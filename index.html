@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="Confirmed Fall 2026 TouroCOM course dates, exams, holidays, and schedule conflicts."/>
+<meta name="robots" content="noindex"/>
+<title>Fall 2026 Course Calendar | TouroCOM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4f0e8;
+  --paper: #fffcf7;
+  --ink: #1c1916;
+  --muted: #6a635a;
+  --line: #e2dacd;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+}
+.wrap { max-width: 1280px; margin: 0 auto; padding: 24px 16px 64px; }
+header {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px 22px;
+  margin-bottom: 16px;
+}
+h1 {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.75rem;
+  margin: 0 0 6px;
+}
+.sub { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.tabs {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px;
+}
+.tabs button {
+  border: 1px solid var(--line);
+  background: #fff;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--ink);
+}
+.tabs button.active {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+}
+.panel { display: none; }
+.panel.active { display: block; }
+.note {
+  margin: 14px 0;
+  padding: 12px 14px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.month {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+.month h2 {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.25rem;
+  margin: 0 0 10px;
+}
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 5px;
+  table-layout: fixed;
+}
+th {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--muted);
+  font-weight: 700;
+  padding: 2px;
+}
+td.day {
+  vertical-align: top;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 6px;
+  overflow: hidden;
+}
+td.important-day {
+  border-color: #c9a8a3;
+  background: #fffaf8;
+}
+td.empty { border: 0; background: transparent; }
+.num {
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.list { display: grid; gap: 4px; }
+.evt {
+  border-left: 3px solid var(--c);
+  background: color-mix(in srgb, var(--c) 8%, white);
+  border-radius: 6px;
+  padding: 4px 5px;
+  overflow: hidden;
+}
+.evt.minor { opacity: 0.85; }
+.course {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--c);
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.title {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 1.25;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.time {
+  display: block;
+  font-size: 0.62rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body.hide-minor .evt.minor { display: none; }
+.imp-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.imp-list li {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92rem;
+}
+.imp-list li:last-child { border-bottom: 0; }
+.imp-list time {
+  color: var(--muted);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.imp-list strong { display: block; }
+.imp-list span { color: var(--muted); font-size: 0.82rem; }
+.unclear-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.unclear-list li {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.unclear-list .tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: #8b4513;
+  background: #f8efe6;
+  border-radius: 999px;
+  padding: 3px 8px;
+  margin-bottom: 6px;
+}
+.unclear-list strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+.unclear-list p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+.filters {
+  display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 12px;
+}
+.filters button {
+  border: 1px solid var(--line);
+  background: #fff;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 7px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+@media (max-width: 900px) {
+  .title { -webkit-line-clamp: 3; font-size: 0.65rem; }
+  td.day { padding: 4px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Fall 2026 Calendar</h1>
+    <p class="sub">Confirmed dates only from your syllabi, plus 2026 U.S. and Jewish holidays. Unclear or conflicting items are left out — see the professor emails.</p>
+    <div class="tabs">
+      <button type="button" class="active" data-tab="calendar">Calendar</button>
+      <button type="button" data-tab="important">Important dates</button>
+      <button type="button" data-tab="unclear">Unclear / conflicts</button>
+    </div>
+  </header>
+
+  <div id="calendar" class="panel active">
+    <div class="filters">
+      <button type="button" id="toggleMinor">Hide routine days</button>
+      <button type="button" onclick="location.hash='#m-8'">Aug</button>
+      <button type="button" onclick="location.hash='#m-9'">Sep</button>
+      <button type="button" onclick="location.hash='#m-10'">Oct</button>
+      <button type="button" onclick="location.hash='#m-11'">Nov</button>
+      <button type="button" onclick="location.hash='#m-12'">Dec</button>
+    </div>
+    <div class="note">Outlined / tinted days mark exams, OSCEs, practicals, deadlines, and no-class holidays. Physiology has no calendar dates in its syllabus, so it is not shown here.</div>
+    
+    <section class="month" id="m-8">
+      <h2>August 2026</h2>
+      <table>
+        <thead><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr></thead>
+        <tbody><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="day"><div class="num">1</div><div class="list"></div></td></tr><tr><td class="day"><div class="num">2</div><div class="list"></div></td><td class="day"><div class="num">3</div><div class="list"></div></td><td class="day"><div class="num">4</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Intro to Anatomic Terminology</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 1–2 PM"><span class="course">Biochem</span><span class="title">Metabolic pathways overview</span><span class="time">1–2 PM</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 11 AM–12 PM"><span class="course">OMM</span><span class="title">History &amp; Philosophy</span><span class="time">11 AM–12 PM</span></div><div class="evt minor" style="--c:#2c5f6e" title="PME · 10–11 AM"><span class="course">PME</span><span class="title">Intro to professionalism &amp; ethics</span><span class="time">10–11 AM</span></div></div></td><td class="day"><div class="num">5</div><div class="list"><div class="evt minor" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">History &amp; Physical</span></div></div></td><td class="day"><div class="num">6</div><div class="list"><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 8:30–10 AM"><span class="course">Biochem</span><span class="title">ETC / ROS</span><span class="time">8:30–10 AM</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 1–5 PM"><span class="course">OMM</span><span class="title">Lab</span><span class="time">1–5 PM</span></div></div></td><td class="day"><div class="num">7</div><div class="list"><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 10–11 AM"><span class="course">Biochem</span><span class="title">Supplemental</span><span class="time">10–11 AM</span></div></div></td><td class="day"><div class="num">8</div><div class="list"></div></td></tr><tr><td class="day"><div class="num">9</div><div class="list"></div></td><td class="day"><div class="num">10</div><div class="list"></div></td><td class="day"><div class="num">11</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Embryology 1</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 11 AM–12 PM"><span class="course">OMM</span><span class="title">Gross Motion</span><span class="time">11 AM–12 PM</span></div><div class="evt minor" style="--c:#2c5f6e" title="PME · 10–11 AM"><span class="course">PME</span><span class="title">Physician–patient relationship</span><span class="time">10–11 AM</span></div></div></td><td class="day important-day"><div class="num">12</div><div class="list"><div class="evt important" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">SDL: History / SOAP</span></div></div></td><td class="day"><div class="num">13</div><div class="list"><div class="evt minor" style="--c:#6b3fa0" title="OMM · 1–5 PM"><span class="course">OMM</span><span class="title">Lab</span><span class="time">1–5 PM</span></div></div></td><td class="day"><div class="num">14</div><div class="list"><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 10–11 AM"><span class="course">Biochem</span><span class="title">Supplemental</span><span class="time">10–11 AM</span></div></div></td><td class="day"><div class="num">15</div><div class="list"></div></td></tr><tr><td class="day"><div class="num">16</div><div class="list"></div></td><td class="day important-day"><div class="num">17</div><div class="list"><div class="evt important" style="--c:#8b1e1e" title="Shared Exam · 11 AM–1 PM"><span class="course">Shared Exam</span><span class="title">Foundations Exam 1</span><span class="time">11 AM–1 PM</span></div></div></td><td class="day important-day"><div class="num">18</div><div class="list"><div class="evt important" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Pre-lab quiz due</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab intro</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Spine Vertebrae</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 11 AM–12 PM"><span class="course">OMM</span><span class="title">Somatic Dysfunction</span><span class="time">11 AM–12 PM</span></div><div class="evt minor" style="--c:#2c5f6e" title="PME · 10–11 AM"><span class="course">PME</span><span class="title">Informed consent &amp; capacity</span><span class="time">10–11 AM</span></div></div></td><td class="day important-day"><div class="num">19</div><div class="list"><div class="evt important" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">SDL: Motivational interviewing</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 1–2 PM"><span class="course">Biochem</span><span class="title">Glycolysis / TCA</span><span class="time">1–2 PM</span></div></div></td><td class="day"><div class="num">20</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Skin &amp; fascia</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Spinal cord / Superficial back</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 10–11 AM"><span class="course">Biochem</span><span class="title">Gluconeogenesis / Glycogen</span><span class="time">10–11 AM</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 1–5 PM"><span class="course">OMM</span><span class="title">Lab</span><span class="time">1–5 PM</span></div></div></td><td class="day"><div class="num">21</div><div class="list"><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 10–11 AM"><span class="course">Biochem</span><span class="title">Supplemental</span><span class="time">10–11 AM</span></div></div></td><td class="day"><div class="num">22</div><div class="list"></div></td></tr><tr><td class="day"><div class="num">23</div><div class="list"></div></td><td class="day"><div class="num">24</div><div class="list"></div></td><td class="day"><div class="num">25</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Intermediate back</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">MSK embryo</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 11 AM–12 PM"><span class="course">OMM</span><span class="title">Neuromuscular</span><span class="time">11 AM–12 PM</span></div><div class="evt minor" style="--c:#2c5f6e" title="PME · 10–11 AM"><span class="course">PME</span><span class="title">Research ethics / industry</span><span class="time">10–11 AM</span></div></div></td><td class="day"><div class="num">26</div><div class="list"><div class="evt minor" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">Skin, hair, nails</span></div></div></td><td class="day"><div class="num">27</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Scapular region</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Upper limb osteology</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 8:30–10 AM"><span class="course">Biochem</span><span class="title">PPP / NADPH</span><span class="time">8:30–10 AM</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 1–5 PM"><span class="course">OMM</span><span class="title">Lab</span><span class="time">1–5 PM</span></div></div></td><td class="day"><div class="num">28</div><div class="list"><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 11 AM–12 PM"><span class="course">Biochem</span><span class="title">Supplemental</span><span class="time">11 AM–12 PM</span></div></div></td><td class="day"><div class="num">29</div><div class="list"></div></td></tr><tr><td class="day"><div class="num">30</div><div class="list"></div></td><td class="day important-day"><div class="num">31</div><div class="list"><div class="evt important" style="--c:#8b1e1e" title="Shared Exam · 10 AM–12 PM"><span class="course">Shared Exam</span><span class="title">Foundations Exam 2</span><span class="time">10 AM–12 PM</span></div></div></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr></tbody>
+      </table>
+    </section>
+    <section class="month" id="m-9">
+      <h2>September 2026</h2>
+      <table>
+        <thead><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr></thead>
+        <tbody><tr><td class="empty"></td><td class="empty"></td><td class="day"><div class="num">1</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Brachium / Cubital fossa</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Pectoral region</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 8–9 AM"><span class="course">Biochem</span><span class="title">DNA packaging / replication</span><span class="time">8–9 AM</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 11 AM–12 PM"><span class="course">OMM</span><span class="title">Thoracic &amp; Scoliosis</span><span class="time">11 AM–12 PM</span></div><div class="evt minor" style="--c:#2c5f6e" title="PME · 10–11 AM"><span class="course">PME</span><span class="title">Mandatory reporting</span><span class="time">10–11 AM</span></div></div></td><td class="day"><div class="num">2</div><div class="list"><div class="evt minor" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">MSK basics + elbow</span></div></div></td><td class="day"><div class="num">3</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Extensor compartment / Hand</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Arm</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 10–11 AM"><span class="course">Biochem</span><span class="title">DNA repair</span><span class="time">10–11 AM</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 1–5 PM"><span class="course">OMM</span><span class="title">Lab</span><span class="time">1–5 PM</span></div></div></td><td class="day"><div class="num">4</div><div class="list"><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 11 AM–12 PM"><span class="course">Biochem</span><span class="title">Supplemental</span><span class="time">11 AM–12 PM</span></div></div></td><td class="day"><div class="num">5</div><div class="list"></div></td></tr><tr><td class="day"><div class="num">6</div><div class="list"></div></td><td class="day important-day"><div class="num">7</div><div class="list"><div class="evt important" style="--c:#3d5a40" title="No Class"><span class="course">No Class</span><span class="title">No classes — Labor Day</span></div><div class="evt important" style="--c:#4a5568" title="US Holiday"><span class="course">US Holiday</span><span class="title">Labor Day</span></div></div></td><td class="day"><div class="num">8</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Joints of the upper limb</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Flexor forearm</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 8–9 AM"><span class="course">Biochem</span><span class="title">RNA synthesis / processing</span><span class="time">8–9 AM</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 11 AM–12 PM"><span class="course">OMM</span><span class="title">Tx Modalities</span><span class="time">11 AM–12 PM</span></div><div class="evt minor" style="--c:#2c5f6e" title="PME · 10–11 AM"><span class="course">PME</span><span class="title">Reproductive ethics</span><span class="time">10–11 AM</span></div></div></td><td class="day"><div class="num">9</div><div class="list"><div class="evt minor" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">Shoulder + wrist/hand</span></div></div></td><td class="day"><div class="num">10</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Extensor region</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Radiology: Back &amp; Upper Limb</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 1–5 PM"><span class="course">OMM</span><span class="title">Lab</span><span class="time">1–5 PM</span></div></div></td><td class="day important-day"><div class="num">11</div><div class="list"><div class="evt important" style="--c:#2f5d50" title="Jewish Holiday"><span class="course">Jewish Holiday</span><span class="title">Erev Rosh Hashanah</span></div><div class="evt important" style="--c:#3d5a40" title="No Class"><span class="course">No Class</span><span class="title">Classes until 12 PM — Rosh Hashanah Eve</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 11 AM–12 PM"><span class="course">Biochem</span><span class="title">Supplemental</span><span class="time">11 AM–12 PM</span></div></div></td><td class="day important-day"><div class="num">12</div><div class="list"><div class="evt important" style="--c:#2f5d50" title="Jewish Holiday"><span class="course">Jewish Holiday</span><span class="title">Rosh Hashanah</span></div></div></td></tr><tr><td class="day important-day"><div class="num">13</div><div class="list"><div class="evt important" style="--c:#2f5d50" title="Jewish Holiday"><span class="course">Jewish Holiday</span><span class="title">Rosh Hashanah (Day 2)</span></div></div></td><td class="day"><div class="num">14</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lower limb osteology / thigh</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Optional review lab</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 11 AM"><span class="course">OMM</span><span class="title">Clinical Ribs (IA)</span><span class="time">11 AM</span></div><div class="evt minor" style="--c:#2c5f6e" title="PME · 10–11 AM"><span class="course">PME</span><span class="title">Advanced directives</span><span class="time">10–11 AM</span></div></div></td><td class="day important-day"><div class="num">15</div><div class="list"><div class="evt important" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">MSK I Lab Practical</span></div><div class="evt important" style="--c:#8b1e1e" title="Shared Exam · 10 AM–12 PM"><span class="course">Shared Exam</span><span class="title">MSK Exam 1</span><span class="time">10 AM–12 PM</span></div><div class="evt minor" style="--c:#2c5f6e" title="PME · 10–11 AM"><span class="course">PME</span><span class="title">End of life / brain death</span><span class="time">10–11 AM</span></div></div></td><td class="day"><div class="num">16</div><div class="list"><div class="evt minor" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">Knee + ankle/foot</span></div></div></td><td class="day"><div class="num">17</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Gluteal region / posterior thigh</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Anterior thigh</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 10–11 AM"><span class="course">Biochem</span><span class="title">Genetic code</span><span class="time">10–11 AM</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 11 AM–12 PM"><span class="course">Biochem</span><span class="title">Protein translation</span><span class="time">11 AM–12 PM</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 1–5 PM"><span class="course">OMM</span><span class="title">Lab</span><span class="time">1–5 PM</span></div></div></td><td class="day"><div class="num">18</div><div class="list"><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 11 AM–12 PM"><span class="course">Biochem</span><span class="title">Supplemental</span><span class="time">11 AM–12 PM</span></div></div></td><td class="day"><div class="num">19</div><div class="list"></div></td></tr><tr><td class="day important-day"><div class="num">20</div><div class="list"><div class="evt important" style="--c:#2f5d50" title="Jewish Holiday"><span class="course">Jewish Holiday</span><span class="title">Erev Yom Kippur</span></div></div></td><td class="day important-day"><div class="num">21</div><div class="list"><div class="evt important" style="--c:#2f5d50" title="Jewish Holiday"><span class="course">Jewish Holiday</span><span class="title">Yom Kippur</span></div><div class="evt important" style="--c:#3d5a40" title="No Class"><span class="course">No Class</span><span class="title">No classes — Yom Kippur</span></div></div></td><td class="day"><div class="num">22</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Popliteal fossa</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Posterior leg / popliteal fossa</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 11 AM–12 PM"><span class="course">OMM</span><span class="title">Autonomic</span><span class="time">11 AM–12 PM</span></div><div class="evt minor" style="--c:#2c5f6e" title="PME · 10–11 AM"><span class="course">PME</span><span class="title">Organ &amp; tissue donation</span><span class="time">10–11 AM</span></div></div></td><td class="day"><div class="num">23</div><div class="list"><div class="evt minor" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">OSCE I review</span></div></div></td><td class="day"><div class="num">24</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Anterior &amp; lateral compartments</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Lateral leg</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 1–5 PM"><span class="course">OMM</span><span class="title">Lab</span><span class="time">1–5 PM</span></div></div></td><td class="day important-day"><div class="num">25</div><div class="list"><div class="evt important" style="--c:#2f5d50" title="Jewish Holiday"><span class="course">Jewish Holiday</span><span class="title">Erev Sukkot</span></div><div class="evt important" style="--c:#3d5a40" title="No Class"><span class="course">No Class</span><span class="title">Classes until 12 PM — Sukkot</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 11 AM–12 PM"><span class="course">Biochem</span><span class="title">Supplemental</span><span class="time">11 AM–12 PM</span></div></div></td><td class="day important-day"><div class="num">26</div><div class="list"><div class="evt important" style="--c:#2f5d50" title="Jewish Holiday"><span class="course">Jewish Holiday</span><span class="title">Sukkot begins</span></div></div></td></tr><tr><td class="day"><div class="num">27</div><div class="list"></div></td><td class="day important-day"><div class="num">28</div><div class="list"><div class="evt important" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">Written Exam 1</span></div></div></td><td class="day"><div class="num">29</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Joints of the lower extremity</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Dorsum of foot</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 11 AM–12 PM"><span class="course">OMM</span><span class="title">Review / Q&amp;A</span><span class="time">11 AM–12 PM</span></div><div class="evt minor" style="--c:#2c5f6e" title="PME · 10–11 AM"><span class="course">PME</span><span class="title">Impaired physicians &amp; self-care</span><span class="time">10–11 AM</span></div></div></td><td class="day important-day"><div class="num">30</div><div class="list"><div class="evt important" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">OSCE I</span></div></div></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr></tbody>
+      </table>
+    </section>
+    <section class="month" id="m-10">
+      <h2>October 2026</h2>
+      <table>
+        <thead><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr></thead>
+        <tbody><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="day"><div class="num">1</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Plantar foot</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Radiology: Lower Limb</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 1–5 PM"><span class="course">OMM</span><span class="title">Lab: Review / Q&amp;A</span><span class="time">1–5 PM</span></div></div></td><td class="day important-day"><div class="num">2</div><div class="list"><div class="evt important" style="--c:#2f5d50" title="Jewish Holiday"><span class="course">Jewish Holiday</span><span class="title">Sukkot ends</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 10–11 AM"><span class="course">Biochem</span><span class="title">Supplemental</span><span class="time">10–11 AM</span></div></div></td><td class="day important-day"><div class="num">3</div><div class="list"><div class="evt important" style="--c:#2f5d50" title="Jewish Holiday"><span class="course">Jewish Holiday</span><span class="title">Shemini Atzeret</span></div></div></td></tr><tr><td class="day important-day"><div class="num">4</div><div class="list"><div class="evt important" style="--c:#2f5d50" title="Jewish Holiday"><span class="course">Jewish Holiday</span><span class="title">Simchat Torah</span></div></div></td><td class="day"><div class="num">5</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Intercostal spaces</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 9–10 AM"><span class="course">Biochem</span><span class="title">Globular proteins</span><span class="time">9–10 AM</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 11 AM"><span class="course">OMM</span><span class="title">Review / Q&amp;A (IA)</span><span class="time">11 AM</span></div></div></td><td class="day important-day"><div class="num">6</div><div class="list"><div class="evt important" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">MSK II Lab Practical</span></div><div class="evt important" style="--c:#8b1e1e" title="Shared Exam · 10 AM–12 PM"><span class="course">Shared Exam</span><span class="title">MSK Exam 2</span><span class="time">10 AM–12 PM</span></div><div class="evt minor" style="--c:#2c5f6e" title="PME · 10–11 AM"><span class="course">PME</span><span class="title">Addressing medical mistakes</span><span class="time">10–11 AM</span></div></div></td><td class="day"><div class="num">7</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Embryology 5: Respiratory</span></div><div class="evt minor" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">Vitals / PV</span></div></div></td><td class="day important-day"><div class="num">8</div><div class="list"><div class="evt important" style="--c:#6b3fa0" title="OMM"><span class="course">OMM</span><span class="title">Practical 1</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Thoracic cage, breast, lungs</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 8:30–10 AM"><span class="course">Biochem</span><span class="title">Lipid digestion / FA synthesis</span><span class="time">8:30–10 AM</span></div></div></td><td class="day"><div class="num">9</div><div class="list"><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 1–2 PM"><span class="course">Biochem</span><span class="title">Supplemental</span><span class="time">1–2 PM</span></div></div></td><td class="day"><div class="num">10</div><div class="list"></div></td></tr><tr><td class="day"><div class="num">11</div><div class="list"></div></td><td class="day important-day"><div class="num">12</div><div class="list"><div class="evt important" style="--c:#6b3fa0" title="OMM"><span class="course">OMM</span><span class="title">Written Exam 1</span></div><div class="evt important" style="--c:#4a5568" title="US Holiday"><span class="course">US Holiday</span><span class="title">Columbus Day / Indigenous Peoples&#x27; Day</span></div></div></td><td class="day"><div class="num">13</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Embryology 6: Cardiovascular</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Anterior mediastinum</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 11 AM–12 PM"><span class="course">OMM</span><span class="title">Lymphatics</span><span class="time">11 AM–12 PM</span></div></div></td><td class="day"><div class="num">14</div><div class="list"><div class="evt minor" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">Chest / pulmonary</span></div></div></td><td class="day"><div class="num">15</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Heart removal</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Mediastinum</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 1–5 PM"><span class="course">OMM</span><span class="title">Lab</span><span class="time">1–5 PM</span></div></div></td><td class="day"><div class="num">16</div><div class="list"><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 10–11 AM"><span class="course">Biochem</span><span class="title">Supplemental</span><span class="time">10–11 AM</span></div></div></td><td class="day"><div class="num">17</div><div class="list"></div></td></tr><tr><td class="day"><div class="num">18</div><div class="list"></div></td><td class="day"><div class="num">19</div><div class="list"></div></td><td class="day"><div class="num">20</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: External heart</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Middle mediastinum &amp; heart</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 11 AM–12 PM"><span class="course">OMM</span><span class="title">Lumbar spine</span><span class="time">11 AM–12 PM</span></div></div></td><td class="day"><div class="num">21</div><div class="list"><div class="evt minor" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">OSCE II review</span></div></div></td><td class="day"><div class="num">22</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Optional review lab</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 10–11 AM"><span class="course">Biochem</span><span class="title">Cholesterol / phospholipids</span><span class="time">10–11 AM</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 1–5 PM"><span class="course">OMM</span><span class="title">Lab</span><span class="time">1–5 PM</span></div></div></td><td class="day"><div class="num">23</div><div class="list"><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 11 AM–12 PM"><span class="course">Biochem</span><span class="title">Supplemental</span><span class="time">11 AM–12 PM</span></div></div></td><td class="day"><div class="num">24</div><div class="list"></div></td></tr><tr><td class="day"><div class="num">25</div><div class="list"></div></td><td class="day important-day"><div class="num">26</div><div class="list"><div class="evt important" style="--c:#2c5f6e" title="PME · 11:59 PM"><span class="course">PME</span><span class="title">Video assignment due</span><span class="time">11:59 PM</span></div></div></td><td class="day"><div class="num">27</div><div class="list"><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 9–10 AM"><span class="course">Biochem</span><span class="title">Lipoproteins / eicosanoids</span><span class="time">9–10 AM</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 11 AM–12 PM"><span class="course">OMM</span><span class="title">Psoas / QL / Piriformis</span><span class="time">11 AM–12 PM</span></div></div></td><td class="day important-day"><div class="num">28</div><div class="list"><div class="evt important" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">OSCE II</span></div></div></td><td class="day"><div class="num">29</div><div class="list"><div class="evt minor" style="--c:#6b3fa0" title="OMM · 1–5 PM"><span class="course">OMM</span><span class="title">Lab</span><span class="time">1–5 PM</span></div></div></td><td class="day"><div class="num">30</div><div class="list"><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 11 AM–12 PM"><span class="course">Biochem</span><span class="title">Supplemental</span><span class="time">11 AM–12 PM</span></div></div></td><td class="day"><div class="num">31</div><div class="list"></div></td></tr></tbody>
+      </table>
+    </section>
+    <section class="month" id="m-11">
+      <h2>November 2026</h2>
+      <table>
+        <thead><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr></thead>
+        <tbody><tr><td class="day"><div class="num">1</div><div class="list"></div></td><td class="day important-day"><div class="num">2</div><div class="list"><div class="evt important" style="--c:#8b1e1e" title="Shared Exam"><span class="course">Shared Exam</span><span class="title">Cardiopulmonary Exam 2</span></div></div></td><td class="day"><div class="num">3</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Embryology 7: GI</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Abdominal wall</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 11 AM–12 PM"><span class="course">OMM</span><span class="title">Clinical lumbar pathologies</span><span class="time">11 AM–12 PM</span></div><div class="evt minor" style="--c:#2c5f6e" title="PME · 10–11 AM"><span class="course">PME</span><span class="title">Social media &amp; medicine ethics</span><span class="time">10–11 AM</span></div></div></td><td class="day"><div class="num">4</div><div class="list"><div class="evt minor" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">Cardiology I</span></div></div></td><td class="day"><div class="num">5</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Abdominal wall / inguinal canal</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Peritoneum</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 1–5 PM"><span class="course">OMM</span><span class="title">Lab</span><span class="time">1–5 PM</span></div></div></td><td class="day"><div class="num">6</div><div class="list"><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 10–11 AM"><span class="course">Biochem</span><span class="title">Supplemental</span><span class="time">10–11 AM</span></div></div></td><td class="day"><div class="num">7</div><div class="list"></div></td></tr><tr><td class="day"><div class="num">8</div><div class="list"></div></td><td class="day"><div class="num">9</div><div class="list"></div></td><td class="day"><div class="num">10</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Celiac trunk / stomach</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Peritoneum / Esophagus</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 8:30–10 AM"><span class="course">Biochem</span><span class="title">Heme / nutrition / insulin</span><span class="time">8:30–10 AM</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 11 AM–12 PM"><span class="course">OMM</span><span class="title">Review / Q&amp;A</span><span class="time">11 AM–12 PM</span></div></div></td><td class="day important-day"><div class="num">11</div><div class="list"><div class="evt important" style="--c:#4a5568" title="US Holiday"><span class="course">US Holiday</span><span class="title">Veterans Day</span></div><div class="evt minor" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">Cardiology II</span></div></div></td><td class="day"><div class="num">12</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: SMA / small intestine</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Small &amp; large intestines</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 8:30–10 AM"><span class="course">Biochem</span><span class="title">Vitamins / iron</span><span class="time">8:30–10 AM</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 1–5 PM"><span class="course">OMM</span><span class="title">Lab</span><span class="time">1–5 PM</span></div></div></td><td class="day"><div class="num">13</div><div class="list"><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 10–11 AM"><span class="course">Biochem</span><span class="title">Supplemental</span><span class="time">10–11 AM</span></div></div></td><td class="day"><div class="num">14</div><div class="list"></div></td></tr><tr><td class="day"><div class="num">15</div><div class="list"></div></td><td class="day"><div class="num">16</div><div class="list"></div></td><td class="day"><div class="num">17</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Liver / gallbladder</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Liver, pancreas, spleen, kidneys</span></div><div class="evt minor" style="--c:#6b3fa0" title="OMM · 11 AM–12 PM"><span class="course">OMM</span><span class="title">Review / Q&amp;A</span><span class="time">11 AM–12 PM</span></div></div></td><td class="day"><div class="num">18</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Autonomics</span></div><div class="evt minor" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">OSCE III review</span></div></div></td><td class="day important-day"><div class="num">19</div><div class="list"><div class="evt important" style="--c:#6b3fa0" title="OMM"><span class="course">OMM</span><span class="title">Practical 2</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Optional review lab</span></div><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Radiology</span></div></div></td><td class="day"><div class="num">20</div><div class="list"><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 12–1 PM"><span class="course">Biochem</span><span class="title">Supplemental</span><span class="time">12–1 PM</span></div></div></td><td class="day"><div class="num">21</div><div class="list"></div></td></tr><tr><td class="day"><div class="num">22</div><div class="list"></div></td><td class="day important-day"><div class="num">23</div><div class="list"><div class="evt important" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">CP &amp; GI Lab Practical</span></div><div class="evt important" style="--c:#8b1e1e" title="Shared Exam · 9:30 AM–12 PM"><span class="course">Shared Exam</span><span class="title">GI Exam</span><span class="time">9:30 AM–12 PM</span></div></div></td><td class="day"><div class="num">24</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Kidney, ureters, adrenals</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 10–11 AM"><span class="course">Biochem</span><span class="title">Urea cycle / nitrogen balance</span><span class="time">10–11 AM</span></div></div></td><td class="day"><div class="num">25</div><div class="list"><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 12–1 PM"><span class="course">Biochem</span><span class="title">Supplemental</span><span class="time">12–1 PM</span></div><div class="evt minor" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">Behavioral &amp; mental health</span></div></div></td><td class="day important-day"><div class="num">26</div><div class="list"><div class="evt important" style="--c:#3d5a40" title="No Class"><span class="course">No Class</span><span class="title">No classes — Thanksgiving</span></div><div class="evt important" style="--c:#4a5568" title="US Holiday"><span class="course">US Holiday</span><span class="title">Thanksgiving</span></div></div></td><td class="day important-day"><div class="num">27</div><div class="list"><div class="evt important" style="--c:#3d5a40" title="No Class"><span class="course">No Class</span><span class="title">No classes — day after Thanksgiving</span></div></div></td><td class="day"><div class="num">28</div><div class="list"></div></td></tr><tr><td class="day"><div class="num">29</div><div class="list"></div></td><td class="day"><div class="num">30</div><div class="list"></div></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr></tbody>
+      </table>
+    </section>
+    <section class="month" id="m-12">
+      <h2>December 2026</h2>
+      <table>
+        <thead><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr></thead>
+        <tbody><tr><td class="empty"></td><td class="empty"></td><td class="day"><div class="num">1</div><div class="list"><div class="evt minor" style="--c:#1f6f8b" title="Anatomy"><span class="course">Anatomy</span><span class="title">Lab: Kidneys</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 10–11 AM"><span class="course">Biochem</span><span class="title">Amino acid metabolism</span><span class="time">10–11 AM</span></div></div></td><td class="day important-day"><div class="num">2</div><div class="list"><div class="evt important" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">OSCE III</span></div></div></td><td class="day"><div class="num">3</div><div class="list"><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 10–11 AM"><span class="course">Biochem</span><span class="title">Purines &amp; pyrimidines</span><span class="time">10–11 AM</span></div></div></td><td class="day important-day"><div class="num">4</div><div class="list"><div class="evt important" style="--c:#2f5d50" title="Jewish Holiday"><span class="course">Jewish Holiday</span><span class="title">Chanukah begins</span></div><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 10–11 AM"><span class="course">Biochem</span><span class="title">Supplemental</span><span class="time">10–11 AM</span></div></div></td><td class="day"><div class="num">5</div><div class="list"></div></td></tr><tr><td class="day"><div class="num">6</div><div class="list"></div></td><td class="day important-day"><div class="num">7</div><div class="list"><div class="evt important" style="--c:#b35c1e" title="PD"><span class="course">PD</span><span class="title">Written Exam 2</span></div></div></td><td class="day"><div class="num">8</div><div class="list"><div class="evt minor" style="--c:#8b5a2b" title="Biochem · 10–11 AM"><span class="course">Biochem</span><span class="title">Supplemental</span><span class="time">10–11 AM</span></div></div></td><td class="day important-day"><div class="num">9</div><div class="list"><div class="evt important" style="--c:#8b1e1e" title="Shared Exam · 10 AM–12 PM"><span class="course">Shared Exam</span><span class="title">Renal Exam</span><span class="time">10 AM–12 PM</span></div></div></td><td class="day important-day"><div class="num">10</div><div class="list"><div class="evt important" style="--c:#2c5f6e" title="PME · 10 AM"><span class="course">PME</span><span class="title">Final Exam</span><span class="time">10 AM</span></div></div></td><td class="day"><div class="num">11</div><div class="list"></div></td><td class="day important-day"><div class="num">12</div><div class="list"><div class="evt important" style="--c:#2f5d50" title="Jewish Holiday"><span class="course">Jewish Holiday</span><span class="title">Chanukah ends</span></div></div></td></tr><tr><td class="day"><div class="num">13</div><div class="list"></div></td><td class="day"><div class="num">14</div><div class="list"></div></td><td class="day"><div class="num">15</div><div class="list"></div></td><td class="day"><div class="num">16</div><div class="list"></div></td><td class="day"><div class="num">17</div><div class="list"></div></td><td class="day"><div class="num">18</div><div class="list"></div></td><td class="day"><div class="num">19</div><div class="list"></div></td></tr><tr><td class="day"><div class="num">20</div><div class="list"></div></td><td class="day"><div class="num">21</div><div class="list"></div></td><td class="day"><div class="num">22</div><div class="list"></div></td><td class="day"><div class="num">23</div><div class="list"></div></td><td class="day"><div class="num">24</div><div class="list"></div></td><td class="day important-day"><div class="num">25</div><div class="list"><div class="evt important" style="--c:#4a5568" title="US Holiday"><span class="course">US Holiday</span><span class="title">Christmas Day</span></div></div></td><td class="day"><div class="num">26</div><div class="list"></div></td></tr><tr><td class="day"><div class="num">27</div><div class="list"></div></td><td class="day"><div class="num">28</div><div class="list"></div></td><td class="day"><div class="num">29</div><div class="list"></div></td><td class="day"><div class="num">30</div><div class="list"></div></td><td class="day"><div class="num">31</div><div class="list"></div></td><td class="empty"></td><td class="empty"></td></tr></tbody>
+      </table>
+    </section>
+  </div>
+
+  <div id="unclear" class="panel">
+    <div class="note">These items were left off the confirmed calendar. Draft emails are in <code>Schedule_Clarification_Emails.md</code>.</div>
+    <ul class="unclear-list">
+      <li>
+        <span class="tag">Anatomy</span>
+        <strong>MSK Exam 1 date conflict</strong>
+        <p>Orientation slides say Sep 14. Anatomy syllabus + Biochem say Sep 15. Calendar currently uses Sep 15.</p>
+      </li>
+      <li>
+        <span class="tag">Anatomy</span>
+        <strong>MSK Exam 2 date conflict</strong>
+        <p>Orientation slides say Oct 5. Anatomy syllabus + Biochem say Oct 6. Calendar currently uses Oct 6.</p>
+      </li>
+      <li>
+        <span class="tag">Anatomy / Biochem</span>
+        <strong>Cardiopulmonary Exam 1 date unknown</strong>
+        <p>Anatomy syllabus: Oct 12. Biochem + Anatomy Orientation: Oct 19. Not shown on the calendar until confirmed.</p>
+      </li>
+      <li>
+        <span class="tag">Anatomy</span>
+        <strong>Renal Exam date conflict</strong>
+        <p>Orientation slides say Dec 7. Anatomy syllabus body + Biochem say Dec 9 (one syllabus line also says 12/9/25). Calendar currently uses Dec 9.</p>
+      </li>
+      <li>
+        <span class="tag">Anatomy</span>
+        <strong>Year typos in syllabus</strong>
+        <p>Several dates are written as 2025 (e.g. 10/8/25, 11/10/25, 12/9/25). Treated as 2026 for now.</p>
+      </li>
+      <li>
+        <span class="tag">Biochem</span>
+        <strong>Oct 2 holiday mislabel</strong>
+        <p>Syllabus says “Rosh Hashanah (classes until 12 PM)” on Oct 2. Actual holiday that day is Sukkot ending / Hoshana Rabbah. Unclear if early dismissal still applies.</p>
+      </li>
+      <li>
+        <span class="tag">Physiology</span>
+        <strong>No calendar dates in syllabus</strong>
+        <p>Only week numbers / topics. No interactive-session or exam calendar dates. Not plotted until faculty confirm shared modular exam dates.</p>
+      </li>
+      <li>
+        <span class="tag">OMM</span>
+        <strong>Written Exam 2 date conflict</strong>
+        <p>Course Layout: Fri Nov 20. Syllabus Exam Dates: Nov 23 (also GI Exam day). Not shown until confirmed. Practicals and Written Exam 1 are clear.</p>
+      </li>
+      <li>
+        <span class="tag">OMM</span>
+        <strong>Minor year typos in Course Layout</strong>
+        <p>Week 4 listed as 08/25/2025; one lab as 09/24/25. Treated as 2026.</p>
+      </li>
+      <li>
+        <span class="tag">PME</span>
+        <strong>Two sessions on Sep 29</strong>
+        <p>Impaired Physicians at 10–11 AM and Four Quadrant Approach at 3–4 PM both listed. Only the 10–11 AM session is on the calendar.</p>
+      </li>
+      <li>
+        <span class="tag">PME</span>
+        <strong>Two topics both listed Oct 27 at 10–11 AM</strong>
+        <p>Inter-professional Education and Confidentiality/HIPAA share the same slot. Neither is on the calendar.</p>
+      </li>
+      <li>
+        <span class="tag">PME</span>
+        <strong>Optional exam review on Thanksgiving</strong>
+        <p>Syllabus lists Nov 26 for optional review — that is Thanksgiving / no classes. Likely canceled or moved.</p>
+      </li>
+      <li>
+        <span class="tag">PD</span>
+        <strong>Written exams say “see school calendar”</strong>
+        <p>Syllabus also lists Written Exam 1 Sep 28 and Written Exam 2 Dec 7. Those dates are used, but still worth confirming with Dr. Giovanis.</p>
+      </li>
+      <li>
+        <span class="tag">PD</span>
+        <strong>Campus schedule differences</strong>
+        <p>Some sessions list different dates for Harlem/Montana vs Middletown (e.g. first week Aug 5 Middletown vs Aug 12 Harlem). Calendar follows Middletown.</p>
+      </li>
+      <li>
+        <span class="tag">Jewish holidays / classes</span>
+        <strong>Some Biochem supplementals fall on holiday eves or Chol HaMoed</strong>
+        <p>Confirmed on calendar: Biochem supplemental on Sep 11 (Erev RH, until 12), Sep 25 (Erev Sukkot, until 12), Oct 2 (Sukkot ends), and Dec 4 (Chanukah begins at sundown). Full no-class only clearly stated for Yom Kippur. Sukkot mid-week (Sep 28–Oct 1) still has exams/classes.</p>
+      </li>
+    </ul>
+  </div>
+
+  <div id="important" class="panel">
+    <div class="note">Exams, OSCEs, practicals, assignment deadlines, and holidays only.</div>
+    <ol class="imp-list"><li><time>08-12</time><div><strong>SDL: History / SOAP</strong><span>PD</span></div></li><li><time>08-17</time><div><strong>Foundations Exam 1</strong><span>Shared Exam · 11 AM–1 PM</span></div></li><li><time>08-18</time><div><strong>Pre-lab quiz due</strong><span>Anatomy</span></div></li><li><time>08-19</time><div><strong>SDL: Motivational interviewing</strong><span>PD</span></div></li><li><time>08-31</time><div><strong>Foundations Exam 2</strong><span>Shared Exam · 10 AM–12 PM</span></div></li><li><time>09-07</time><div><strong>No classes — Labor Day</strong><span>No Class</span></div></li><li><time>09-07</time><div><strong>Labor Day</strong><span>US Holiday</span></div></li><li><time>09-11</time><div><strong>Erev Rosh Hashanah</strong><span>Jewish Holiday</span></div></li><li><time>09-11</time><div><strong>Classes until 12 PM — Rosh Hashanah Eve</strong><span>No Class</span></div></li><li><time>09-12</time><div><strong>Rosh Hashanah</strong><span>Jewish Holiday</span></div></li><li><time>09-13</time><div><strong>Rosh Hashanah (Day 2)</strong><span>Jewish Holiday</span></div></li><li><time>09-15</time><div><strong>MSK I Lab Practical</strong><span>Anatomy</span></div></li><li><time>09-15</time><div><strong>MSK Exam 1</strong><span>Shared Exam · 10 AM–12 PM</span></div></li><li><time>09-20</time><div><strong>Erev Yom Kippur</strong><span>Jewish Holiday</span></div></li><li><time>09-21</time><div><strong>Yom Kippur</strong><span>Jewish Holiday</span></div></li><li><time>09-21</time><div><strong>No classes — Yom Kippur</strong><span>No Class</span></div></li><li><time>09-25</time><div><strong>Erev Sukkot</strong><span>Jewish Holiday</span></div></li><li><time>09-25</time><div><strong>Classes until 12 PM — Sukkot</strong><span>No Class</span></div></li><li><time>09-26</time><div><strong>Sukkot begins</strong><span>Jewish Holiday</span></div></li><li><time>09-28</time><div><strong>Written Exam 1</strong><span>PD</span></div></li><li><time>09-30</time><div><strong>OSCE I</strong><span>PD</span></div></li><li><time>10-02</time><div><strong>Sukkot ends</strong><span>Jewish Holiday</span></div></li><li><time>10-03</time><div><strong>Shemini Atzeret</strong><span>Jewish Holiday</span></div></li><li><time>10-04</time><div><strong>Simchat Torah</strong><span>Jewish Holiday</span></div></li><li><time>10-06</time><div><strong>MSK II Lab Practical</strong><span>Anatomy</span></div></li><li><time>10-06</time><div><strong>MSK Exam 2</strong><span>Shared Exam · 10 AM–12 PM</span></div></li><li><time>10-08</time><div><strong>Practical 1</strong><span>OMM</span></div></li><li><time>10-12</time><div><strong>Written Exam 1</strong><span>OMM</span></div></li><li><time>10-12</time><div><strong>Columbus Day / Indigenous Peoples&#x27; Day</strong><span>US Holiday</span></div></li><li><time>10-26</time><div><strong>Video assignment due</strong><span>PME · 11:59 PM</span></div></li><li><time>10-28</time><div><strong>OSCE II</strong><span>PD</span></div></li><li><time>11-02</time><div><strong>Cardiopulmonary Exam 2</strong><span>Shared Exam</span></div></li><li><time>11-11</time><div><strong>Veterans Day</strong><span>US Holiday</span></div></li><li><time>11-19</time><div><strong>Practical 2</strong><span>OMM</span></div></li><li><time>11-23</time><div><strong>CP &amp; GI Lab Practical</strong><span>Anatomy</span></div></li><li><time>11-23</time><div><strong>GI Exam</strong><span>Shared Exam · 9:30 AM–12 PM</span></div></li><li><time>11-26</time><div><strong>No classes — Thanksgiving</strong><span>No Class</span></div></li><li><time>11-26</time><div><strong>Thanksgiving</strong><span>US Holiday</span></div></li><li><time>11-27</time><div><strong>No classes — day after Thanksgiving</strong><span>No Class</span></div></li><li><time>12-02</time><div><strong>OSCE III</strong><span>PD</span></div></li><li><time>12-04</time><div><strong>Chanukah begins</strong><span>Jewish Holiday</span></div></li><li><time>12-07</time><div><strong>Written Exam 2</strong><span>PD</span></div></li><li><time>12-09</time><div><strong>Renal Exam</strong><span>Shared Exam · 10 AM–12 PM</span></div></li><li><time>12-10</time><div><strong>Final Exam</strong><span>PME · 10 AM</span></div></li><li><time>12-12</time><div><strong>Chanukah ends</strong><span>Jewish Holiday</span></div></li><li><time>12-25</time><div><strong>Christmas Day</strong><span>US Holiday</span></div></li></ol>
+  </div>
+</div>
+<script>
+document.querySelectorAll('.tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+document.getElementById('toggleMinor').addEventListener('click', function() {
+  document.body.classList.toggle('hide-minor');
+  this.textContent = document.body.classList.contains('hide-minor')
+    ? 'Show routine days' : 'Hide routine days';
+});
+</script>
+</body>
+</html>
