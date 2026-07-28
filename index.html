@@ -150,6 +150,23 @@ td.empty { border: 0; background: transparent; }
 }
 .evt.important .title { -webkit-line-clamp: unset; display: block; }
 body.hide-minor .evt.minor { display: none; }
+/* --- grading panel --- */
+.gcard { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
+.gcard.gwarn { border-color: #c9a8a3; background: #fffaf8; }
+.gcard h3 { font-family: Fraunces, Georgia, serif; font-size: 1.12rem; margin: 0 0 10px; }
+.gmeta { font-family: "Source Sans 3", system-ui, sans-serif; font-size: 0.75rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; margin-left: 8px; white-space: nowrap; }
+table.gtable { width: 100%; border-collapse: collapse; border-spacing: 0; table-layout: auto; margin: 0 0 10px; }
+table.gtable td { padding: 5px 0; border-bottom: 1px solid var(--line); font-size: 0.9rem; vertical-align: baseline; }
+table.gtable tr:last-child td { border-bottom: 0; }
+table.gtable td.w { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; padding-left: 12px; width: 1%; }
+table.gtable td.w.hi { color: #8b1e1e; }
+ul.gnotes { margin: 0; padding-left: 18px; }
+ul.gnotes li { font-size: 0.88rem; line-height: 1.5; margin-bottom: 7px; color: var(--ink); }
+ul.gnotes li.galert { background: #fff4f2; border-left: 3px solid #8b1e1e; border-radius: 0 6px 6px 0; padding: 7px 10px; margin-left: -18px; list-style: none; }
+ol.gtop { margin: 0; padding-left: 20px; }
+ol.gtop li { font-size: 0.9rem; line-height: 1.55; margin-bottom: 8px; }
+.gfoot { font-size: 0.82rem; color: var(--muted); margin: 10px 0 0; }
+@media (max-width: 640px) { .gmeta { display: block; margin-left: 0; margin-top: 2px; white-space: normal; } }
 body.group-b .evt[data-grp="A"] { display: none; }
 .imp-list {
   list-style: none;
@@ -238,6 +255,7 @@ body.group-b .evt[data-grp="A"] { display: none; }
     <div class="tabs" role="tablist" aria-label="Calendar views">
       <button type="button" class="active" role="tab" id="tab-calendar" aria-controls="calendar" aria-selected="true" data-tab="calendar">Calendar</button>
       <button type="button" role="tab" id="tab-important" aria-controls="important" aria-selected="false" data-tab="important">Important dates</button>
+      <button type="button" role="tab" id="tab-grading" aria-controls="grading" aria-selected="false" data-tab="grading">Grading &amp; deadlines</button>
       <button type="button" role="tab" id="tab-unclear" aria-controls="unclear" aria-selected="false" data-tab="unclear">Open items</button>
     </div>
   </header>
@@ -330,6 +348,160 @@ body.group-b .evt[data-grp="A"] { display: none; }
   <div id="important" class="panel" role="tabpanel" aria-labelledby="tab-important" tabindex="0">
     <div class="note">Exams, OSCEs, practicals, assignment deadlines, and holidays only.</div>
     <ol class="imp-list" id="impList"></ol>
+  </div>
+
+  <div id="grading" class="panel" role="tabpanel" aria-labelledby="tab-grading" tabindex="0">
+
+    <div class="gcard gwarn">
+      <h3>The five things that can hurt you most</h3>
+      <ol class="gtop">
+        <li><b>PD: three unexcused skills-lab absences = automatic “U” for the course.</b> One costs 5 points off your <i>final grade</i>, two costs 10. Forgetting to sign in counts as an absence.</li>
+        <li><b>Histology: 75% of the grade sits on three exams with no dates published.</b></li>
+        <li><b>PME video assignment: 10 points off per day late</b>, and the syllabus says “No exceptions” on the Oct 26 deadline.</li>
+        <li><b>Attendance points are 5–15% in six courses.</b> Showing up is worth more than most exams’ margin.</li>
+        <li><b>OMM grade complaints die after 3 business days.</b> Everything else gets 3 weeks.</li>
+      </ol>
+    </div>
+
+    <div class="gcard">
+      <h3>Anatomy <span class="gmeta">BSCN 606 · letter grade</span></h3>
+      <table class="gtable">
+        <tr><td>Module written exams</td><td class="w hi">60%</td></tr>
+        <tr><td>Lab practicals</td><td class="w hi">30%</td></tr>
+        <tr><td>Interactive sessions (participation)</td><td class="w">5%</td></tr>
+        <tr><td>Lab participation (attendance + lab reports)</td><td class="w">5%</td></tr>
+      </table>
+      <ul class="gnotes">
+        <li><b>Exams:</b> Aug 17 · Aug 31 · Sep 15 · Oct 6 · Oct 19 · Nov 2 · Nov 23 · Dec 9</li>
+        <li><b>Practicals:</b> Sep 15, Oct 6, Nov 23 — all 1–5 PM, same day as the written</li>
+        <li><b>Lab absences:</b> the first unexcused one is free, then your 5% erodes — 2 → 4%, 3 → 3%, 4 → 2%, 5 → 1%. <b>Sign in at every lab.</b></li>
+      </ul>
+    </div>
+
+    <div class="gcard">
+      <h3>Biochemistry &amp; Genetics <span class="gmeta">BSCN 625 · 5 cr · letter grade</span></h3>
+      <table class="gtable">
+        <tr><td>8 module exams</td><td class="w hi">90%</td></tr>
+        <tr><td>In-person iClicker check-ins</td><td class="w">8%</td></tr>
+        <tr><td>Weekly Canvas self-assessment quiz</td><td class="w">2%</td></tr>
+      </table>
+      <ul class="gnotes">
+        <li><b>The 8% is attendance, not correctness</b> — iClicker answers aren’t marked right or wrong, you just have to be in the room.</li>
+        <li><b>Weekly quiz:</b> opens Mon 8:00 AM, closes Sun 11:59 PM, <b>3 attempts</b>, graded.</li>
+        <li><b>The Metabolic Map is provided on exams.</b> Learn to use it rather than memorize it.</li>
+        <li>Course director (Middletown): <b>Dr. Shilpika Bagh</b> — Sbagh@touro.edu</li>
+      </ul>
+    </div>
+
+    <div class="gcard">
+      <h3>Physiology <span class="gmeta">BSCN 635 · letter grade</span></h3>
+      <table class="gtable">
+        <tr><td>Module / ExamSoft exams</td><td class="w hi">90%</td></tr>
+        <tr><td>Poll Everywhere in-class questions</td><td class="w">8%</td></tr>
+        <tr><td>Weekly Canvas quiz</td><td class="w">2%</td></tr>
+      </table>
+      <ul class="gnotes">
+        <li class="galert"><b>Physiology’s 8% IS graded for correctness</b> — unlike Biochem’s. You need <b>≥50% correct</b> in a session for full points. <b>Absent, or below 50%, scores zero for that session.</b> The easiest points on campus to lose by accident.</li>
+        <li><b>Weekly quiz:</b> posted Monday morning, due Sunday midnight, <b>best of 2 attempts</b>. Miss the window and the point is gone.</li>
+        <li><b>Supplemental sessions become mandatory</b> if your cumulative exam average is failing, and stay mandatory until an exam brings you back up.</li>
+        <li>Sits for <b>6 of the 8</b> module exams — not Foundations 2, not MSK 2.</li>
+      </ul>
+    </div>
+
+    <div class="gcard">
+      <h3>OMM <span class="gmeta">OMMN 610 · letter grade</span></h3>
+      <table class="gtable">
+        <tr><td>Written Exam 1 — Mon Oct 12, 10 AM–12 PM</td><td class="w hi">25%</td></tr>
+        <tr><td>Written Exam 2 — Fri Nov 20, 9–11 AM</td><td class="w hi">25%</td></tr>
+        <tr><td>In-class clicker quizzes</td><td class="w">15%</td></tr>
+        <tr><td>Practical 1 — Thu Oct 8</td><td class="w">15%</td></tr>
+        <tr><td>Practical 2 — Thu Nov 19</td><td class="w">15%</td></tr>
+        <tr><td>Canvas lab quizzes</td><td class="w">5%</td></tr>
+      </table>
+      <ul class="gnotes">
+        <li><b>Recurring weekly deadline: the Canvas lab quiz is due Wednesday 11:59 PM, the night before lab.</b> It opens the day after the previous week’s lab.</li>
+        <li class="galert"><b>Grade complaints must reach IT within 3 business days of the session</b> — after that they will not be investigated. Far shorter than the campus-wide 3-week window.</li>
+        <li><b>OSE skill sign-offs</b> are required. Fail one and you work with an OMM TA, then re-test. A <b>third</b> unsatisfactory attempt means a meeting with the Course Director.</li>
+        <li>Attendance mandatory for all interactive and lab sessions. Unexcused absence from a written exam = zero.</li>
+      </ul>
+    </div>
+
+    <div class="gcard">
+      <h3>Physical Diagnosis <span class="gmeta">PRCN 607</span></h3>
+      <table class="gtable">
+        <tr><td>Exam I — <b>Thu Sep 24</b></td><td class="w hi">20%</td></tr>
+        <tr><td>Exam II — Mon Dec 7</td><td class="w hi">20%</td></tr>
+        <tr><td>OSCE 1 — Sep 30</td><td class="w">12.5%</td></tr>
+        <tr><td>OSCE 2 — Oct 28</td><td class="w">12.5%</td></tr>
+        <tr><td>OSCE 3 — Dec 2</td><td class="w">12.5%</td></tr>
+        <tr><td>Online quizzes</td><td class="w">10%</td></tr>
+        <tr><td>Interactive sessions</td><td class="w">10%</td></tr>
+        <tr><td>SDL OSCE — Aug 12 &amp; Aug 19</td><td class="w">2.5%</td></tr>
+      </table>
+      <ul class="gnotes">
+        <li><b>Early Canvas quizzes:</b> Intro to PD + SP Guidelines due <b>Aug 4</b>; Bloodborne Pathogen due <b>Aug 7</b>.</li>
+        <li class="galert"><b>The attendance rules are the harshest on campus, and they come off your final grade —</b> 1 unexcused skills-lab absence <b>−5 points</b>, 2 unexcused <b>−10 points</b>, 3 unexcused <b>= “U” for the course</b>. <b>Forgetting to sign in counts as an unexcused absence.</b> Late, wrong attire, missing equipment, or weak participation = <b>−5 on your next OSCE</b>, and may count as an absence. Three or more <i>excused</i> absences and you must arrange a competency assessment or lose 5 points.</li>
+        <li><b>OSCEs:</b> arrive after your slot ends and you score zero. Arrive with more than half your slot left and you may still sit it. Makeups must happen <b>before the written exam dates</b>; skills-lab makeups <b>before the final OSCE</b>.</li>
+        <li>All materials must be <b>latex-free</b> and of clinical quality.</li>
+      </ul>
+    </div>
+
+    <div class="gcard">
+      <h3>Professionalism &amp; Medical Ethics <span class="gmeta">PRCN 647 · Pass / Unsatisfactory</span></h3>
+      <table class="gtable">
+        <tr><td>Final exam — Thu Dec 10, 10 AM–12 PM</td><td class="w hi">50%</td></tr>
+        <tr><td>Out-of-class video assignment — Sun Oct 26, 11:59 PM</td><td class="w hi">40%</td></tr>
+        <tr><td>Clicker sessions / Canvas quizzes</td><td class="w">10%</td></tr>
+      </table>
+      <ul class="gnotes">
+        <li><b>P = 70–100 · U = 69 and below.</b> The only P/U course this term — everything else is a letter grade.</li>
+        <li class="galert"><b>Video assignment late penalty: 10 points per day.</b> Four days late is a fail on 40% of the course. The syllabus says “No exceptions” on the Oct 26 date.</li>
+        <li><b>The video:</b> groups of no more than 4. Act out an approved ethical case where a principle was broken, then show the resolution. Voice-over PowerPoint is accepted. <b>The case must be approved by the course director in advance</b>, must come from syllabus material, and must be COMLEX/USMLE-relevant. Graded on the Canvas rubric; top 5 shown in class. <b>Not participating = zero.</b></li>
+        <li>Optional exam review Nov 17.</li>
+      </ul>
+    </div>
+
+    <div class="gcard">
+      <h3>Histology <span class="gmeta">BSCN 604-0-MT · 5 cr · letter grade</span></h3>
+      <table class="gtable">
+        <tr><td>Exam I — <b>no date published</b></td><td class="w hi">25%</td></tr>
+        <tr><td>Exam II — <b>no date published</b></td><td class="w hi">25%</td></tr>
+        <tr><td>Exam III — <b>no date published</b></td><td class="w hi">25%</td></tr>
+        <tr><td>Lab assessment</td><td class="w">15%</td></tr>
+        <tr><td>Discussion group</td><td class="w">10%</td></tr>
+      </table>
+      <ul class="gnotes">
+        <li class="galert">Each exam is <b>15% written + 10% practical</b>. These figures come from the <b>Fall 2024</b> syllabus — no 2026 version exists yet, and <b>none of the three exams appears on the Fall 2026 calendar.</b></li>
+        <li><b>Lab grading:</b> an ungraded pre-quiz opens each session, then <b>the same ~20-question image-ID quiz is repeated at the end and graded</b>. Closed computer. Attendance mandatory and monitored. Useful consequence — what you learn <i>during</i> lab still counts.</li>
+        <li><b>Discussion group:</b> 5+ MCQs discussed with peers; assigned readings required beforehand.</li>
+        <li>Course director: <b>Dr. Alex Braun</b> — alex.braun6@touro.edu</li>
+      </ul>
+    </div>
+
+    <div class="gcard">
+      <h3>Medicine and Horsemanship <span class="gmeta">mandatory · ungraded</span></h3>
+      <ul class="gnotes">
+        <li>Not graded, but <b>an unexcused absence puts a Professionalism letter in your file.</b></li>
+        <li>Your session: <b>Mon Aug 3, 9:45 AM–1:45 PM</b>, Raven Hill Farms. Cannot be switched.</li>
+      </ul>
+    </div>
+
+    <div class="gcard gwarn">
+      <h3>⚠️ What isn’t clear from the material we have</h3>
+      <ol class="gtop">
+        <li><b>Histology has no 2026 exam dates</b> — 75% of a 5-credit course. Only a Fall 2024 syllabus exists. Ask Dr. Braun.</li>
+        <li><b>Three different rules for “clicker” points, across two different apps.</b> Biochem uses <b>iClicker</b>, graded on attendance only (8%). Physiology uses <b>Poll Everywhere</b>, graded on correctness with a ≥50% threshold or zero (8%). OMM says only “a web-based polling application” and calls them “clicker quiz scores,” implying correctness (15%). PME and PD state neither the app nor the rule. <b>Install both apps and log into each before your first session</b>, then confirm per course.</li>
+        <li><b>Anatomy’s 5% “Interactive Sessions” has no stated mechanism</b> — clicker, sign-in, or something else is never said. The syllabus separately requires “any required reflection or quiz” as pre-class prep, but <b>no quiz appears in the grading table at all.</b></li>
+        <li><b>PD’s “Online Quizzes” (10%) have no schedule.</b> Only two are known — Aug 4 and Aug 7 — and both come from Canvas, not the syllabus.</li>
+        <li><b>Two conflicting grade-dispute windows.</b> IT orientation says 3 weeks from publication, campus-wide and final. OMM says 3 business days for clicker and Canvas-quiz concerns. Assume the shorter one for OMM and screenshot any error immediately.</li>
+        <li><b>OMM OSE skill sign-offs have no dates or list</b> — required, with escalation on a third failure, but neither which skills nor when.</li>
+        <li><b>Anatomy lab reports are graded but never described</b> — no format, length, or due date anywhere.</li>
+        <li><b>PME video: no case-approval deadline or process is given</b>, though approval is required before filming. With a hard Oct 26 date and 10 points per day, start by early October.</li>
+        <li><b>Physiology’s contribution to MSK looks thin</b> — only one required session falls between Sep 11 and Oct 1, yet Physiology is examined on MSK Exam 1 (Sep 15).</li>
+      </ol>
+      <p class="gfoot">Email drafts for all of these are in <code>OPEN_QUESTIONS_FOR_FACULTY.md</code>.</p>
+    </div>
+
   </div>
 
   <div class="note">Outlined / tinted days mark exams, OSCEs, practicals, deadlines, and no-class holidays. “Shared Exam” = a combined module exam; the courses tested are listed on each (Physiology sits for 6 of the 8 — not Foundations 2 or MSK 2). <b>Histology</b> (Histology I, BSCN 604-0-MT — a 5-credit course with its own exams) and <b>Medicine and Horsemanship</b> are now shown — both appear on the official calendar but were missing here before. <b>Horsemanship is mandatory, and you attend only ONE of the ten dates shown</b> — they are a menu, not a schedule. Physiology now has real dates too. You are in <b>Group B</b> — use <b>Show Group B only</b> above to drop the Group A labs. Your pattern is stable all semester: <b>Anatomy lab 3–5 PM on Tue/Mon, 1–3 PM on Thu</b>; <b>OMM lab always 3–5 PM on Thu</b> — so Thursdays are a solid 1–5 PM block. The one oddity is <b>Thu Oct 22</b>, where the calendar double-books both groups; see the Open items tab. Four labs carry no group letter on the official calendar (Thu Aug 27, Wed Sep 2 Histology, Wed Sep 23 Anatomy 1–5 PM) — assume you attend those. Histology labs are never split by group. Hover any entry for the full topic list. Orientation ran Jul 27–31 and is before this grid starts.</div>
