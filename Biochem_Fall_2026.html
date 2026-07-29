@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Biochemistry and Genetics I — Fall 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4f0e8;
+  --paper: #fffcf7;
+  --ink: #1c1916;
+  --muted: #6a635a;
+  --line: #e2dacd;
+  --brand: #8b5a2b;
+  --alert: #8b1e1e;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Source Sans 3", system-ui, sans-serif; color: var(--ink); background: var(--bg); }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 24px 16px 64px; }
+header { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; margin-bottom: 16px; }
+h1 { font-family: Fraunces, Georgia, serif; font-size: 1.75rem; margin: 0 0 6px; }
+.sub { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.tabs button { border: 1px solid var(--line); background: #fff; font: inherit; font-weight: 600; font-size: 0.9rem; padding: 8px 14px; border-radius: 999px; cursor: pointer; color: var(--ink); }
+.tabs button.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+.panel { display: none; }
+.panel.active { display: block; }
+
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
+.card.warn { border-color: #c9a8a3; background: #fffaf8; }
+.card h2 { font-family: Fraunces, Georgia, serif; font-size: 1.2rem; margin: 0 0 10px; }
+.card h3 { font-family: Fraunces, Georgia, serif; font-size: 1.05rem; margin: 0 0 8px; }
+.lead { font-size: 0.9rem; color: var(--muted); margin: 0 0 14px; line-height: 1.55; }
+
+ul.notes { margin: 0; padding-left: 18px; }
+ul.notes li { font-size: 0.9rem; line-height: 1.55; margin-bottom: 8px; }
+ul.notes li.alert { background: #fff4f2; border-left: 3px solid var(--alert); border-radius: 0 6px 6px 0; padding: 8px 11px; margin-left: -18px; list-style: none; }
+ol.top { margin: 0; padding-left: 20px; }
+ol.top li { font-size: 0.92rem; line-height: 1.6; margin-bottom: 10px; }
+
+.scroller { overflow-x: auto; }
+table.data { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 560px; }
+table.data th { text-align: left; font-size: 0.72rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); border-bottom: 2px solid var(--line); padding: 6px 8px; white-space: nowrap; }
+table.data td { padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.data td.n { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
+table.data tr.hi td { background: #fff4f2; }
+table.data tr.hi td.n { color: var(--alert); }
+.bar { display: inline-block; height: 9px; background: var(--brand); border-radius: 2px; vertical-align: middle; margin-right: 6px; }
+
+.wk { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 0; margin-bottom: 12px; overflow: hidden; }
+.wk > summary { cursor: pointer; padding: 13px 16px; display: grid; grid-template-columns: 92px 1fr auto; gap: 12px; align-items: baseline; list-style: none; }
+.wk > summary::-webkit-details-marker { display: none; }
+.wk > summary:hover { background: #fff; }
+.wk .wknum { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); white-space: nowrap; }
+.wk .wktitle { font-weight: 700; font-size: 0.98rem; }
+.wk .wktag { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; border-radius: 999px; padding: 3px 9px; white-space: nowrap; background: #efe7da; color: #6a563a; }
+.wk .wktag.exam { background: #f6dedb; color: var(--alert); }
+.wk .wktag.light { background: #e6ece3; color: #43603f; }
+.wk .body { padding: 2px 16px 16px; border-top: 1px solid var(--line); }
+.wk[open] > summary { background: #fff; }
+.sched { list-style: none; margin: 12px 0 0; padding: 0; }
+.sched li { display: grid; grid-template-columns: 128px 1fr; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 0.88rem; line-height: 1.45; }
+.sched li:last-child { border-bottom: 0; }
+.sched .when { color: var(--muted); font-weight: 700; font-variant-numeric: tabular-nums; }
+.sched .what b { display: block; }
+.sched .what span { color: var(--muted); font-size: 0.84rem; }
+.sched li.ex { background: #fff4f2; border-radius: 6px; padding: 8px 10px; margin: 4px -10px; border-bottom: 0; }
+.sched li.ex .when { color: var(--alert); }
+.do { margin: 12px 0 0; padding: 12px 14px; background: #fff; border: 1px solid var(--line); border-radius: 10px; }
+.do h4 { font-size: 0.74rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 0 0 7px; }
+.do ul { margin: 0; padding-left: 18px; }
+.do li { font-size: 0.88rem; line-height: 1.5; margin-bottom: 5px; }
+
+.tier { border-left: 4px solid var(--line); padding-left: 14px; margin-bottom: 18px; }
+.tier.t1 { border-color: var(--alert); }
+.tier.t2 { border-color: var(--brand); }
+.tier.t3 { border-color: #b8a98f; }
+.tier.t4 { border-color: #cfc7b8; }
+.tier h3 { margin-bottom: 4px; }
+.tier .why { font-size: 0.85rem; color: var(--muted); margin: 0 0 10px; }
+.rank { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; border-radius: 999px; padding: 2px 8px; margin-right: 6px; background: #efe7da; color: #6a563a; }
+.rank.a { background: #f6dedb; color: var(--alert); }
+.rank.b { background: #e9e0cf; color: #6a563a; }
+.rank.c { background: #e6ece3; color: #43603f; }
+.src { display: block; margin-top: 3px; font-size: 0.84rem; color: var(--muted); }
+
+.kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 0 0 6px; }
+.kpi div { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 13px; }
+.kpi b { display: block; font-family: Fraunces, Georgia, serif; font-size: 1.5rem; line-height: 1.1; }
+.kpi span { font-size: 0.8rem; color: var(--muted); }
+.tagline { font-size: 0.8rem; color: var(--muted); margin-top: 10px; }
+@media (max-width: 700px) {
+  .wk > summary { grid-template-columns: 1fr; gap: 4px; }
+  .sched li { grid-template-columns: 1fr; gap: 2px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Biochemistry and Genetics I</h1>
+    <p class="sub">BSCN 625 &middot; 5 credits &middot; letter grade &middot; Fall 2026 &middot; Middletown &middot; Dr. Shilpika Bagh</p>
+    <div class="tabs" role="tablist" aria-label="Biochemistry views">
+      <button type="button" class="active" role="tab" id="tab-plan" aria-controls="plan" aria-selected="true" data-tab="plan">Weekly plan</button>
+      <button type="button" role="tab" id="tab-exams" aria-controls="exams" aria-selected="false" data-tab="exams">Exams &amp; deadlines</button>
+      <button type="button" role="tab" id="tab-res" aria-controls="res" aria-selected="false" data-tab="res">Resources, ranked</button>
+      <button type="button" role="tab" id="tab-method" aria-controls="method" aria-selected="false" data-tab="method">How to study it</button>
+    </div>
+  </header>
+
+  <!-- ================= WEEKLY PLAN ================= -->
+  <div id="plan" class="panel active" role="tabpanel" aria-labelledby="tab-plan" tabindex="0">
+
+    <div class="card warn">
+      <h2>Three facts that should shape the whole semester</h2>
+      <div class="kpi">
+        <div><b>43%</b><span>of all Biochemistry exam points fall in the first four weeks, on Foundations 1 and 2</span></div>
+        <div><b>44 pts</b><span>Foundations Exam 2 on Aug 31 &mdash; the single largest Biochemistry exam of the term</span></div>
+        <div><b>8 pts</b><span>the entire GI exam on Nov 23 &mdash; the lowest-yield exam of the term</span></div>
+      </div>
+      <p class="tagline">Point counts are the Canvas gradebook's per-module Biochemistry score rows. The eight rows are published; the values may carry over from the previous year, so treat the ordering as reliable and the exact numbers as indicative.</p>
+    </div>
+
+    <div class="card">
+      <p class="lead">One row per teaching week. Each week lists the sessions from the official calendar, what has to be watched <b>before</b> each interactive session under the flipped-classroom model, and the review work that actually earns points. Weeks are collapsed; open the one you are in.</p>
+
+      <details class="wk" open>
+        <summary><span class="wknum">Week 1</span><span class="wktitle">Aug 3&ndash;9 &middot; Foundations block opens</span><span class="wktag">Build the map</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Tue Aug 4<br>1&ndash;2 PM</span><span class="what"><b>Interactive session</b><span>Watch first: Lecture 1 Overview of Metabolic Pathways, Lecture 2 Enzymes and Enzyme Kinetics</span></span></li>
+            <li><span class="when">Thu Aug 6<br>8:30&ndash;10 AM</span><span class="what"><b>Interactive session</b><span>Watch first: Lecture 3 Electron Transport Chain, Lecture 4 Signal Transduction, Lecture 5 Carbohydrate Digestion, plus Primer 1 Thermodynamics and Primer 2 Carbohydrate Structures</span></span></li>
+            <li><span class="when">Fri Aug 7<br>10&ndash;11 AM</span><span class="what"><b>Supplemental session</b><span>Optional. Mini review of the week plus student questions.</span></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li><b>Start the metabolic map on day one, not before an exam.</b> Print the annotated copy, learn the legend in the bottom-left corner, the vitamin abbreviations, which compartment each reaction sits in, and which way the arrows run. You are handed the blank map in every exam; the cost of not knowing your way around it is time you do not have.</li>
+              <li>Three graded quizzes opened Aug 3 and are due <b>Mon Aug 17, 11:59 PM</b>: Week 1 Overview (1 pt, unlimited attempts), Enzyme and ETC (8 pts, 6 attempts), Signal Transduction and Carbohydrate Digestion (6 pts, 6 attempts).</li>
+              <li>Read both Foundations 1 clinical vignettes &mdash; <b>Toxic Exposure</b> and <b>Asthma</b>. Vignettes generate their own exam questions and are the cheapest points on the paper.</li>
+              <li>Sit in the room for both interactive sessions. The 8% is attendance, and check-ins only register from inside the classroom.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="wk">
+        <summary><span class="wknum">Week 2</span><span class="wktitle">Aug 10&ndash;16 &middot; no new Biochemistry content</span><span class="wktag light">Review week</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Fri Aug 14<br>10&ndash;11 AM</span><span class="what"><b>Supplemental session</b><span>Exam review the week before the exam. Worth attending even though attendance is not required.</span></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li><b>No interactive session falls this week</b>, which makes it the first real review block of the semester. Spend it on Foundations 1, not on getting ahead.</li>
+              <li>Work questions in this order: interactive-session questions from the archive, then the Canvas practice quizzes, then the graded self-assessment quizzes, then a TA review. Questions written by the faculty are the closest thing to the exam.</li>
+              <li>Second pass on lectures 1&ndash;5. Read every bullet, number and diagram; the diagrams are examined.</li>
+              <li>Finish all three graded quizzes before Monday. They close at 11:59 PM on exam day.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="wk">
+        <summary><span class="wknum">Week 3</span><span class="wktitle">Aug 17&ndash;23 &middot; Foundations 1, then straight into carbohydrate metabolism</span><span class="wktag exam">Exam Mon</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li class="ex"><span class="when">Mon Aug 17<br>11 AM&ndash;1 PM</span><span class="what"><b>Foundations Exam 1 &mdash; about 28 Biochemistry points</b><span>Lectures 1&ndash;5, Primers 1&ndash;2, clinical vignettes Toxic Exposure and Asthma</span></span></li>
+            <li><span class="when">Wed Aug 19<br>1&ndash;2 PM</span><span class="what"><b>Interactive session</b><span>Watch first: Lecture 6 Glycolysis Parts I and II, Lecture 7 PDH and TCA cycle</span></span></li>
+            <li><span class="when">Thu Aug 20<br>10&ndash;11 AM</span><span class="what"><b>Interactive session</b><span>Watch first: Lecture 8 Gluconeogenesis and Ethanol Metabolism, Lecture 9 Glycogen Metabolism</span></span></li>
+            <li><span class="when">Fri Aug 21<br>10&ndash;11 AM</span><span class="what"><b>Supplemental session</b></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li class="alert" style="list-style:none;margin-left:-18px;background:#fff4f2;border-left:3px solid #8b1e1e;border-radius:0 6px 6px 0;padding:8px 11px"><b>There is no recovery gap between the two Foundations exams.</b> Two weeks of content and 44 points arrive between Aug 17 and Aug 31. Start lectures 6 and 7 before the Aug 17 exam if you can, because the Wednesday session is two days after it.</li>
+              <li>Read the clinical vignette <b>Lactic Acidosis</b>.</li>
+              <li>Glycolysis, gluconeogenesis and glycogen are the densest regulation content of the term: every enzyme, its activator and its inhibitor. Build the enzyme table as you go rather than at the end.</li>
+              <li>Trace each of these pathways on the metabolic map as you learn it, rather than learning them off the slides alone.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="wk">
+        <summary><span class="wknum">Week 4</span><span class="wktitle">Aug 24&ndash;30 &middot; the heaviest Biochemistry week of the semester</span><span class="wktag exam">Peak load</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Thu Aug 27<br>8:30&ndash;10 AM</span><span class="what"><b>Interactive session</b><span>Watch first: Lecture 10 Mono- and Disaccharide Metabolism, Lecture 11 HMP shunt and NADPH Part 1, Lecture 12 NADPH Part 2</span></span></li>
+            <li><span class="when">Fri Aug 28<br>11 AM&ndash;12 PM</span><span class="what"><b>Supplemental session</b><span>Exam review before Foundations 2.</span></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li><b>Foundations Exam 2 is Monday and carries roughly 44 Biochemistry points, more than any other exam this term.</b> Seven lectures, one week of runway. This is the week to protect from every other commitment.</li>
+              <li>Three graded quizzes close <b>Mon Aug 31, 11:59 PM</b>: Glycolysis and TCA (9 pts), Gluconeogenesis and Glycogen (9 pts), Monosaccharides and HMP NADPH 1 (8 pts). All six attempts. Use them as review, not as a checkbox.</li>
+              <li>Read the clinical vignette <b>Hemolytic Anemia</b>, which is the G6PD deficiency case that pairs with the NADPH lectures.</li>
+              <li>Work the archived interactive questions for Foundations 2 &mdash; the archive splits them by faculty member, so you can see how each writes.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="wk">
+        <summary><span class="wknum">Week 5</span><span class="wktitle">Aug 31&ndash;Sep 6 &middot; Foundations 2, then genetics begins</span><span class="wktag exam">Exam Mon</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li class="ex"><span class="when">Mon Aug 31<br>10 AM&ndash;12 PM</span><span class="what"><b>Foundations Exam 2 &mdash; about 44 Biochemistry points</b><span>Lectures 6&ndash;12, clinical vignettes Lactic Acidosis and Hemolytic Anemia</span></span></li>
+            <li><span class="when">Tue Sep 1<br>8&ndash;9 AM</span><span class="what"><b>Interactive session</b><span>Watch first: Lecture 13 DNA Composition and Packaging, Lecture 14 DNA Replication, plus Primer 3 DNA Structure and Primer 4 Nucleotide Structure</span></span></li>
+            <li><span class="when">Thu Sep 3<br>10&ndash;11 AM</span><span class="what"><b>Interactive session</b><span>Watch first: Lecture 15 DNA Repair, plus Primer 5 Cell Cycle and Division</span></span></li>
+            <li><span class="when">Fri Sep 4<br>11 AM&ndash;12 PM</span><span class="what"><b>Supplemental session</b></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li><b>The course changes character here.</b> Lectures 13 onward are medical genetics, taught against Thompson &amp; Thompson rather than Lippincott, and assessed through case-based vignettes. Pathway memorisation gives way to inheritance patterns and mechanisms of mutation.</li>
+              <li>The Tuesday session is the morning after the exam. Watch lectures 13 and 14 during the weekend before the exam, or accept walking in cold.</li>
+              <li>Read both MSK 1 vignettes early &mdash; <b>MERRF</b> (Thompson &amp; Thompson Case 33) and <b>Lynch syndrome</b> (Case 29).</li>
+              <li>Primers 3, 4, 5 and 6 are all examined on MSK 1. Each primer reliably generates a question, and they are short.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="wk">
+        <summary><span class="wknum">Week 6</span><span class="wktitle">Sep 7&ndash;13 &middot; Labor Day and Rosh Hashanah</span><span class="wktag light">Short week</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Mon Sep 7</span><span class="what"><b>School closed &mdash; Labor Day</b></span></li>
+            <li><span class="when">Tue Sep 8<br>8&ndash;9 AM</span><span class="what"><b>Interactive session</b><span>Watch first: Lecture 16 RNA Types and Synthesis, Lecture 17 RNA Processing, plus Primer 6 RNA Structure</span></span></li>
+            <li><span class="when">Fri Sep 11<br>11 AM&ndash;12 PM</span><span class="what"><b>Supplemental session</b><span>Half day &mdash; classes end at 12 PM for Erev Rosh Hashanah.</span></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>Two graded quizzes close <b>Mon Sep 14</b> (DNA Repair, 8 pts; DNA Composition and Replication, 8 pts) and one closes <b>Tue Sep 15</b> (RNA Types and Synthesis, 8 pts). <b>All three allow only three attempts</b>, down from six on the Foundations quizzes. Read the questions before you burn a try.</li>
+              <li>MSK Exam 1 is Tue Sep 15, and Rosh Hashanah takes out the weekend before it. The usable review time is Thursday Sep 10 and Monday Sep 14.</li>
+              <li>MSK 1 is about 15 Biochemistry points, roughly a third of Foundations 2. Calibrate the effort accordingly.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="wk">
+        <summary><span class="wknum">Week 7</span><span class="wktitle">Sep 14&ndash;20 &middot; MSK 1, then a double session</span><span class="wktag exam">Exam Tue</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li class="ex"><span class="when">Tue Sep 15<br>10 AM&ndash;12 PM</span><span class="what"><b>MSK Exam 1 &mdash; about 15 Biochemistry points</b><span>Lectures 13&ndash;17, Primers 3&ndash;6, vignettes MERRF and Lynch syndrome</span></span></li>
+            <li><span class="when">Thu Sep 17<br>10&ndash;11 AM</span><span class="what"><b>Interactive session</b><span>Watch first: Lecture 18 Genetic Code</span></span></li>
+            <li><span class="when">Thu Sep 17<br>11 AM&ndash;12 PM</span><span class="what"><b>Second interactive session, back to back</b><span>Watch first: Lecture 19 Translation and Co- and Post-Translational Modifications</span></span></li>
+            <li><span class="when">Fri Sep 18<br>11 AM&ndash;12 PM</span><span class="what"><b>Supplemental session</b></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li><b>Thursday Sep 17 carries two consecutive Biochemistry interactive sessions</b>, the only day in the term that does. Two lectures of prep are due the same morning, two days after an exam.</li>
+              <li>Read vignettes <b>Huntington</b> (Case 24) and <b>Cystic Fibrosis</b> (Case 12).</li>
+              <li>Yom Kippur closes the school on Mon Sep 21, so the following week is short as well.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="wk">
+        <summary><span class="wknum">Week 8</span><span class="wktitle">Sep 21&ndash;27 &middot; Yom Kippur and Sukkot</span><span class="wktag light">Short week</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Mon Sep 21</span><span class="what"><b>School closed &mdash; Yom Kippur</b></span></li>
+            <li><span class="when">Fri Sep 25<br>10&ndash;11 AM</span><span class="what"><b>Interactive session</b><span>Watch first: Lecture 20 Fibrous Proteins, Collagen and Elastin; Lecture 21 Glycoproteins and Proteoglycans</span></span></li>
+            <li><span class="when">Fri Sep 25<br>11 AM&ndash;12 PM</span><span class="what"><b>Supplemental session</b><span>Listed on the Biochemistry Canvas modules but not on the official calendar. Half day &mdash; classes end at 12 PM for Erev Sukkot.</span></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>Two graded quizzes close <b>Tue Sep 22</b>: Genetic Code (8 pts) and Protein Translation (8 pts), three attempts each.</li>
+              <li>Read the vignette <b>Mucopolysaccharidoses</b>, which pairs with the glycoproteins lecture and is examined on MSK 2.</li>
+              <li>Friday is the only Biochemistry teaching this week and it lands on a half day. Do the prep on Thursday.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="wk">
+        <summary><span class="wknum">Week 9</span><span class="wktitle">Sep 28&ndash;Oct 4 &middot; no Biochemistry teaching</span><span class="wktag light">Review week</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Fri Oct 2<br>10&ndash;11 AM</span><span class="what"><b>Supplemental session</b><span>Half day &mdash; classes end at 12 PM for Hoshana Rabbah.</span></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li><b>The second empty week of the term.</b> No new lectures, no interactive session. Use it on MSK 2 review, and on getting a first pass through lectures 22 and 23 before the Oct 5 session.</li>
+              <li>The Week 4 NADPH 2 and Glycoprotein quiz (8 pts, unlimited attempts) closes <b>Tue Oct 6</b>.</li>
+              <li>The next three weeks run exam, exam, exam with almost no gap: MSK 2 on Oct 6 and Cardiopulmonary 1 on Oct 19. Front-load here.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="wk">
+        <summary><span class="wknum">Week 10</span><span class="wktitle">Oct 5&ndash;11 &middot; MSK 2 and the protein block</span><span class="wktag exam">Exam Tue</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Mon Oct 5<br>9&ndash;10 AM</span><span class="what"><b>Interactive session</b><span>Watch first: Lecture 22 Globular Proteins and Hemoglobin, Lecture 23 Acid-Base Balance, plus Primers 7 Amino Acid, 8 Protein Structure and 9 Acid-Base</span></span></li>
+            <li class="ex"><span class="when">Tue Oct 6<br>10 AM&ndash;12 PM</span><span class="what"><b>MSK Exam 2 &mdash; about 16 Biochemistry points</b><span>Lectures 18&ndash;21, vignettes Cystic Fibrosis and Mucopolysaccharidoses</span></span></li>
+            <li><span class="when">Thu Oct 8<br>8:30&ndash;10 AM</span><span class="what"><b>Interactive session</b><span>Watch first: Lecture 24 Lipid Digestion and Absorption; the acid-base and globular protein material continues</span></span></li>
+            <li><span class="when">Fri Oct 9<br>9&ndash;10 AM</span><span class="what"><b>Supplemental session</b><span>Confirmed 9&ndash;10 AM. An older version of the syllabus said 1&ndash;2 PM.</span></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li><b>A lecture-heavy interactive session lands the morning before an exam.</b> Monday's prep has to be done over the preceding weekend alongside MSK 2 revision.</li>
+              <li>Read the vignette <b>Acid-Base Disorder</b>. Acid-base is one of the few topics that recurs across Biochemistry, Physiology and the boards; time spent here compounds.</li>
+              <li>The oxygen dissociation curve and haemoglobin shift logic sit here. Learn it once, properly, in both directions.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="wk">
+        <summary><span class="wknum">Week 11</span><span class="wktitle">Oct 12&ndash;18 &middot; fatty acid metabolism, no interactive session</span><span class="wktag light">Self-paced</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Fri Oct 16<br>10&ndash;11 AM</span><span class="what"><b>Supplemental session</b><span>Exam review before Cardiopulmonary 1.</span></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li><b>No interactive session, but two lectures are examined on Monday.</b> Lecture 25 Fatty Acid and Triacylglycerol Synthesis and Lecture 26 Degradation of Triacylglycerols and Fatty Acids are self-directed this week, together with Primer 10 Lipid Structures.</li>
+              <li>Two graded quizzes close <b>Mon Oct 19</b>: Lipid Digestion, Fatty Acid and TAG (8 pts) and Overview and Acid-Base (7 pts).</li>
+              <li>Read the vignette <b>Fatty Acid Metabolic Defect</b>.</li>
+              <li>Cardiopulmonary 1 is about 14 Biochemistry points, the smallest of the middle exams.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="wk">
+        <summary><span class="wknum">Week 12</span><span class="wktitle">Oct 19&ndash;25 &middot; Cardiopulmonary 1, then lipids</span><span class="wktag exam">Exam Mon</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li class="ex"><span class="when">Mon Oct 19<br>10 AM&ndash;12 PM</span><span class="what"><b>Cardiopulmonary Exam 1 &mdash; about 14 Biochemistry points</b><span>Lectures 22&ndash;26, Primers 7&ndash;10, vignettes Globular Protein, Acid-Base Disorder, Fatty Acid Metabolic Defect</span></span></li>
+            <li><span class="when">Thu Oct 22<br>10&ndash;11 AM</span><span class="what"><b>Interactive session</b><span>Watch first: Lecture 27 Cholesterol Properties and Synthesis, Lecture 28 Phospholipids and Sphingolipids, plus Primer 11 Cholesterol and Bile Acid Structures</span></span></li>
+            <li><span class="when">Fri Oct 23<br>11 AM&ndash;12 PM</span><span class="what"><b>Supplemental session</b></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>Cardiopulmonary 2 is two weeks out and worth about 18 points, more than either MSK exam. It is four lectures, so the ratio of points to content is the best of the middle block.</li>
+              <li>This is also the week Anatomy has no sessions at all, which frees real time. Spend some of it here.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="wk">
+        <summary><span class="wknum">Week 13</span><span class="wktitle">Oct 26&ndash;Nov 1 &middot; lipoproteins and eicosanoids</span><span class="wktag">Two sessions</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Tue Oct 27<br>9&ndash;10 AM</span><span class="what"><b>Interactive session</b><span>Watch first: Lecture 29 Lipoproteins Parts 1 and 2, Lecture 30 Eicosanoids, plus Primer 12 Lipoproteins and Primer 13 Eicosanoid Structure</span></span></li>
+            <li><span class="when">Thu Oct 29</span><span class="what"><b>Interactive session</b><span>Time to be confirmed on the calendar.</span></span></li>
+            <li><span class="when">Fri Oct 30<br>11 AM&ndash;12 PM</span><span class="what"><b>Supplemental session</b><span>Listed on the Biochemistry Canvas modules.</span></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>Three graded quizzes close across the weekend: Globular and Fibrous Proteins (8 pts) on <b>Sun Nov 1</b>, then Cholesterol and Lipoprotein (8 pts) and Phospholipid and Eicosanoid (8 pts) on <b>Mon Nov 2</b>.</li>
+              <li class="alert" style="list-style:none;margin-left:-18px;background:#fff4f2;border-left:3px solid #8b1e1e;border-radius:0 6px 6px 0;padding:8px 11px"><b>The Globular and Fibrous Proteins quiz closes Nov 1, but its content was examined on Oct 6 and Oct 19.</b> It is worth points and nothing else by then. This is the clearest case of the general rule: quiz due dates are not a study schedule.</li>
+              <li>Lipoprotein classes, their apolipoproteins and the associated dyslipidaemias are heavily examined and heavily confused. Build one table and learn it.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="wk">
+        <summary><span class="wknum">Week 14</span><span class="wktitle">Nov 2&ndash;8 &middot; Cardiopulmonary 2, then a quiet week</span><span class="wktag exam">Exam Mon</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li class="ex"><span class="when">Mon Nov 2<br>11 AM&ndash;1 PM</span><span class="what"><b>Cardiopulmonary Exam 2 &mdash; about 18 Biochemistry points</b><span>Lectures 27&ndash;30, Primers 11&ndash;13</span></span></li>
+            <li><span class="when">Fri Nov 6<br>10&ndash;11 AM</span><span class="what"><b>Supplemental session</b></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li><b>The last genuinely light Biochemistry week before the end of term.</b> After the exam there is no interactive session until Nov 10.</li>
+              <li>Use it to get ahead on the GI block and, more importantly, to start the renal and nitrogen material early. Renal is about 24 points, the third largest exam, and it arrives in the compressed final fortnight.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="wk">
+        <summary><span class="wknum">Week 15</span><span class="wktitle">Nov 9&ndash;15 &middot; GI block, two long sessions</span><span class="wktag">Two sessions</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Tue Nov 10<br>8:30&ndash;10 AM</span><span class="what"><b>Interactive session</b><span>Watch first: Lecture 31 Heme Metabolism, Lecture 32 Macronutrients, Insulin and Glucagon, plus Primer 14 Nutrition</span></span></li>
+            <li><span class="when">Thu Nov 12<br>8:30&ndash;10 AM</span><span class="what"><b>Interactive session and team-based learning</b><span>Fat-soluble vitamins, water-soluble vitamins, Lecture 36 Iron Metabolism, and the Vitamins TBL</span></span></li>
+            <li><span class="when">Fri Nov 13<br>10&ndash;11 AM</span><span class="what"><b>Supplemental session</b></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li class="alert" style="list-style:none;margin-left:-18px;background:#fff4f2;border-left:3px solid #8b1e1e;border-radius:0 6px 6px 0;padding:8px 11px"><b>Lectures 33, 34 and 35 are not posted on Canvas.</b> Lecture files run 1&ndash;42 with those three absent, and the syllabus places fat-soluble vitamins, water-soluble vitamins and insulin/glucagon in exactly that gap. Worth asking about before the GI exam rather than after.</li>
+              <li><b>The Vitamins session is team-based learning</b>, which is graded differently from a normal interactive session and includes a peer contribution form. The Canvas module carries the TBL outline and the assessment form; read them before the session.</li>
+              <li>Both sessions start at 8:30 AM and run 90 minutes. Prep has to be done the night before.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="wk">
+        <summary><span class="wknum">Week 16</span><span class="wktitle">Nov 16&ndash;22 &middot; no Biochemistry teaching</span><span class="wktag light">Review week</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Fri Nov 20<br>12&ndash;1 PM</span><span class="what"><b>Supplemental session</b><span>Exam review before the GI exam.</span></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>Two graded quizzes close <b>Mon Nov 23</b>: Macronutrients (4 pts, three attempts) and Vitamins and Iron (8 pts, unlimited attempts).</li>
+              <li class="alert" style="list-style:none;margin-left:-18px;background:#fff4f2;border-left:3px solid #8b1e1e;border-radius:0 6px 6px 0;padding:8px 11px"><b>The GI exam carries about 8 Biochemistry points, the lowest of the eight.</b> That is roughly a fifth of Foundations 2 for six lectures of content. The week also holds OMM Written Exam 2 and the GI anatomy practical &mdash; if something has to give, the marginal Biochemistry point here is the cheapest thing on the board.</li>
+              <li>Renal is the better use of this week. It is worth three times the GI exam and arrives 16 days later.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="wk">
+        <summary><span class="wknum">Week 17</span><span class="wktitle">Nov 23&ndash;29 &middot; GI exam, then nitrogen; Thanksgiving</span><span class="wktag exam">Exam Mon</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li class="ex"><span class="when">Mon Nov 23<br>9:30 AM&ndash;12 PM</span><span class="what"><b>GI Exam &mdash; about 8 Biochemistry points</b><span>Lectures 31&ndash;36, Primer 14, the Vitamins TBL</span></span></li>
+            <li><span class="when">Tue Nov 24<br>10&ndash;11 AM</span><span class="what"><b>Interactive session</b><span>Watch first: Lecture 37 Nitrogen Balance, Dietary Protein Digestion and Transaminases; Lecture 38 Urea Cycle</span></span></li>
+            <li><span class="when">Wed Nov 25<br>12&ndash;1 PM</span><span class="what"><b>Supplemental session</b><span>Confirmed 12&ndash;1 PM.</span></span></li>
+            <li><span class="when">Thu Nov 26<br>Fri Nov 27</span><span class="what"><b>School closed &mdash; Thanksgiving recess</b></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li><b>The renal block starts the day after the GI exam and runs almost unbroken to the final.</b> Six lectures, about 24 points, and Thanksgiving in the middle of it.</li>
+              <li>The urea cycle is the classic high-yield renal-block topic: the enzymes, where each step happens, and the deficiency presentations.</li>
+              <li>Thanksgiving is a four-day break with a 24-point exam two weeks out. Whether to work through it is a personal call, but the arithmetic is unusually clear this year.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="wk">
+        <summary><span class="wknum">Week 18</span><span class="wktitle">Nov 30&ndash;Dec 6 &middot; amino acids and nucleotides</span><span class="wktag">Two sessions</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Tue Dec 1<br>10&ndash;11 AM</span><span class="what"><b>Interactive session</b><span>Watch first: Lecture 39 Amino Acid Metabolism, Lecture 40 Inborn Errors of Amino Acid Metabolism</span></span></li>
+            <li><span class="when">Thu Dec 3<br>10&ndash;11 AM</span><span class="what"><b>Interactive session</b><span>Watch first: Lecture 41 Synthesis of Purines and Pyrimidines, Lecture 42 Catabolism of Purines and Pyrimidines</span></span></li>
+            <li><span class="when">Fri Dec 4<br>10&ndash;11 AM</span><span class="what"><b>Supplemental session &mdash; last day of class</b></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>Read the vignettes <b>Inborn Error of Amino Acid Metabolism</b> and <b>Gout</b>. Gout is the named renal-exam vignette.</li>
+              <li>The inborn errors are pure pattern recognition: enzyme missing, metabolite accumulating, clinical presentation. Build the table.</li>
+              <li>Purine and pyrimidine salvage and the drugs that block it are heavily examined and reappear in pharmacology later.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="wk">
+        <summary><span class="wknum">Week 19</span><span class="wktitle">Dec 7&ndash;13 &middot; finals</span><span class="wktag exam">Final exam</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Tue Dec 8<br>10&ndash;11 AM</span><span class="what"><b>Supplemental session</b><span>Final review, the day before the exam.</span></span></li>
+            <li class="ex"><span class="when">Wed Dec 9<br>10 AM&ndash;12 PM</span><span class="what"><b>Renal Exam &mdash; about 24 Biochemistry points</b><span>Lectures 37&ndash;42, vignette Gout</span></span></li>
+            <li><span class="when">Fri Dec 11</span><span class="what"><b>Last day of finals</b></span></li>
+            <li><span class="when">Sun Dec 13<br>11:59 PM</span><span class="what"><b>Final three graded quizzes close</b><span>Nitrogen Balance and Urea (7 pts), Amino Acid Inborn Errors and Heme (8 pts), Purine and Pyrimidine (8 pts)</span></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li class="alert" style="list-style:none;margin-left:-18px;background:#fff4f2;border-left:3px solid #8b1e1e;border-radius:0 6px 6px 0;padding:8px 11px"><b>The last three quizzes close four days after the exam they cover and two days after the term ends.</b> They are 23 points of the quiz component, so they still count &mdash; but do them <i>before</i> Dec 9, when they are worth something as revision. Left to the deadline they are administration.</li>
+              <li>Renal is the second-largest Biochemistry exam of the term and lands after the longest stretch of the semester. It rewards the person who started it in week 14.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ================= EXAMS ================= -->
+  <div id="exams" class="panel" role="tabpanel" aria-labelledby="tab-exams" tabindex="0">
+
+    <div class="card">
+      <h2>Where the exam points actually are</h2>
+      <p class="lead">Biochemistry does not sit its own exams. It contributes a block of questions to each of the eight shared module exams, and the Canvas gradebook publishes one score row per module. Those rows are what the table below reports. The lecture ranges, primers and vignettes come from the Canvas module names, which state them explicitly.</p>
+      <div class="scroller">
+      <table class="data">
+        <thead><tr><th>Exam</th><th>Date</th><th>Lectures</th><th>Primers</th><th>Clinical vignettes</th><th>Points</th><th>Share</th></tr></thead>
+        <tbody>
+          <tr class="hi"><td><b>Foundations 2</b></td><td>Mon Aug 31<br>10 AM&ndash;12 PM</td><td>6&ndash;12</td><td>&mdash;</td><td>Lactic Acidosis, Hemolytic Anemia</td><td class="n">44</td><td><span class="bar" style="width:88px"></span>26%</td></tr>
+          <tr class="hi"><td><b>Foundations 1</b></td><td>Mon Aug 17<br>11 AM&ndash;1 PM</td><td>1&ndash;5</td><td>1&ndash;2</td><td>Toxic Exposure, Asthma</td><td class="n">28</td><td><span class="bar" style="width:56px"></span>17%</td></tr>
+          <tr><td><b>Renal</b></td><td>Wed Dec 9<br>10 AM&ndash;12 PM</td><td>37&ndash;42</td><td>&mdash;</td><td>Gout</td><td class="n">24</td><td><span class="bar" style="width:48px"></span>14%</td></tr>
+          <tr><td><b>Cardiopulmonary 2</b></td><td>Mon Nov 2<br>11 AM&ndash;1 PM</td><td>27&ndash;30</td><td>11&ndash;13</td><td>&mdash;</td><td class="n">18</td><td><span class="bar" style="width:36px"></span>11%</td></tr>
+          <tr><td><b>MSK 2</b></td><td>Tue Oct 6<br>10 AM&ndash;12 PM</td><td>18&ndash;21</td><td>&mdash;</td><td>Cystic Fibrosis, Mucopolysaccharidoses</td><td class="n">16</td><td><span class="bar" style="width:32px"></span>10%</td></tr>
+          <tr><td><b>MSK 1</b></td><td>Tue Sep 15<br>10 AM&ndash;12 PM</td><td>13&ndash;17</td><td>3, 4, 5, 6</td><td>MERRF, Lynch syndrome</td><td class="n">15</td><td><span class="bar" style="width:30px"></span>9%</td></tr>
+          <tr><td><b>Cardiopulmonary 1</b></td><td>Mon Oct 19<br>10 AM&ndash;12 PM</td><td>22&ndash;26</td><td>7&ndash;10</td><td>Globular Protein, Acid-Base Disorder, Fatty Acid Metabolic Defect</td><td class="n">14</td><td><span class="bar" style="width:28px"></span>8%</td></tr>
+          <tr><td><b>GI</b></td><td>Mon Nov 23<br>9:30 AM&ndash;12 PM</td><td>31&ndash;36</td><td>14</td><td>Vitamins TBL</td><td class="n">8</td><td><span class="bar" style="width:16px"></span>5%</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <ul class="notes" style="margin-top:14px">
+        <li><b>The two Foundations exams together are 43% of the Biochemistry exam grade and both are done by Aug 31.</b> Whatever study system is going to be used this semester has to be working in week one, not settled by October.</li>
+        <li><b>The term is bookended.</b> Foundations 1 and 2 at the front, Renal at the back, and the four middle exams share 63 points between them. The GI exam is an outlier at 8.</li>
+        <li>The point values may carry over from the previous year, since the participation rows in the same gradebook still hold last year's dates. The <i>ordering</i> is consistent with how much teaching time each module gets, so it is worth planning against; the exact numbers are not worth defending.</li>
+        <li>The Metabolic Map is supplied in every exam. Both the syllabus and the orientation deck state this.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Grade composition</h2>
+      <div class="scroller">
+      <table class="data">
+        <thead><tr><th>Component</th><th>What it is</th><th>Weight</th></tr></thead>
+        <tbody>
+          <tr><td>Eight module exams</td><td>Biochemistry questions inside the shared exams above</td><td class="n">90%</td></tr>
+          <tr><td>Interactive session check-ins</td><td>In-person polling, graded for attendance rather than correctness</td><td class="n">8%</td></tr>
+          <tr><td>Canvas self-assessment quizzes</td><td>Graded for correct answers</td><td class="n">2%</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <ul class="notes" style="margin-top:14px">
+        <li><b>The 8% is attendance, not correctness.</b> Answers are not marked right or wrong, but check-ins only count from inside the classroom, and arriving late means missing the first one. Roughly twenty sessions carry one or two points each.</li>
+        <li class="alert"><b>The polling app is named two different ways by the same course.</b> The Fall 2026 syllabus says <b>Poll Everywhere</b>; the Fall 2026 orientation deck says <b>iClicker</b>. Install both and confirm at the first session on Aug 4.</li>
+        <li>Attendance at the interactive sessions is required by college policy. All classes are in person, with no remote option.</li>
+        <li>Grade concerns go to the course director; the campus-wide window is three weeks from publication.</li>
+      </ul>
+    </div>
+
+    <div class="card warn">
+      <h2>Every graded quiz deadline</h2>
+      <p class="lead">Twenty-two graded quizzes, 163 points in total, all closing at 11:59 PM. Attempt limits vary from three to unlimited and are not consistent within a week.</p>
+      <div class="scroller">
+      <table class="data">
+        <thead><tr><th>Closes</th><th>Quizzes</th><th>Points</th><th>Attempts</th></tr></thead>
+        <tbody>
+          <tr><td>Mon Aug 17</td><td>Week 1 Overview; Enzyme and ETC; Signal Transduction and Carbohydrate Digestion</td><td class="n">15</td><td>unlimited / 6 / 6</td></tr>
+          <tr><td>Mon Aug 31</td><td>Glycolysis and TCA; Gluconeogenesis and Glycogen; Monosaccharides, HMP and NADPH 1</td><td class="n">26</td><td>6</td></tr>
+          <tr><td>Mon Sep 14</td><td>DNA Repair; DNA Composition and Replication</td><td class="n">16</td><td>3</td></tr>
+          <tr><td>Tue Sep 15</td><td>RNA Types and Synthesis</td><td class="n">8</td><td>3</td></tr>
+          <tr><td>Tue Sep 22</td><td>Genetic Code; Protein Translation</td><td class="n">16</td><td>3</td></tr>
+          <tr><td>Tue Oct 6</td><td>NADPH 2 and Glycoprotein</td><td class="n">8</td><td>unlimited</td></tr>
+          <tr><td>Mon Oct 19</td><td>Lipid Digestion, Fatty Acid and TAG; Overview and Acid-Base</td><td class="n">15</td><td>6</td></tr>
+          <tr><td>Sun Nov 1</td><td>Globular and Fibrous Proteins</td><td class="n">8</td><td>6</td></tr>
+          <tr><td>Mon Nov 2</td><td>Cholesterol and Lipoprotein; Phospholipid and Eicosanoid</td><td class="n">16</td><td>6</td></tr>
+          <tr><td>Mon Nov 23</td><td>Macronutrients; Vitamins and Iron</td><td class="n">12</td><td>3 / unlimited</td></tr>
+          <tr class="hi"><td>Sun Dec 13</td><td>Nitrogen Balance and Urea; Amino Acid Inborn Errors and Heme; Purine and Pyrimidine</td><td class="n">23</td><td>6</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <ul class="notes" style="margin-top:14px">
+        <li class="alert"><b>The quiz calendar is not a study calendar, and following it would put you behind twice.</b> Most quizzes close at 11:59 PM on the day of the exam they belong to, so treating the deadline as the trigger means revising on exam day. Three cases are worse: the Globular and Fibrous Proteins quiz closes Nov 1 for content examined on Oct 6 and Oct 19, and the final three close Dec 13, four days after the Renal exam and two days after the term ends.</li>
+        <li><b>The orientation deck describes a rule the Canvas configuration does not follow.</b> The deck says quizzes open Monday 8 AM and close Sunday 11:59 PM with three attempts. On Canvas they open roughly two weeks ahead and close on the exam date, with attempts of three, six, twenty-five or unlimited depending on the quiz. The syllabus defers to Canvas. <b>Read the due date on each individual quiz.</b></li>
+        <li>Four further quizzes sit in the gradebook carrying 2025 dates &mdash; a Week 2 Pedigree Inheritance quiz, a Week 2 quiz marked F25, a Week 7 Regulation of Gene Expression quiz, and a duplicate Week 15 Vitamins and Iron quiz. They are last year's and are not on this year's schedule.</li>
+        <li>Alongside the graded set there are around thirty ungraded practice quizzes with unlimited attempts, plus a not-for-credit duplicate of most self-assessments. Those are the ones to grind; they cost nothing.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ================= RESOURCES ================= -->
+  <div id="res" class="panel" role="tabpanel" aria-labelledby="tab-res" tabindex="0">
+
+    <div class="card">
+      <h2>How the advice was weighted</h2>
+      <p class="lead">Guidance from previous years is only as good as the match between their course and this one. Three things changed, and they decide how much of each source survives.</p>
+      <div class="scroller">
+      <table class="data">
+        <thead><tr><th>Source year</th><th>Exam structure then</th><th>How well it maps</th></tr></thead>
+        <tbody>
+          <tr><td><b>Fall 2025</b><br>Class of 2029</td><td>Eight shared module exams: Foundations 1 and 2, MSK 1 and 2, Cardiopulmonary 1 and 2, GI, Renal</td><td><span class="rank a">Direct match</span> Identical exam names, identical sequence, genetics already merged in. The archive is even filed by those eight exams. <b>Use this first.</b></td></tr>
+          <tr><td><b>Fall 2024</b><br>Class of 2028</td><td>Module-based</td><td><span class="rank b">Close</span> Worth checking for topics that have not moved, but 2025 supersedes it wherever both exist.</td></tr>
+          <tr><td><b>Fall 2022</b><br>Class of 2026</td><td>Standalone Biochemistry Exam 1 and Exam 2, before genetics was merged in</td><td><span class="rank c">Methods only</span> The exam boundaries do not transfer at all. Every study <i>method</i> it describes does, because each thing it names still exists in 2026.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <ul class="notes" style="margin-top:14px">
+        <li><b>The 2022 guide holds up better than its age suggests.</b> It is built on the metabolic map, the primers, the clinical vignettes, the clicker questions and the TA reviews. All five are still in the 2026 course, all five are still weighted the same way, and the map is still handed out in the exam. What does not transfer is anything keyed to "Exam 1" or "Exam 2", which in 2026 means the two Foundations exams plus part of Cardiopulmonary 1.</li>
+        <li>Where the 2022 material lands on the current calendar: its <b>Sugars</b> sheet covers the Foundations primers, its <b>Enzymes</b> sheet is gluconeogenesis and glycogen regulation and maps onto <b>Foundations 2</b>, and its <b>Diseases and Conditions</b> sheet is haemoglobin and acid-base, which is now <b>Cardiopulmonary 1</b>.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>What to use, in order</h2>
+      <p class="lead">There is more material available than any one person can work through. This is a ranking, not a list &mdash; the tiers are meant to be dropped from the bottom when time runs short.</p>
+
+      <div class="tier t1">
+        <h3>Tier 1 &mdash; the course is written from these</h3>
+        <p class="why">Everything examined comes from here. Nothing below this tier substitutes for it.</p>
+        <ol class="top">
+          <li><b>The Touro lecture slides and videos.</b> Every testable fact lives in them, including the numbers and the diagrams. The consistent advice across every year is to read every bullet rather than skim for themes, and to expect three or four passes before it coheres.</li>
+          <li><b>The Metabolic Map, learned early.</b> It is provided in every exam, which makes fluency with it worth more than memorising it. Learn the legend, the vitamin abbreviations, which compartment each reaction occupies, and the direction of the arrows. Study from an annotated copy rather than a blank one; the annotated version in the archive is the same official map with the labelling filled in.<span class="src">In the repo: <code>SGA - upperclassmen resources/Kevin MAP.pdf</code>, alongside the blank <code>FullSubwayMap222.pdf</code> from Canvas.</span></li>
+          <li><b>Interactive-session questions, current and archived.</b> Written by the faculty who write the exams, which makes them the closest available proxy. The Fall 2025 archive files them per exam and even splits them by faculty member, so the individual question styles are visible.</li>
+          <li><b>The fourteen primers.</b> Short, and the recurring report from previous years is that each reliably produces at least one exam question. The Canvas module names state which primers belong to which exam, so there is no guesswork.</li>
+          <li><b>The clinical vignettes.</b> They generate questions that appear nowhere else and are among the easiest points available. Read them close to the exam so the details are fresh. Each is named in the module title of the exam it belongs to.</li>
+          <li><b>The Canvas practice and self-assessment quizzes.</b> Roughly thirty ungraded practice quizzes carry unlimited attempts and cost nothing. The graded ones are worth 2% of the course as well.</li>
+        </ol>
+      </div>
+
+      <div class="tier t2">
+        <h3>Tier 2 &mdash; high value, use as much as the week allows</h3>
+        <p class="why">Second-order material that consolidates rather than introduces.</p>
+        <ol class="top" start="7">
+          <li><b>TA reviews.</b> Twenty teaching assistants are assigned to the course this year, and the archive holds their review decks per exam. Reported as the best question source after the faculty's own. Made by students, so occasional errors are expected rather than alarming.</li>
+          <li><b>Faculty review sessions and decks.</b> Worth attending and worth reading afterwards. One specific warning carried forward from previous years: the course director's review deck differs in small ways from her lecture slides, and the differences are where the attention should go.</li>
+          <li><b>Lippincott Illustrated Reviews: Biochemistry, 9th edition.</b> The required text, and the syllabus maps chapters to individual lectures. Useful for a topic that has not landed after two passes of the slides, rather than as a primary read.</li>
+          <li><b>The supplemental sessions.</b> Optional, roughly weekly, and the one before each exam functions as a review. Questions asked there tend to be the ones the class collectively got wrong.</li>
+        </ol>
+      </div>
+
+      <div class="tier t3">
+        <h3>Tier 3 &mdash; targeted use only</h3>
+        <p class="why">Reach for these to unstick one topic, not to cover the course.</p>
+        <ol class="top" start="11">
+          <li><b>Ninja Nerd videos</b> for a mechanism that refuses to click after the slides and the textbook.</li>
+          <li><b>First Aid</b> for board-style framing of a topic already learned.</li>
+          <li><b>Student-made reviews and Anki decks from the archive</b>, which exist for each exam. Useful late, as a check on coverage.</li>
+        </ol>
+      </div>
+
+      <div class="tier t4">
+        <h3>Tier 4 &mdash; deliberately skipped</h3>
+        <p class="why">Not because they are bad, but because they are not aimed at this exam.</p>
+        <ol class="top" start="14">
+          <li><b>External question banks and pre-made Anki decks.</b> The consistent report from previous years is that they underperform for this course specifically, because the questions are written against a general biochemistry syllabus rather than against these slides. The same students recommend them for other courses.</li>
+          <li><b>The optional textbooks</b> &mdash; Panini, Marks, Molecular Biology of the Cell, Robbins. Listed in the syllabus as optional and reasonably treated that way.</li>
+          <li><b>Building an original Anki deck for this course.</b> Previous years describe the volume as too large to card usefully. The time is better spent on questions.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Where each resource lives</h2>
+      <div class="scroller">
+      <table class="data">
+        <thead><tr><th>Resource</th><th>Location</th></tr></thead>
+        <tbody>
+          <tr><td>Lectures, primers, vignettes, quizzes, TBL material</td><td>Canvas, filed by module and by week</td></tr>
+          <tr><td>Blank Metabolic Map, NBOME laboratory values</td><td>Canvas, Resources module</td></tr>
+          <tr><td>Annotated Metabolic Map, 2022 study sheets, first-year guide</td><td>This repository, <code>SGA - upperclassmen resources</code></td></tr>
+          <tr><td>Fall 2025 archive &mdash; lectures, interactive questions, vignettes, faculty reviews, TA reviews, student reviews and Anki decks, all filed per exam</td><td>SGA dashboard, OMS-I tab, Biochem/Genetics (Fall 2025)</td></tr>
+          <tr><td>Teaching assistant list, twenty names with contact addresses</td><td>Canvas, Teaching Assistants module</td></tr>
+          <tr><td>Course director office hours</td><td>Canvas, Office Hours module &mdash; by appointment, Room 254</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= METHOD ================= -->
+  <div id="method" class="panel" role="tabpanel" aria-labelledby="tab-method" tabindex="0">
+
+    <div class="card">
+      <h2>The method, and why this course needs its own</h2>
+      <p class="lead">The recurring theme in advice from previous years is that a single study system will not carry all of first year, and that Biochemistry sits at the opposite end from Anatomy and Physiology.</p>
+      <ul class="notes">
+        <li><b>This is a bottom-up course.</b> Anatomy and Physiology reward building the framework first and filling in detail afterwards. Biochemistry does the reverse: the details come first, and the structure only appears once enough of them are in place. The practical consequence is that the first pass through a lecture will not feel like understanding, and that is the expected experience rather than a warning sign. It typically takes three or four passes before a block coheres.</li>
+          <li><b>Volume is the difficulty, not conceptual depth.</b> Every number, diagram and figure on a slide is examinable. Colour-highlighted text matters but is not the boundary of what is tested.</li>
+        <li><b>Questions are the primary study activity, not the final check.</b> The ordering that keeps being recommended runs from easiest and most general to hardest and most specific: textbook or review-book questions, then TA weekly reviews, then TA exam reviews, then the Canvas practice quizzes, then the faculty's own interactive-session questions. The last of those is the most predictive, because the people who wrote them write the exam.</li>
+        <li><b>Learn the question form, not only the content.</b> Interactive-session questions tend to reappear in the same shape on the exam.</li>
+        <li><b>Speaking the material out loud is repeatedly named as the highest-return technique for this course</b> &mdash; explaining a pathway to another person, or to nobody in particular. It surfaces the steps that were being skimmed.</li>
+        <li><b>Stay one to two weeks ahead where the calendar allows.</b> The empty weeks &mdash; Aug 10, Sep 28, Nov 16 &mdash; are the ones that make this possible, and they sit immediately before exams for a reason.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Working the metabolic map</h2>
+      <ul class="notes">
+        <li><b>It is an exam aid, so the skill being tested is navigation under time pressure.</b> Knowing roughly where a pathway lives is worth more than having memorised its contents, because the contents are printed in front of you.</li>
+        <li>Before each exam, find the relevant region of the map and work through it deliberately, so that no time is spent searching during the exam itself.</li>
+        <li>The parts that repeatedly catch people out: the legend in the bottom-left corner, the vitamin names and abbreviations and their precursors, which side of the mitochondrial membrane each reaction sits on, the direction of the arrows, and the cofactors.</li>
+        <li>Study from the annotated copy. The blank version is what appears in the exam, so the goal is to be able to look at the blank one and see the annotations.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Exam technique carried over from previous years</h2>
+      <ul class="notes">
+        <li>Stems run long. Read the question, form an answer before looking at the options, then work the options against it.</li>
+        <li>When the answer is not known outright, eliminate. Most questions have two defensible options; the work is finding which is worse.</li>
+        <li>Flag and move on rather than stalling. Rank the flagged questions by difficulty and return to the easiest of them first.</li>
+        <li>Write down whatever is volatile as soon as the exam opens &mdash; a pathway, an enzyme list, a set of values.</li>
+        <li>Questions are written by different faculty, so one stem sometimes contains the information needed for another.</li>
+        <li>Keep a running file of missed questions and facts that will not stick, and read only that in the last hour before the exam.</li>
+      </ul>
+    </div>
+
+    <div class="card warn">
+      <h2>Open questions worth resolving early</h2>
+      <ul class="notes">
+        <li><b>Which polling app the course actually uses.</b> The syllabus says Poll Everywhere, the orientation deck says iClicker, and 8% of the grade depends on the check-in registering. Resolve it at the first session on Aug 4.</li>
+        <li><b>Whether lectures 33, 34 and 35 will be posted.</b> The lecture files on Canvas run 1&ndash;42 with those three missing, and the syllabus places the vitamin and insulin/glucagon material there. They belong to the GI exam.</li>
+        <li><b>Whether the quiz configuration on Canvas is intended.</b> It contradicts the orientation deck on both the window and the attempt count. Canvas is the operative one either way, but the discrepancy is worth flagging.</li>
+        <li><b>How the team-based learning session on Nov 12 is graded.</b> Canvas carries a TBL outline and a peer contribution form, but the syllabus does not say how the result enters the grade.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll(".tabs button").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".tabs button").forEach(b=>{b.classList.remove("active");b.setAttribute("aria-selected","false");});
+    document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
+    btn.classList.add("active");btn.setAttribute("aria-selected","true");
+    document.getElementById(btn.dataset.tab).classList.add("active");
+    window.scrollTo({top:0});
+  });
+});
+</script>
+</body>
+</html>
