@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Clinical Anatomy and Embryology I — Fall 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4f0e8;
+  --paper: #fffcf7;
+  --ink: #1c1916;
+  --muted: #6a635a;
+  --line: #e2dacd;
+  --brand: #8b5a2b;
+  --alert: #8b1e1e;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Source Sans 3", system-ui, sans-serif; color: var(--ink); background: var(--bg); }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 24px 16px 64px; }
+header { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; margin-bottom: 16px; }
+h1 { font-family: Fraunces, Georgia, serif; font-size: 1.75rem; margin: 0 0 6px; }
+.sub { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.tabs button { border: 1px solid var(--line); background: #fff; font: inherit; font-weight: 600; font-size: 0.9rem; padding: 8px 14px; border-radius: 999px; cursor: pointer; color: var(--ink); }
+.tabs button.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+.panel { display: none; }
+.panel.active { display: block; }
+
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
+.card.warn { border-color: #c9a8a3; background: #fffaf8; }
+.card h2 { font-family: Fraunces, Georgia, serif; font-size: 1.2rem; margin: 0 0 10px; }
+.card h3 { font-family: Fraunces, Georgia, serif; font-size: 1.05rem; margin: 0 0 8px; }
+.lead { font-size: 0.9rem; color: var(--muted); margin: 0 0 14px; line-height: 1.55; }
+
+ul.notes { margin: 0; padding-left: 18px; }
+ul.notes li { font-size: 0.9rem; line-height: 1.55; margin-bottom: 8px; }
+ul.notes li.alert { background: #fff4f2; border-left: 3px solid var(--alert); border-radius: 0 6px 6px 0; padding: 8px 11px; margin-left: -18px; list-style: none; }
+ol.top { margin: 0; padding-left: 20px; }
+ol.top li { font-size: 0.92rem; line-height: 1.6; margin-bottom: 10px; }
+
+.scroller { overflow-x: auto; }
+table.data { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 560px; }
+table.data th { text-align: left; font-size: 0.72rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); border-bottom: 2px solid var(--line); padding: 6px 8px; white-space: nowrap; }
+table.data td { padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.data td.n { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
+table.data tr.hi td { background: #fff4f2; }
+table.data tr.hi td.n { color: var(--alert); }
+.bar { display: inline-block; height: 9px; background: var(--brand); border-radius: 2px; vertical-align: middle; margin-right: 6px; }
+
+.wk { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 0; margin-bottom: 12px; overflow: hidden; }
+.wk > summary { cursor: pointer; padding: 13px 16px; display: grid; grid-template-columns: 92px 1fr auto; gap: 12px; align-items: baseline; list-style: none; }
+.wk > summary::-webkit-details-marker { display: none; }
+.wk > summary:hover { background: #fff; }
+.wk .wknum { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); white-space: nowrap; }
+.wk .wktitle { font-weight: 700; font-size: 0.98rem; }
+.wk .wktag { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; border-radius: 999px; padding: 3px 9px; white-space: nowrap; background: #efe7da; color: #6a563a; }
+.wk .wktag.exam { background: #f6dedb; color: var(--alert); }
+.wk .wktag.light { background: #e6ece3; color: #43603f; }
+.wk .body { padding: 2px 16px 16px; border-top: 1px solid var(--line); }
+.wk[open] > summary { background: #fff; }
+.sched { list-style: none; margin: 12px 0 0; padding: 0; }
+.sched li { display: grid; grid-template-columns: 128px 1fr; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 0.88rem; line-height: 1.45; }
+.sched li:last-child { border-bottom: 0; }
+.sched .when { color: var(--muted); font-weight: 700; font-variant-numeric: tabular-nums; }
+.sched .what b { display: block; }
+.sched .what span { color: var(--muted); font-size: 0.84rem; }
+.sched li.ex { background: #fff4f2; border-radius: 6px; padding: 8px 10px; margin: 4px -10px; border-bottom: 0; }
+.sched li.ex .when { color: var(--alert); }
+.do { margin: 12px 0 0; padding: 12px 14px; background: #fff; border: 1px solid var(--line); border-radius: 10px; }
+.do h4 { font-size: 0.74rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 0 0 7px; }
+.do ul { margin: 0; padding-left: 18px; }
+.do li { font-size: 0.88rem; line-height: 1.5; margin-bottom: 5px; }
+
+.tier { border-left: 4px solid var(--line); padding-left: 14px; margin-bottom: 18px; }
+.tier.t1 { border-color: var(--alert); }
+.tier.t2 { border-color: var(--brand); }
+.tier.t3 { border-color: #b8a98f; }
+.tier.t4 { border-color: #cfc7b8; }
+.tier h3 { margin-bottom: 4px; }
+.tier .why { font-size: 0.85rem; color: var(--muted); margin: 0 0 10px; }
+.rank { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; border-radius: 999px; padding: 2px 8px; margin-right: 6px; background: #efe7da; color: #6a563a; }
+.rank.a { background: #f6dedb; color: var(--alert); }
+.rank.b { background: #e9e0cf; color: #6a563a; }
+.rank.c { background: #e6ece3; color: #43603f; }
+.src { display: block; margin-top: 3px; font-size: 0.84rem; color: var(--muted); }
+
+.kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 0 0 6px; }
+.kpi div { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 13px; }
+.kpi b { display: block; font-family: Fraunces, Georgia, serif; font-size: 1.5rem; line-height: 1.1; }
+.kpi span { font-size: 0.8rem; color: var(--muted); }
+.tagline { font-size: 0.8rem; color: var(--muted); margin-top: 10px; }
+@media (max-width: 700px) {
+  .wk > summary { grid-template-columns: 1fr; gap: 4px; }
+  .sched li { grid-template-columns: 1fr; gap: 2px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Clinical Anatomy and Embryology I</h1>
+    <p class="sub">BSCN 606 &middot; 6.5 credits &middot; letter grade &middot; Fall 2026 &middot; Middletown &middot; Dr. Jeremiah DiRuzzo &middot; Lab Group B</p>
+    <div class="tabs" role="tablist" aria-label="Anatomy views">
+      <button type="button" class="active" role="tab" id="tab-plan" aria-controls="plan" aria-selected="true" data-tab="plan">Weekly plan</button>
+      <button type="button" role="tab" id="tab-exams" aria-controls="exams" aria-selected="false" data-tab="exams">Exams &amp; deadlines</button>
+      <button type="button" role="tab" id="tab-res" aria-controls="res" aria-selected="false" data-tab="res">Resources, ranked</button>
+      <button type="button" role="tab" id="tab-method" aria-controls="method" aria-selected="false" data-tab="method">How to study it</button>
+    </div>
+  </header>
+
+  <!-- ================= WEEKLY PLAN ================= -->
+  <div id="plan" class="panel active" role="tabpanel" aria-labelledby="tab-plan" tabindex="0">
+
+    <div class="card warn">
+      <h2>Three facts that should shape the whole semester</h2>
+      <div class="kpi">
+        <div><b>90%</b><span>of the course grade is pooled across exams — 60% written and 30% practical — not scored as eight isolated module percentages</span></div>
+        <div><b>35%</b><span>of the grade is lab (30% practicals + 5% participation), and lab is half the lived course</span></div>
+        <div><b>Sep 15</b><span>first practical, same afternoon as MSK Exam 1 — only four weeks of dissection before it</span></div>
+      </div>
+      <p class="tagline">Confirmed: Canvas publishes no per-module Anatomy score rows (unlike Biochemistry). The only graded Canvas item posted is the Pre-lab Quiz at 10 points. Written and practical pooling is stated on the orientation deck; the deck contradicts itself on whether there are 7 or 8 written exams and 2 or 3 lab exams — the calendar carries eight writtens and three practicals, and this page follows the calendar.</p>
+    </div>
+
+    <div class="card">
+      <p class="lead">One row per teaching week for <b>Lab Group B</b>. Sessions come from the DO 2030 Google Calendar. Watch the faculty videos before each interactive session. Weeks are collapsed; open the one you are in.</p>
+
+      <details class="wk" open>
+        <summary><span class="wknum">Week 1</span><span class="wktitle">Aug 3–9 · Foundations block opens</span><span class="wktag">Watch first</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Tue Aug 4<br>9–10 AM</span><span class="what"><b>Interactive session — Intro to Anatomy</b><span>Watch first: faculty Intro to Anatomy videos (parts I–III posted on Canvas).</span></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>Start Netter or an atlas skim for a mental map of regions — DHahn's top-down method. Do not memorise yet.</li>
+              <li>Confirm Poll Everywhere works; the 5% interactive grade only registers from inside the classroom.</li>
+              <li>Read the Lab Introduction Manual before the first lab next week.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details class="wk">
+        <summary><span class="wknum">Week 2</span><span class="wktitle">Aug 10–16 · embryology, then Foundations 1</span><span class="wktag exam">Exam Mon</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Tue Aug 11<br>9–10 AM</span><span class="what"><b>Interactive session — Intro to Embryo 1, 2, 3</b><span>Watch first: Introduction to Embryology videos 1–3. Readings: The Developing Human, chapters 2–5.</span></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>Foundations Exam 1 is Monday Aug 17. Two interactive sessions of content for the first written.</li>
+              <li>Embryology is examined with gross anatomy from day one — treat the Aug 11 session as exam material, not background.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details class="wk">
+        <summary><span class="wknum">Week 3</span><span class="wktitle">Aug 17–23 · Foundations 1, then lab opens</span><span class="wktag exam">Exam Mon · Lab starts</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li class="ex"><span class="when">Mon Aug 17<br>11 AM–1 PM</span><span class="what"><b>Foundations Exam 1 (shared module exam)</b><span>Anatomy questions pooled into the written grade.</span></span></li>
+            <li><span class="when">Tue Aug 18<br>9–10 AM</span><span class="what"><b>Interactive session — Vertebrae</b><span>Watch first: Spine videos (general, cervical, thoracic, lumbar).</span></span></li>
+            <li class="ex"><span class="when">Tue Aug 18<br>1:00 PM</span><span class="what"><b>Pre-lab Quiz due — 10 points</b><span>Deadline binds Group B. Anyone who has not submitted is sent to the library before being admitted.</span></span></li>
+            <li><span class="when">Tue Aug 18<br>3–5 PM</span><span class="what"><b>Lab B — Intro to the Anatomy Lab</b><span>First lab. Scrubs, nitrile gloves, eye protection, solid-colour surgical mask, closed-toe shoes.</span></span></li>
+            <li><span class="when">Thu Aug 20<br>9–10 AM</span><span class="what"><b>Interactive session — Superficial Back and Spinal Cord</b></span></li>
+            <li><span class="when">Thu Aug 20<br>1–3 PM</span><span class="what"><b>Lab B — Superficial Back</b><span>Grant's Dissector chapter 1.</span></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>The Pre-lab Quiz is due at 1 PM, two hours before Group B's first lab. Finish it the night before.</li>
+              <li>Lab participation (5%) starts counting immediately: sign in, stay, leave the table clean.</li>
+              <li>Foundations Exam 2 is two weeks away. Spine and back content starts the day after Foundations 1.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details class="wk">
+        <summary><span class="wknum">Week 4</span><span class="wktitle">Aug 24–30 · into the upper limb, Foundations 2 Monday</span><span class="wktag exam">Exam Mon</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Tue Aug 25<br>9–10 AM</span><span class="what"><b>Interactive session — Embryo-MSK</b><span>Watch first: MSK Embryo videos parts I–III.</span></span></li>
+            <li><span class="when">Tue Aug 25<br>3–5 PM</span><span class="what"><b>Lab B — Deep Back and Sub-Occipital</b></span></li>
+            <li><span class="when">Thu Aug 27<br>10–11 AM</span><span class="what"><b>Interactive session — Osteology of the Upper Limb</b></span></li>
+            <li><span class="when">Thu Aug 27<br>1–3 PM and 3–5 PM</span><span class="what"><b>Lab — Scapular Region (both slots, no group letter)</b><span>Likely: Group B at 1–3 PM under the normal Thursday pattern. Confirm if posted.</span></span></li>
+            <li><span class="when">Fri Aug 28<br>9–10 AM</span><span class="what"><b>Optional supplemental — Foundations II Week 1</b><span>Zoom; register via Canvas home page. Questions into the Google Doc by 1 PM Wednesday.</span></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>Foundations Exam 2 is Monday. Protect this week.</li>
+              <li class="alert" style="list-style:none;margin-left:-18px;background:#fff4f2;border-left:3px solid #8b1e1e;border-radius:0 6px 6px 0;padding:8px 11px">Unknown: Canvas files Embryo-MSK and Osteology of the Upper Limb under the MSK I module, while the calendar places both before Foundations Exam 2. Which exam they hit is not yet confirmed — follow the objectives sheet when it posts.</li>
+              <li>Aug 27 labs carry no A/B label. Treat the normal Thursday pattern as indicative only.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details class="wk">
+        <summary><span class="wknum">Week 5</span><span class="wktitle">Aug 31–Sep 6 · Foundations 2, then MSK I upper limb</span><span class="wktag exam">Exam Mon</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li class="ex"><span class="when">Mon Aug 31<br>10 AM–12 PM</span><span class="what"><b>Foundations Exam 2 (shared module exam)</b></span></li>
+            <li><span class="when">Tue Sep 1<br>9–10 AM</span><span class="what"><b>Interactive session — Brachium and Cubital Fossa</b></span></li>
+            <li><span class="when">Tue Sep 1<br>3–5 PM</span><span class="what"><b>Lab B — Pectoral region and axilla</b></span></li>
+            <li><span class="when">Thu Sep 3<br>9–10 AM</span><span class="what"><b>Interactive session — Extensor compartment, carpal tunnel, hand, vessels</b></span></li>
+            <li><span class="when">Thu Sep 3<br>1–3 PM</span><span class="what"><b>Lab B — Arm and cubital fossa</b></span></li>
+            <li><span class="when">Fri Sep 4<br>9–10 AM</span><span class="what"><b>Optional supplemental — MSK I Weeks 1–2</b></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>MSK I written and the first lab practical land together on Sep 15. Lab review has to run in parallel with written study from this week on.</li>
+              <li>Brachial plexus and rotator cuff are high-yield exceptions — start a running list.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details class="wk">
+        <summary><span class="wknum">Week 6</span><span class="wktitle">Sep 7–13 · finish upper limb</span><span class="wktag">Practical next week</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Tue Sep 8<br>9–10 AM</span><span class="what"><b>Interactive session — Joints of the upper limb</b></span></li>
+            <li><span class="when">Tue Sep 8<br>3–5 PM</span><span class="what"><b>Lab B — Palm and dorsum of the hand</b></span></li>
+            <li><span class="when">Thu Sep 10<br>9–10 AM</span><span class="what"><b>Interactive session — Radiology of back and upper limb</b></span></li>
+            <li><span class="when">Thu Sep 10<br>1–3 PM</span><span class="what"><b>Lab B — Extensors and dorsal hand</b></span></li>
+            <li><span class="when">Fri Sep 11<br>9–10 AM</span><span class="what"><b>Optional supplemental — MSK I Week 3</b></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>Structure lists and unlabelled plastination images for MSK I are already on Canvas under Lab Documents. Label the images before the practical.</li>
+              <li>Practice practical decks (MSK I Back Practice Practical) are posted — use them timed.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details class="wk">
+        <summary><span class="wknum">Week 7</span><span class="wktitle">Sep 14–20 · MSK I exam day, then lower limb starts</span><span class="wktag exam">Exam Tue · Practical</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Mon Sep 14<br>9–10 AM</span><span class="what"><b>Interactive session — Osteology of the Lower Limb</b><span>MSK II content begins the day before MSK I Exam. Do not let it steal the last written pass.</span></span></li>
+            <li><span class="when">Mon Sep 14<br>3–5 PM</span><span class="what"><b>Lab B — Lower limb superficial veins and anterior/medial thigh</b><span>Calendar starts lower-limb dissection here; the syllabus still lists an optional review lab for this day. The DO 2030 calendar is followed.</span></span></li>
+            <li class="ex"><span class="when">Tue Sep 15<br>10 AM–12 PM</span><span class="what"><b>MSK Exam 1 (shared module exam)</b></span></li>
+            <li class="ex"><span class="when">Tue Sep 15<br>1–5 PM</span><span class="what"><b>MSK I Lab Practical</b><span>Cadaver, plastinated specimens, and Visible Body. ~50–60 stations, about one minute each.</span></span></li>
+            <li><span class="when">Thu Sep 17<br>9–10 AM</span><span class="what"><b>Interactive session — Gluteal region and posterior thigh</b></span></li>
+            <li><span class="when">Thu Sep 17<br>1–3 PM</span><span class="what"><b>Lab B — Gluteal region and posterior thigh</b></span></li>
+            <li><span class="when">Fri Sep 18<br>9–10 AM</span><span class="what"><b>Optional supplemental — MSK II Week 1</b></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>MSK I is the first double exam day of the term: written morning, practical afternoon.</li>
+              <li class="alert" style="list-style:none;margin-left:-18px;background:#fff4f2;border-left:3px solid #8b1e1e;border-radius:0 6px 6px 0;padding:8px 11px">Orientation deck wrongly lists this written as Sep 14. Calendar, Final V1.0 syllabus and Canvas module header all say Sep 15.</li>
+              <li>After the practical, lower limb is the new block — do not carry a post-exam gap into it.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details class="wk">
+        <summary><span class="wknum">Week 8</span><span class="wktitle">Sep 21–27 · lower limb densest week · Wed 1–5 PM lab</span><span class="wktag">Four-hour Wed lab</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Tue Sep 22<br>9–10 AM</span><span class="what"><b>Interactive session — Posterior leg and popliteal fossa</b></span></li>
+            <li><span class="when">Tue Sep 22<br>3–5 PM</span><span class="what"><b>Lab B — Popliteal fossa and posterior leg</b></span></li>
+            <li><span class="when">Wed Sep 23<br>1–5 PM</span><span class="what"><b>Lab — Anterior compartment of the leg (single four-hour block)</b><span>No group letter. Appears nowhere else all term. Unknown whether both groups attend together.</span></span></li>
+            <li><span class="when">Thu Sep 24<br>1–3 PM</span><span class="what"><b>Lab B — Lateral leg, dorsum and plantar foot</b></span></li>
+            <li><span class="when">Fri Sep 25<br>9–10 AM</span><span class="what"><b>Interactive session — Anterior/lateral leg and foot</b><span>Same 9–10 AM slot as the optional supplemental MSK II Week 2 — both appear on the calendar.</span></span></li>
+            <li><span class="when">Fri Sep 25<br>9–10 AM</span><span class="what"><b>Optional supplemental — MSK II Week 2</b><span>On the Anatomy course schedule and the DO 2030 calendar; conflicts with the interactive above.</span></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li class="alert" style="list-style:none;margin-left:-18px;background:#fff4f2;border-left:3px solid #8b1e1e;border-radius:0 6px 6px 0;padding:8px 11px">Wed Sep 23 is the only four-hour Anatomy lab of the semester. Clarify with Dr. DiRuzzo whether Group B attends the full block.</li>
+              <li class="alert" style="list-style:none;margin-left:-18px;background:#fff4f2;border-left:3px solid #8b1e1e;border-radius:0 6px 6px 0;padding:8px 11px">Fri Sep 25 double-books an interactive and a supplemental at 9 AM. Prefer the interactive if forced to choose — it is graded via Poll Everywhere.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details class="wk">
+        <summary><span class="wknum">Week 9</span><span class="wktitle">Sep 28–Oct 4 · joints, radiology, practical review</span><span class="wktag">Practical Tue</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Tue Sep 29<br>9–10 AM</span><span class="what"><b>Interactive session — Joints of the lower limb</b></span></li>
+            <li><span class="when">Tue Sep 29<br>3–5 PM</span><span class="what"><b>Lab B — Foot and lower-limb joints</b></span></li>
+            <li><span class="when">Thu Oct 1<br>10–11 AM</span><span class="what"><b>Interactive session — Radiology of the lower limb</b></span></li>
+            <li><span class="when">Thu Oct 1<br>1–3 PM</span><span class="what"><b>Lab B — Review for practical exam</b></span></li>
+            <li><span class="when">Fri Oct 2<br>9–10 AM</span><span class="what"><b>Optional supplemental — MSK II Week 3</b></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>Second practical is Oct 6, same day as MSK Exam 2. Use the Oct 1 review lab for timed station practice, not for new dissection.</li>
+              <li>MSK II unlabelled plastinations and practice practical are on Canvas.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details class="wk">
+        <summary><span class="wknum">Week 10</span><span class="wktitle">Oct 5–11 · MSK II exam day, then thorax opens</span><span class="wktag exam">Exam Tue · Practical</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Mon Oct 5<br>3–5 PM</span><span class="what"><b>Lab B — Thoracic cage, breast, pleura, lungs</b><span>Thorax dissection starts the day before MSK II Exam.</span></span></li>
+            <li class="ex"><span class="when">Tue Oct 6<br>10 AM–12 PM</span><span class="what"><b>MSK Exam 2 (shared module exam)</b></span></li>
+            <li class="ex"><span class="when">Tue Oct 6<br>1–5 PM</span><span class="what"><b>MSK II Lab Practical</b></span></li>
+            <li><span class="when">Wed Oct 7<br>4–5 PM</span><span class="what"><b>Interactive session — Respiratory system development</b></span></li>
+            <li><span class="when">Thu Oct 8<br>11 AM–12 PM</span><span class="what"><b>Interactive session — Breast, thoracic wall, lungs</b></span></li>
+            <li><span class="when">Thu Oct 8<br>1–3 PM</span><span class="what"><b>Lab B — Lungs</b></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li class="alert" style="list-style:none;margin-left:-18px;background:#fff4f2;border-left:3px solid #8b1e1e;border-radius:0 6px 6px 0;padding:8px 11px">Orientation deck wrongly lists MSK II as Oct 5. Calendar, Final V1.0 and Canvas say Oct 6.</li>
+              <li>Cardiopulmonary Exam 1 is Oct 19 — thirteen days of thorax content with no recovery gap after MSK II.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details class="wk">
+        <summary><span class="wknum">Week 11</span><span class="wktitle">Oct 12–18 · mediastinum before CP Exam 1</span><span class="wktag">Exam Mon</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Tue Oct 13<br>9–10 AM</span><span class="what"><b>Interactive session — Embryo-cardiovascular development</b></span></li>
+            <li><span class="when">Tue Oct 13<br>3–5 PM</span><span class="what"><b>Lab B — Superior, anterior, posterior mediastinum</b></span></li>
+            <li><span class="when">Thu Oct 15<br>9–10 AM</span><span class="what"><b>Interactive session — Superior, anterior, posterior mediastinum</b></span></li>
+            <li><span class="when">Thu Oct 15<br>1–3 PM</span><span class="what"><b>Lab B — Pericardium and heart</b></span></li>
+            <li><span class="when">Fri Oct 16<br>9–10 AM</span><span class="what"><b>Optional supplemental — C/P I Week 1</b><span>On the Anatomy course schedule; also on the DO 2030 calendar.</span></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>Cardiopulmonary Exam 1 is Monday. Final V1.0 corrected this from Oct 12 in the older syllabus — use Oct 19.</li>
+              <li>Heart lab begins before CP Exam 1 on the calendar; the written boundary for heart vs thorax is not published as a point table. Follow the module objectives.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details class="wk">
+        <summary><span class="wknum">Week 12</span><span class="wktitle">Oct 19–25 · CP Exam 1, then heart · Thu Oct 22 clash</span><span class="wktag exam">Exam Mon · Clash Thu</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li class="ex"><span class="when">Mon Oct 19<br>10 AM–12 PM</span><span class="what"><b>Cardiopulmonary Exam 1 (shared module exam)</b></span></li>
+            <li><span class="when">Tue Oct 20<br>9–10 AM</span><span class="what"><b>Interactive session — Middle mediastinum and heart</b></span></li>
+            <li><span class="when">Tue Oct 20<br>3–5 PM</span><span class="what"><b>Lab B — External and internal heart</b></span></li>
+            <li><span class="when">Thu Oct 22<br>3–5 PM</span><span class="what"><b>Lab B — Posterior mediastinum</b><span>Calendar also lists OMM Lab B at 3–5 PM. Only day all term with this double-booking.</span></span></li>
+            <li><span class="when">Fri Oct 23<br>9–10 AM</span><span class="what"><b>Optional supplemental</b></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li class="alert" style="list-style:none;margin-left:-18px;background:#fff4f2;border-left:3px solid #8b1e1e;border-radius:0 6px 6px 0;padding:8px 11px">Thu Oct 22: Anatomy Lab B and OMM Lab B are both listed 3–5 PM. Under the normal Thursday pattern Group B would have Anatomy 1–3 PM and OMM 3–5 PM, which suggests the Anatomy A/B labels for that day are reversed. Confirm with Dr. DiRuzzo and Dr. Castro before the day.</li>
+              <li>Next Monday is CP Exam 2, and the week of Oct 26 has almost no Anatomy.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details class="wk">
+        <summary><span class="wknum">Week 13</span><span class="wktitle">Oct 26–Nov 1 · no Anatomy teaching · CP Exam 2 Monday</span><span class="wktag light">Empty week</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Fri Oct 30<br>9–10 AM</span><span class="what"><b>Optional supplemental — C/P Week 2</b><span>Only Anatomy item this week. On the course schedule and the calendar.</span></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>No lecture, no lab, no interactive. Cardiopulmonary Exam 2 is Monday Nov 2. Treat the week as a deliberate study block unless faculty say otherwise.</li>
+              <li>Syllabus still lists optional labs on Oct 28–29 that do not appear on the DO 2030 calendar — calendar wins.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details class="wk">
+        <summary><span class="wknum">Week 14</span><span class="wktitle">Nov 2–8 · CP Exam 2, then GI opens</span><span class="wktag exam">Exam Mon</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li class="ex"><span class="when">Mon Nov 2<br>11 AM–1 PM</span><span class="what"><b>Cardiopulmonary Exam 2 (shared module exam)</b><span>Orientation deck writes this date as November 2, 2025 — year typo. Calendar and syllabus agree on 2026.</span></span></li>
+            <li><span class="when">Tue Nov 3<br>9–10 AM</span><span class="what"><b>Interactive session — Embryology 7: GI system</b></span></li>
+            <li><span class="when">Tue Nov 3<br>3–5 PM</span><span class="what"><b>Lab B — Anterolateral abdominal wall, inguinal canal, scrotum</b></span></li>
+            <li><span class="when">Thu Nov 5<br>9–10 AM</span><span class="what"><b>Interactive session — Abdominal wall, inguinal canal, scrotum</b></span></li>
+            <li><span class="when">Thu Nov 5<br>1–3 PM</span><span class="what"><b>Lab B — Peritoneum and viscera in situ</b></span></li>
+            <li><span class="when">Fri Nov 6<br>9–10 AM</span><span class="what"><b>Optional supplemental — GI Week 1</b></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>GI Exam and the third practical fall together on Nov 23. Inguinal canal and peritoneum are clinically dense — start the relationships early.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details class="wk">
+        <summary><span class="wknum">Week 15</span><span class="wktitle">Nov 9–15 · foregut and midgut</span><span class="wktag">Build GI</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Tue Nov 10<br>3–5 PM</span><span class="what"><b>Lab B — Stomach, celiac trunk, pancreas, spleen, start SMA</b></span></li>
+            <li><span class="when">Wed Nov 11<br>3–4 PM</span><span class="what"><b>Interactive session — Peritoneum, esophagus, stomach, celiac trunk</b></span></li>
+            <li><span class="when">Thu Nov 12<br>10–11 AM</span><span class="what"><b>Interactive session — Small and large intestines and blood supply</b></span></li>
+            <li><span class="when">Thu Nov 12<br>1–3 PM</span><span class="what"><b>Lab B — SMA / IMA and intestines</b></span></li>
+            <li><span class="when">Fri Nov 13<br>9–10 AM</span><span class="what"><b>Optional supplemental — GI Week 2</b></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>Porta-systemic anastomoses and peritoneal compartments generate exam questions that do not appear in atlas labelling alone.</li>
+              <li>Last supplemental of the term is this Friday.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details class="wk">
+        <summary><span class="wknum">Week 16</span><span class="wktitle">Nov 16–22 · liver, portal vein, autonomics, radiology</span><span class="wktag">Practical Mon</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Tue Nov 17<br>9–10 AM</span><span class="what"><b>Interactive session — Portal vein, gallbladder, liver, pancreas, spleen</b></span></li>
+            <li><span class="when">Wed Nov 18<br>1–2 PM</span><span class="what"><b>Interactive session — Autonomics</b></span></li>
+            <li><span class="when">Thu Nov 19<br>10–11 AM</span><span class="what"><b>Interactive session — Radiology of thorax and abdomen</b></span></li>
+            <li><span class="when">Thu Nov 19<br>1–3 PM</span><span class="what"><b>Lab B — Portal vein, liver, porta hepatis, gallbladder</b></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>Third practical (CP and GI) is Monday Nov 23 afternoon, with the GI written that morning. Thorax and Abdomen unlabelled plastinations and practice practicals are on Canvas.</li>
+              <li>Autonomics is short and frequently under-studied — it is examined.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details class="wk">
+        <summary><span class="wknum">Week 17</span><span class="wktitle">Nov 23–29 · GI exam day, then renal opens</span><span class="wktag exam">Exam Mon · Practical</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li class="ex"><span class="when">Mon Nov 23<br>9:30 AM–12 PM</span><span class="what"><b>GI Exam (shared module exam)</b></span></li>
+            <li class="ex"><span class="when">Mon Nov 23<br>1–5 PM</span><span class="what"><b>CP and GI Lab Practical</b></span></li>
+            <li><span class="when">Tue Nov 24<br>9–10 AM</span><span class="what"><b>Interactive session — Kidneys, ureters, suprarenal glands</b></span></li>
+            <li><span class="when">Tue Nov 24<br>3–5 PM</span><span class="what"><b>Lab B — Kidneys, ureters, suprarenal glands</b></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>Renal Exam is Dec 9. Only two teaching weeks of content after this practical — a short runway.</li>
+              <li>Syllabus lab table still carries a 2025 year typo on this practical date; calendar is Nov 23, 2026.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details class="wk">
+        <summary><span class="wknum">Week 18</span><span class="wktitle">Nov 30–Dec 6 · posterior abdominal wall</span><span class="wktag">Last lab</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li><span class="when">Tue Dec 1<br>9–10 AM</span><span class="what"><b>Interactive session — Posterior abdominal wall</b></span></li>
+            <li><span class="when">Tue Dec 1<br>3–5 PM</span><span class="what"><b>Lab B — Posterior abdominal wall and lumbar plexus</b></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li class="alert" style="list-style:none;margin-left:-18px;background:#fff4f2;border-left:3px solid #8b1e1e;border-radius:0 6px 6px 0;padding:8px 11px">Last Anatomy lab of the term. Renal Exam is next week. Orientation deck wrongly lists Renal as Dec 7; calendar, Final V1.0 interactive schedule and shared-exam pattern say Dec 9.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details class="wk">
+        <summary><span class="wknum">Week 19</span><span class="wktitle">Dec 7–13 · Renal Exam</span><span class="wktag exam">Final exam</span></summary>
+        <div class="body">
+          <ul class="sched">
+            <li class="ex"><span class="when">Wed Dec 9<br>10 AM–12 PM</span><span class="what"><b>Renal Exam (shared module exam)</b><span>Syllabus body carries a 12/9/25 year typo; DO 2030 calendar is Dec 9, 2026.</span></span></li>
+          </ul>
+          <div class="do">
+            <h4>Do this week</h4>
+            <ul>
+              <li>No further Anatomy sessions after this exam.</li>
+              <li>A final Unsatisfactory requires a comprehensive remediation exam at the end of the academic year, standardised across campuses.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ================= EXAMS ================= -->
+  <div id="exams" class="panel" role="tabpanel" aria-labelledby="tab-exams" tabindex="0">
+
+    <div class="card">
+      <h2>Where the points actually are</h2>
+      <p class="lead">Anatomy does not publish the Biochemistry-style per-module score rows. A full Canvas sweep of assignments, quizzes and assignment groups returns a single graded item: the Pre-lab Quiz. The 60% written and 30% practical weights are therefore denominators over the whole semester, not eight separate exam percentages.</p>
+      <div class="scroller">
+      <table class="data">
+        <thead><tr><th>Component</th><th>What the sources say</th><th>Weight</th></tr></thead>
+        <tbody>
+          <tr class="hi"><td><b>Module written exams</b></td><td>Orientation: total Anatomy questions correct across the written exams, divided by the total number of Anatomy written questions. Deck says 7 exams; calendar and modules carry 8.</td><td class="n">60%</td></tr>
+          <tr class="hi"><td><b>Lab practicals</b></td><td>Orientation: total correct across the practicals. Deck says 3 lab exams, then &quot;across the 2 exams&quot; on the next line. Calendar carries three: Sep 15, Oct 6, Nov 23.</td><td class="n">30%</td></tr>
+          <tr><td>Interactive sessions</td><td>Poll Everywhere with a location restriction — responses only count from inside the classroom. Confirmed on the orientation deck; Poll Everywhere also appears in the Canvas course navigation.</td><td class="n">5%</td></tr>
+          <tr><td>Lab participation</td><td>Pre-lab Quiz, assigned worksheets, 100% attendance, bone boxes returned on time, clean dissection table, lab-instructor input. Course director's decision is final.</td><td class="n">5%</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <ul class="notes" style="margin-top:14px">
+        <li><b>Confidence on the 60/30/5/5 split: high.</b> Final V1.0 syllabus and the orientation deck agree, and the calendar page already carries the same table.</li>
+        <li><b>Confidence on pooling: medium-high for written, medium for practicals.</b> The orientation deck states pooling plainly, but contradicts its own exam counts. No Canvas gradebook rows exist yet to confirm or refute the mechanism. If pooling holds, one weak exam dilutes rather than isolates — which is the opposite of Biochemistry's per-module score rows.</li>
+        <li><b>Indicative load, not points:</b> interactive-session counts on the Group B calendar are roughly Foundations I 2 · Foundations II 4 · MSK I 4–5 · MSK II 5 · CP I 4 · CP II 1 · GI 7 · Renal 2. That is a teaching-time proxy only. It is not a published point table.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Every written exam and practical</h2>
+      <p class="lead">Dates below follow the DO 2030 Google Calendar. Where another source disagrees, the disagreement is recorded in the notes.</p>
+      <div class="scroller">
+      <table class="data">
+        <thead><tr><th>Exam</th><th>Written</th><th>Practical</th><th>Canvas module marker</th></tr></thead>
+        <tbody>
+          <tr><td><b>Foundations 1</b></td><td>Mon Aug 17<br>11 AM–1 PM</td><td class="n">—</td><td>August 17th Foundation I Exam</td></tr>
+          <tr><td><b>Foundations 2</b></td><td>Mon Aug 31<br>10 AM–12 PM</td><td class="n">—</td><td>Aug 31st Foundation II Exam</td></tr>
+          <tr class="hi"><td><b>MSK 1</b></td><td>Tue Sep 15<br>10 AM–12 PM</td><td>Tue Sep 15<br>1–5 PM</td><td>Sep 15th MSK I + Lab Exam</td></tr>
+          <tr class="hi"><td><b>MSK 2</b></td><td>Tue Oct 6<br>10 AM–12 PM</td><td>Tue Oct 6<br>1–5 PM</td><td>Oct 6th MSK II + Lab Exam</td></tr>
+          <tr><td><b>Cardiopulmonary 1</b></td><td>Mon Oct 19<br>10 AM–12 PM</td><td class="n">—</td><td>No separate CP I exam subheader on Canvas; content sits in the Cardio/Pulmonary module</td></tr>
+          <tr><td><b>Cardiopulmonary 2</b></td><td>Mon Nov 2<br>11 AM–1 PM</td><td class="n">—</td><td>Nov 2nd Cardio/Pulmonary II Exam</td></tr>
+          <tr class="hi"><td><b>GI</b></td><td>Mon Nov 23<br>9:30 AM–12 PM</td><td>Mon Nov 23<br>1–5 PM<br>(CP &amp; GI)</td><td>Nov 23rd GI Exam, Thorax &amp; Abdomen Lab Exam</td></tr>
+          <tr><td><b>Renal</b></td><td>Wed Dec 9<br>10 AM–12 PM</td><td class="n">—</td><td>Renal Module page only; no dated exam subheader yet</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <ul class="notes" style="margin-top:14px">
+        <li class="alert"><b>Orientation deck exam-date slide is wrong in three places and one year.</b> It lists MSK I as Sep 14, MSK II as Oct 5, Renal as Dec 7, and Cardio/Pulm II as &quot;November 2, 2025&quot;. The DO 2030 calendar, Final V1.0 syllabus and Canvas module headers agree on Sep 15, Oct 6 and Dec 9. Do not use that slide for planning.</li>
+        <li><b>Final V1.0 corrected Cardiopulmonary Exam 1 from Oct 12 to Oct 19</b> relative to the older syllabus still in the repo. Canvas file <code>DO Fall Anatomy Syllabus 2026-Final V1.0).docx</code> matches the repo copy (updated Jul 28).</li>
+        <li>Practicals examine cadaver, plastinated specimens and Visible Body. Unlabelled plastination images are provided in advance on Canvas under Lab Documents.</li>
+      </ul>
+    </div>
+
+    <div class="card warn">
+      <h2>Dated deadlines that are not study cues</h2>
+      <div class="scroller">
+      <table class="data">
+        <thead><tr><th>Item</th><th>Due</th><th>Points</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr class="hi"><td><b>Pre-lab Quiz</b></td><td>Tue Aug 18, 1:00 PM</td><td class="n">10</td><td>Only graded Canvas assignment posted. Deadline is 1 PM for Group B as well, whose first lab starts at 3 PM.</td></tr>
+          <tr><td>Assigned lab worksheets</td><td>As handed out</td><td class="n">part of 5%</td><td>No worksheet due dates are published yet. They count inside lab participation when assigned.</td></tr>
+          <tr><td>Supplemental question Google Doc</td><td>1 PM Wednesday before each Friday session</td><td class="n">—</td><td>Not graded. Questions after 1 PM Wednesday are not covered that week.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <ul class="notes" style="margin-top:14px">
+        <li><b>There is no graded quiz calendar to misuse</b> the way Biochemistry's self-assessments can be. The Pre-lab Quiz is a gate into lab, not a content review schedule — and it falls two hours before Group B's first dissection, not after it.</li>
+        <li><b>Lab absence ladder</b> (orientation and Final V1.0): 1 unexcused free, then 2 → 4%, 3 → 3%, 4 → 2%, 5 → 1%, 5+ → 0 of the 5% participation. Sign-in sheet is the record. More than 5 minutes late means not admitted and marked absent. Attendance challenges refused after 1 week.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ================= RESOURCES ================= -->
+  <div id="res" class="panel" role="tabpanel" aria-labelledby="tab-res" tabindex="0">
+
+    <div class="card">
+      <h2>How the advice was weighted</h2>
+      <p class="lead">Guidance from previous years is only as good as the match between their course and this one. Anatomy kept the same eight shared module-exam names through Fall 2025; older guides were written when the course still ran as standalone Exam 1 / Exam 2.</p>
+      <div class="scroller">
+      <table class="data">
+        <thead><tr><th>Source year</th><th>Exam structure then</th><th>How well it maps</th></tr></thead>
+        <tbody>
+          <tr><td><b>Fall 2025</b><br>Class of 2029</td><td>Eight shared module exams: Foundations 1–2, MSK 1–2, Cardio/Pulm 1–2, GI, Renal. Three practicals on the MSK and CP/GI days.</td><td><span class="rank a">Direct match</span> SGA OMS-I lists <i>Anatomy &amp; Embryology I (Fall 2025)</i> under current resources, with the same eight exam names in the EXAMS column. Use this archive first.</td></tr>
+          <tr><td><b>Fall 2024</b><br>Class of 2028</td><td>Anatomy I 2024 folder on the SGA archive column</td><td><span class="rank b">Close</span> Worth checking for topics that have not moved. 2025 supersedes it wherever both exist.</td></tr>
+          <tr><td><b>Fall 2022</b><br>Class of 2026 · DHahn guide</td><td>Standalone Anatomy Exam 1 and Exam 2 mindset in the written advice (slides 28–36)</td><td><span class="rank c">Methods only</span> Top-down atlas skim, objective sheets, Gray's questions, Wall of Shame Anki, lab-as-written-study — all still apply. Exam boundaries labelled &quot;Exam 1&quot; / &quot;Exam 2&quot; do not transfer onto the eight 2026 modules.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <ul class="notes" style="margin-top:14px">
+        <li><b>Practical format appears continuous.</b> DHahn describes ~50–60 stations, a Wall of Shame of images, structure lists in advance, and plastination/Visible Body — matching the 2026 syllabus and Lab Introduction Manual. That block of advice survives even when written exam boundaries do not.</li>
+        <li><b>Lab group split.</b> 2026 runs Groups A/B with Group B at Anatomy labs Tue/Mon 3–5 PM and Thu 1–3 PM. Older advice that assumes a single lab section still transfers on method; it does not transfer on clock times.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>What to use, in order</h2>
+      <p class="lead">More material exists than one person can work through. Drop from the bottom when time runs short.</p>
+
+      <div class="tier t1">
+        <h3>Tier 1 — the course is written from these</h3>
+        <p class="why">Everything examined comes from here. Nothing below substitutes for it.</p>
+        <ol class="top">
+          <li><b>Touro lecture videos and slides, against the syllabus objectives.</b> Orientation: exam questions come from the syllabus/Canvas objectives, not from older wording that may still sit on some videos.</li>
+          <li><b>Dissection lab, plastination lab, and Visible Body — kept current every week.</b> Practicals and writtens reinforce each other; DHahn and the orientation deck both say so. Unlabelled plastination images are on Canvas for MSK I, MSK II, and Thorax/Abdomen.</li>
+          <li><b>Interactive-session / Poll Everywhere questions.</b> Worth 5%, and the closest available proxy for faculty question style.</li>
+          <li><b>Structure lists and practice practicals on Canvas.</b> MSK I/II and Thorax/Abdomen practice practicals with answer keys are already posted under Lab Documents.</li>
+          <li><b>The objective sheet for each exam, once the class starts filling it.</b> DHahn: questions are often variants of the objectives. Verify against slides rather than treating peer text as authoritative.</li>
+        </ol>
+      </div>
+
+      <div class="tier t2">
+        <h3>Tier 2 — high value, use as the week allows</h3>
+        <p class="why">Second-order material that consolidates rather than introduces.</p>
+        <ol class="top" start="6">
+          <li><b>Fall 2025 Anatomy archive and the per-exam EXAMS folders</b> on the SGA OMS-I dashboard — same eight exam names as 2026.</li>
+          <li><b>TA reviews and the 27 named TAs on the Fall 2026 list</b> (Canvas home page / <code>TA list.docx</code>).</li>
+          <li><b>Friday supplemental sessions.</b> Orientation: Zoom, registration on Canvas home, recorded. Canvas home page also says &quot;Fridays at 9am in the Lecture Hall&quot; — sources disagree on venue; registration link and calendar date are the operative parts. Questions into the shared Google Doc by 1 PM Wednesday.</li>
+          <li><b>Required texts as reference, not primary read:</b> Moore's Clinically Oriented Anatomy, Netter, The Developing Human, Grant's Dissector. Canvas home links newer editions than the Final V1.0 syllabus lists (Moore 10th vs 9th, Developing Human 12th vs 11th, Netter 9th vs 8th) — use the library links on Canvas.</li>
+          <li><b>Gray's / BRS-style questions and UMich resources</b> named in the DHahn guide, mapped onto the current module rather than onto 2022 Exam 1/2.</li>
+        </ol>
+      </div>
+
+      <div class="tier t3">
+        <h3>Tier 3 — targeted use only</h3>
+        <p class="why">Unstick one topic; do not cover the course with these.</p>
+        <ol class="top" start="11">
+          <li><b>YouTube for plexus and layered regions</b> (brachial plexus, forearm muscles, abdominal aorta, foot layers) — DHahn list.</li>
+          <li><b>Bootcamp structure-identification quizzes</b> and prior-year Wall of Shame Anki, knowing images change.</li>
+          <li><b>Anatomy I 2024 and Previous Years folders</b> on SGA when 2025 is missing a topic.</li>
+        </ol>
+      </div>
+
+      <div class="tier t4">
+        <h3>Tier 4 — deliberately skipped as a primary plan</h3>
+        <p class="why">Not because they are bad, but because they are aimed at a different exam shape.</p>
+        <ol class="top" start="14">
+          <li><b>Anything keyed only to &quot;Anatomy Exam 1&quot; or &quot;Exam 2&quot; from 2022</b> without remapping onto a 2026 module.</li>
+          <li><b>Building an original full-course Anki deck from scratch</b> before the structure lists and Wall of Shame images exist — DHahn's advice is to Anki the Wall of Shame once the images are released, not to card the entire atlas up front.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Where each resource lives</h2>
+      <div class="scroller">
+      <table class="data">
+        <thead><tr><th>Resource</th><th>Location</th></tr></thead>
+        <tbody>
+          <tr><td>Lectures, modules, lab documents, plastinations, practice practicals</td><td>Canvas course 168934, eleven modules</td></tr>
+          <tr><td>Final V1.0 syllabus, orientation deck, lab manual, supplemental schedule, TA list</td><td>This repository, <code>Clinical Anatomy and Embryology I/</code></td></tr>
+          <tr><td>DHahn first-year guide (Anatomy written slides 28–36, lab 37–42)</td><td><code>Clinical Anatomy and Embryology I/SGA - upperclassmen resources/</code> (copy; original landed under Biochemistry)</td></tr>
+          <tr><td>Fall 2025 Anatomy archive and per-exam folders</td><td>SGA dashboard OMS-I tab</td></tr>
+          <tr><td>Study Tips 2018.pptx</td><td>Canvas files — kept as historical advice only</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= METHOD ================= -->
+  <div id="method" class="panel" role="tabpanel" aria-labelledby="tab-method" tabindex="0">
+
+    <div class="card">
+      <h2>The method, and why this course is not Biochemistry</h2>
+      <p class="lead">Previous-year guidance frames Anatomy as top-down and spatial against Biochemistry's bottom-up memorisation. The lab and practical need their own system entirely.</p>
+      <ul class="notes">
+        <li><b>Top-down first.</b> Skim Netter or walk the lab for a mental map of regions before memorising attachments. DHahn: Exam 1 thinking is a &quot;2D map&quot;; later exams need a &quot;3D globe&quot; of relationships. In 2026 that shift still happens, but across MSK and thorax rather than across two standalone papers.</li>
+        <li><b>Videos are denser than the slides.</b> Some faculty leave explanations only in the recording. Keep a running file of timestamps the lecturer flags as exam material.</li>
+        <li><b>Questions early, not as a final check.</b> Order that keeps being recommended: objective sheet, then Gray's/BRS, then TA reviews (older years first if short on time, then newest), then Poll Everywhere decks, then missed questions only.</li>
+        <li><b>Origins, insertions, innervations, exceptions.</b> Handmade artery diagrams and anastomoses on slides are high yield. Exceptions to rules are examined more often than the rules.</li>
+        <li><b>Embryology rides with the region.</b> It is not a separate course grade. Each block's embryo lectures are examined on that block's written.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Lab and practical — their own system</h2>
+      <ul class="notes">
+        <li><b>Written and lab are one course.</b> Dissection time is also written study if the table is used to quiz relationships, not only to cut.</li>
+        <li><b>Do not save lab for the week of the practical.</b> DHahn: go 1–2 times a day near the exam; first pass every structure on the list, then partner quiz, then timed passes.</li>
+        <li><b>Wall of Shame / image stations.</b> Study the released images in black and white — colour will not be there. Image-occlusion Anki is the recommended tool once the deck exists. Prior-year decks help for skill, not for identical pins.</li>
+        <li><b>Practical rules that cost points:</b> do not touch specimens or tags unless told; pencils and clipboards are provided; you may edit earlier answers until time is called; swaps require a form and a documented emergency.</li>
+        <li><b>Group B clock times:</b> Anatomy labs Tue/Mon 3–5 PM, Thu 1–3 PM, with the Sep 23 and Oct 22 exceptions flagged in the weekly plan.</li>
+        <li><b>More than five minutes late = absent.</b> The 5% participation grade is easy to keep and easy to lose.</li>
+      </ul>
+    </div>
+
+    <div class="card warn">
+      <h2>Open questions worth resolving early</h2>
+      <ul class="notes">
+        <li><b>Whether written and practical scores are truly pooled.</b> Orientation says yes; it also miscounts the exams. Canvas has no per-module rows yet to confirm. Ask Dr. DiRuzzo if a single bad practical is diluted across three or stands alone.</li>
+        <li><b>Which exam takes Embryo-MSK and Osteology of the Upper Limb.</b> Taught Aug 25–27 before Foundations Exam 2; filed on Canvas under MSK I. Objectives sheet should settle it.</li>
+        <li><b>Thu Oct 22 Group B lab times</b> — Anatomy and OMM both listed 3–5 PM.</li>
+        <li><b>Wed Sep 23 1–5 PM lab</b> — whether both groups attend the full four hours.</li>
+        <li><b>Supplemental venue.</b> Orientation says Zoom with registration; Canvas home says Lecture Hall. Check the registration link the week of the first supplemental (Aug 28).</li>
+        <li><b>Lab Groups and Table Breakdown / Practical Groups Breakdown</b> on the Canvas home page are still empty placeholders.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll(".tabs button").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".tabs button").forEach(b=>{b.classList.remove("active");b.setAttribute("aria-selected","false");});
+    document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
+    btn.classList.add("active");btn.setAttribute("aria-selected","true");
+    document.getElementById(btn.dataset.tab).classList.add("active");
+    window.scrollTo({top:0});
+  });
+});
+</script>
+</body>
+</html>
