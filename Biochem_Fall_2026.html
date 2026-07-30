@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Biochemistry and Genetics I — Fall 2026</title>
+<title>Biochemistry and Genetics I &mdash; Fall 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&amp;family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #f4f0e8;
@@ -72,6 +72,26 @@ table.data tr.hi td.n { color: var(--alert); }
 .do h4 { font-size: 0.74rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 0 0 7px; }
 .do ul { margin: 0; padding-left: 18px; }
 .do li { font-size: 0.88rem; line-height: 1.5; margin-bottom: 5px; }
+.do.prac { background: #fdfbf5; border-color: #ded3bf; }
+.do.prac h4 { color: var(--brand); }
+.do li.no { list-style: none; margin-left: -18px; }
+.do li.alert { list-style: none; margin-left: -18px; background: #fff4f2; border-left: 3px solid var(--alert); border-radius: 0 6px 6px 0; padding: 8px 11px; }
+.chip { display: inline-block; font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; background: #e8e2d6; color: #6a563a; border-radius: 999px; padding: 1px 7px; margin-right: 6px; }
+.chip.skip { background: #f0e3e1; color: var(--alert); }
+.chip.n { background: #e4ebe1; color: #3f5c3b; }
+.chip.map { background: #e2e6ee; color: #3d4a63; }
+code { font-size: 0.84em; background: #f2ece1; border-radius: 4px; padding: 1px 4px; word-break: break-word; }
+.evi { font-size: 0.8rem; color: var(--muted); font-style: italic; }
+.hedge { border-left: 3px solid #b8a98f; background: #faf7f1; padding: 9px 12px; border-radius: 0 6px 6px 0; margin: 10px 0; font-size: 0.86rem; line-height: 1.55; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+.mod { background: #fff; border: 1px solid var(--line); border-radius: 11px; padding: 13px 15px; }
+.mod h4 { font-family: Fraunces, Georgia, serif; font-size: 1rem; margin: 0 0 3px; }
+.mod .meta { font-size: 0.76rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; margin: 0 0 9px; }
+.mod p { font-size: 0.86rem; line-height: 1.55; margin: 0 0 8px; }
+.mod p:last-child { margin-bottom: 0; }
+.mod dl { margin: 0; font-size: 0.85rem; line-height: 1.5; }
+.mod dt { font-weight: 700; color: var(--brand); font-size: 0.78rem; text-transform: uppercase; letter-spacing: .04em; margin-top: 8px; }
+.mod dd { margin: 2px 0 0; }
 
 .tier { border-left: 4px solid var(--line); padding-left: 14px; margin-bottom: 18px; }
 .tier.t1 { border-color: var(--alert); }
@@ -85,6 +105,7 @@ table.data tr.hi td.n { color: var(--alert); }
 .rank.b { background: #e9e0cf; color: #6a563a; }
 .rank.c { background: #e6ece3; color: #43603f; }
 .src { display: block; margin-top: 3px; font-size: 0.84rem; color: var(--muted); }
+ol.top li.warn-li { list-style: none; margin-left: -20px; background: #fff4f2; border-left: 3px solid var(--alert); border-radius: 0 6px 6px 0; padding: 9px 12px; }
 
 .kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 0 0 6px; }
 .kpi div { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 13px; }
@@ -105,6 +126,7 @@ table.data tr.hi td.n { color: var(--alert); }
     <div class="tabs" role="tablist" aria-label="Biochemistry views">
       <button type="button" class="active" role="tab" id="tab-plan" aria-controls="plan" aria-selected="true" data-tab="plan">Weekly plan</button>
       <button type="button" role="tab" id="tab-exams" aria-controls="exams" aria-selected="false" data-tab="exams">Exams &amp; deadlines</button>
+      <button type="button" role="tab" id="tab-ask" aria-controls="ask" aria-selected="false" data-tab="ask">What the exams ask</button>
       <button type="button" role="tab" id="tab-res" aria-controls="res" aria-selected="false" data-tab="res">Resources, ranked</button>
       <button type="button" role="tab" id="tab-method" aria-controls="method" aria-selected="false" data-tab="method">How to study it</button>
     </div>
@@ -114,13 +136,40 @@ table.data tr.hi td.n { color: var(--alert); }
   <div id="plan" class="panel active" role="tabpanel" aria-labelledby="tab-plan" tabindex="0">
 
     <div class="card warn">
-      <h2>Three facts that should shape the whole semester</h2>
+      <h2>Four facts that should shape the whole semester</h2>
       <div class="kpi">
         <div><b>43%</b><span>of all Biochemistry exam points fall in the first four weeks, on Foundations 1 and 2</span></div>
         <div><b>44 pts</b><span>Foundations Exam 2 on Aug 31 &mdash; the single largest Biochemistry exam of the term</span></div>
         <div><b>8 pts</b><span>the entire GI exam on Nov 23 &mdash; the lowest-yield exam of the term</span></div>
+        <div><b>&minus;0.881</b><span>correlation between an exam's point value and how much practice material exists for it</span></div>
       </div>
       <p class="tagline">Point counts are the Canvas gradebook's per-module Biochemistry score rows. The eight rows are published; the values may carry over from the previous year, so treat the ordering as reliable and the exact numbers as indicative.</p>
+    </div>
+
+    <div class="card warn">
+      <h2>The archive is distributed inversely to the marks</h2>
+      <p class="lead">This is the finding that reorders the whole semester, and it is invisible without counting. Across 3,937 clean multiple-choice questions gathered from four years of course material and routed onto the 2026 syllabus, the amount of practice material available for an exam runs <b>opposite</b> to what that exam is worth. Spearman correlation between points and clean questions: <b>&minus;0.881</b>.</p>
+      <div class="scroller">
+      <table class="data">
+        <thead><tr><th>Module</th><th>Points</th><th>Share of grade</th><th>Clean questions</th><th>Per point</th><th>Volume index</th><th>Read as</th></tr></thead>
+        <tbody>
+          <tr class="hi"><td><b>GI</b></td><td class="n">8</td><td class="n">4.8%</td><td class="n">552</td><td class="n">69.0</td><td class="n">3.79</td><td>Four times over-supplied. <b>Cap it</b></td></tr>
+          <tr><td>MSK 1</td><td class="n">15</td><td class="n">9.0%</td><td class="n">526</td><td class="n">35.1</td><td class="n">1.67</td><td>Over-supplied, and much of it is off-syllabus genetics</td></tr>
+          <tr><td>CP 1</td><td class="n">14</td><td class="n">8.4%</td><td class="n">381</td><td class="n">27.2</td><td class="n">1.25</td><td>Over-supplied</td></tr>
+          <tr><td>MSK 2</td><td class="n">16</td><td class="n">9.6%</td><td class="n">370</td><td class="n">23.1</td><td class="n">1.15</td><td>About right</td></tr>
+          <tr><td>CP 2</td><td class="n">18</td><td class="n">10.8%</td><td class="n">289</td><td class="n">16.1</td><td class="n">0.98</td><td>About right</td></tr>
+          <tr><td>Renal</td><td class="n">24</td><td class="n">14.4%</td><td class="n">335</td><td class="n">14.0</td><td class="n">0.94</td><td>About right</td></tr>
+          <tr><td>Foundations 1</td><td class="n">28</td><td class="n">16.8%</td><td class="n">345</td><td class="n">12.3</td><td class="n">0.68</td><td>Under-supplied</td></tr>
+          <tr class="hi"><td><b>Foundations 2</b></td><td class="n">44</td><td class="n">26.3%</td><td class="n">245</td><td class="n">5.6</td><td class="n">0.37</td><td><b>Worst-supplied exam of the term, and the largest</b></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <ul class="notes" style="margin-top:14px">
+        <li class="alert"><b>Working through the archive in the order it presents itself over-studies GI roughly fourfold and under-studies Foundations 2 to about a third of what it deserves.</b> GI carries 4.8% of the grade and 18.2% of the usable material. Foundations 2 carries 26.3% of the grade and 9.7% of the material. Volume index is the share of the archive divided by the share of the grade; anything above 1.0 will absorb more time than it repays.</li>
+        <li><b>Time should track points, not availability.</b> For every hour spent on GI, five and a half belong to Foundations 2. The per-week guidance below is written to that split rather than to what happens to be lying around.</li>
+        <li><b>A refinement worth carrying.</b> The table counts every clean question routed to a 2026 module, including rows that originate in Spring Medical Genetics and Spring Endocrine/Reproductive files. Restricted to Fall-course material only &mdash; 2,308 clean rows &mdash; the two ends hold but two middle rows move: MSK 1 falls to 1.16, because its apparent over-supply was mostly Spring genetics contamination, and CP 1 rises to 1.79, making it the most over-supplied module after GI. The correlation weakens to &minus;0.571 and stays negative. GI highest and Foundations 2 lowest is true on both counts.</li>
+        <li>Two probable causes, neither confirmed: GI absorbed heme, iron, vitamins and insulin from prior-year exams that were worth far more points then; and Foundations 2 sits two weeks into the semester, before the teaching assistants who write most of the archive have accumulated anything.</li>
+      </ul>
     </div>
 
     <div class="card">
@@ -137,10 +186,20 @@ table.data tr.hi td.n { color: var(--alert); }
           <div class="do">
             <h4>Do this week</h4>
             <ul>
-              <li><b>Start the metabolic map on day one, not before an exam.</b> Print the annotated copy, learn the legend in the bottom-left corner, the vitamin abbreviations, which compartment each reaction sits in, and which way the arrows run. You are handed the blank map in every exam; the cost of not knowing your way around it is time you do not have.</li>
+              <li><b>Print the two documents the faculty have already posted, and treat them as the syllabus.</b> <code>BG team Fall 2026 Foundation Exam 1 Review topics.docx</code> is 29 bullets and is the entire examinable scope. <code>BG team Fall 2026 Foundation Exam 1 Diseases_Conditions.docx</code> is <b>six lines long</b>, which means the disease-association option pool for this exam can simply be memorised. Both are in the Foundation Exam #1 module on Canvas.</li>
+              <li><b>Learn the metabolic map's navigation now, but only one region of it.</b> The legend in the bottom-left corner, the vitamin abbreviations, which side of the mitochondrial membrane each reaction sits on, the direction of the arrows. Then <b>oxidative phosphorylation, and nothing else</b> &mdash; that is the only one of the map's 23 regions in scope before Aug 17. Use the blank <code>FullSubwayMap222.pdf</code>; the annotated copy in the archive has zero annotations in this region.</li>
               <li>Three graded quizzes opened Aug 3 and are due <b>Mon Aug 17, 11:59 PM</b>: Week 1 Overview (1 pt, unlimited attempts), Enzyme and ETC (8 pts, 6 attempts), Signal Transduction and Carbohydrate Digestion (6 pts, 6 attempts).</li>
-              <li>Read both Foundations 1 clinical vignettes &mdash; <b>Toxic Exposure</b> and <b>Asthma</b>. Vignettes generate their own exam questions and are the cheapest points on the paper.</li>
+              <li>Read both Foundations 1 clinical vignettes &mdash; <b>Toxic Exposure</b> and <b>Asthma</b>. Read them because their subjects are heavily examined: Toxic Exposure appears in 6 distinct years of the archive and Asthma in 5. <span class="evi">Not, as previous years reported, because the questions are unique to the vignette &mdash; of 36 usable questions on toxic exposure, none come from the vignette file itself and 32 come from teaching-assistant reviews.</span></li>
               <li>Sit in the room for both interactive sessions. The 8% is attendance, and check-ins only register from inside the classroom.</li>
+            </ul>
+          </div>
+          <div class="do prac">
+            <h4>Practise this week</h4>
+            <ul>
+              <li><b>Signal transduction, harder than it feels this early.</b> It is the highest-leverage single topic in the course: 216 questions across 6 years including 2026, and its questions pair across module lines with acid-base on CP 1 (27 co-occurrences) and eicosanoids on CP 2 (22). Learning it properly in August pays twice more before December.</li>
+              <li><b>Work the two 2026 pre-discussion decks as slides, not as a question list.</b> <code>Pre discussion Week 1 Overview and enzyme PE IS F26.pptx</code> and <code>Pre discussion Week 1 ETC Signal Tr Carb Dig F26.pptx</code>. Faculty-written interactive questions are the only material that matches the exam's format &mdash; but the answer options live on the slide, so they have to be opened in PowerPoint.</li>
+              <li class="no"><span class="chip skip">Skip</span><b>The rest of the metabolic map, and the annotated copy of it.</b> MSK 1 and MSK 2 need none of the map at all. Its annotations are Renal and GI disease labels. It is a November asset.</li>
+              <li class="no"><span class="chip skip">Skip</span><b>The 2025 archive folder named <code>Foundations 1</code>.</b> It is last year's genetics block. Of its 221 clean questions, 113 belong to 2026's MSK 1 and 52 are off-syllabus entirely; only 15 belong here.</li>
             </ul>
           </div>
         </div>
@@ -156,9 +215,19 @@ table.data tr.hi td.n { color: var(--alert); }
             <h4>Do this week</h4>
             <ul>
               <li><b>No interactive session falls this week</b>, which makes it the first real review block of the semester. Spend it on Foundations 1, not on getting ahead.</li>
-              <li>Work questions in this order: interactive-session questions from the archive, then the Canvas practice quizzes, then the graded self-assessment quizzes, then a TA review. Questions written by the faculty are the closest thing to the exam.</li>
-              <li>Second pass on lectures 1&ndash;5. Read every bullet, number and diagram; the diagrams are examined.</li>
+              <li>Work questions in this order: the faculty review deck, then the faculty's own interactive-session questions from the archive, then a teaching-assistant review, then the Canvas quizzes last. <span class="evi">Faculty-made material has the highest usable rate of any source measured, 57.8% across 384 rows and 31 files. The Canvas self-assessment quizzes moved to the end of this list because they cannot be shown to help &mdash; only 3 of them ever reached the question corpus.</span></li>
+              <li>Second pass on lectures 1&ndash;5, read against the 29-bullet topic list rather than end to end. <b>Memorise the numbers the topic list names</b> &mdash; the ETC energy yields, the fasting glucose range &mdash; and expect one or two per exam. <span class="evi">The received advice that every number and diagram is testable is contradicted: on 449 faculty-written clean questions, 5.8% turn on a specific number, 2.2% ask a calculation and 3.8% require a figure. Central-concept language outnumbers minor-detail language by more than twenty to one.</span></li>
               <li>Finish all three graded quizzes before Monday. They close at 11:59 PM on exam day.</li>
+            </ul>
+          </div>
+          <div class="do prac">
+            <h4>Practise this week</h4>
+            <ul>
+              <li><b>The highest-value half hour available before Aug 17: the ETC inhibitor and uncoupler table in the faculty review deck.</b> The 2026 Foundations 1 review contains <b>106 terms that appear in no available lecture deck</b>, and the substantive cluster is electron-transport toxicology with named agents and their antidotes &mdash; arsenic and dimercaprol, atractyloside, pentachlorophenol, oligomycin, malonate, carbon monoxide, Wilson's disease, copper, mercury, barbiturates. The 2026 disease list confirms the emphasis by naming "CO and CN poisoning" as one of only six conditions. This content is review-only; it is not in the slides.</li>
+              <li class="alert"><b>Read the orphan copy of the review, not the one linked in the module.</b> Two copies of the 2026 Foundations 1 review exist on Canvas with the same date. The module-linked <code>BG Team Foundation Exam #1 Review.pptx</code> is 44 slides; the unlinked <code>Fall 2026 Foundation Exam #1 Review.pptx</code> is 49 and the shorter one is a strict subset of it. The extra five slides are nutrition material.</li>
+              <li><b>Two teaching-assistant files, then stop.</b> <code>2023 Middletown TA Review- Biochem Exam 1.pdf</code> carries 54 clean questions belonging to this exam, more than any other single file; <code>Biochemistry Exam 1 Review 2024.pptx.pdf</code> carries 47. Both are in the archive under the 2024 and 2023 material rather than under anything labelled Foundations.</li>
+              <li class="no"><span class="chip n">Expect</span>Short items. Roughly 40-word stems, five options, one-step mechanism reasoning, and <b>the lowest vignette rate of any exam in the course at 15.5%</b>. Not paragraphs.</li>
+              <li class="no"><span class="chip skip">Skip</span><b>The ETC energy-yield calculation is the exception to that.</b> The topic list asks for it explicitly, and the archive's questions on lectures 1&ndash;5 flag calculation zero times. Do it from the topic list, because past questions will not make you.</li>
             </ul>
           </div>
         </div>
@@ -176,10 +245,19 @@ table.data tr.hi td.n { color: var(--alert); }
           <div class="do">
             <h4>Do this week</h4>
             <ul>
-              <li class="alert" style="list-style:none;margin-left:-18px;background:#fff4f2;border-left:3px solid #8b1e1e;border-radius:0 6px 6px 0;padding:8px 11px"><b>There is no recovery gap between the two Foundations exams.</b> Two weeks of content and 44 points arrive between Aug 17 and Aug 31. Start lectures 6 and 7 before the Aug 17 exam if you can, because the Wednesday session is two days after it.</li>
-              <li>Read the clinical vignette <b>Lactic Acidosis</b>.</li>
-              <li>Glycolysis, gluconeogenesis and glycogen are the densest regulation content of the term: every enzyme, its activator and its inhibitor. Build the enzyme table as you go rather than at the end.</li>
-              <li>Trace each of these pathways on the metabolic map as you learn it, rather than learning them off the slides alone.</li>
+              <li class="alert"><b>There is no recovery gap between the two Foundations exams.</b> Two weeks of content and 44 points arrive between Aug 17 and Aug 31. Start lectures 6 and 7 before the Aug 17 exam if you can, because the Wednesday session is two days after it.</li>
+              <li>Read the clinical vignette <b>Lactic Acidosis</b>. It is one of only two subjects in the whole archive examined in <b>seven distinct years</b> &mdash; 137 usable questions, of which 9 come from the vignette file and 95 from teaching-assistant reviews.</li>
+              <li>Glycolysis, gluconeogenesis and glycogen are the densest regulation content of the term: every enzyme, its activator and its inhibitor. Build the enzyme table as you go rather than at the end. <span class="evi">Regulation and rate-limiting-step language is flagged in 9.4% of this exam's questions, the highest of the eight modules.</span></li>
+              <li>Trace each of these pathways on the metabolic map as you learn it, rather than learning them off the slides alone. Four regions are in scope and all four are needed: <b>glycolysis and gluconeogenesis, the citric acid cycle, glycogen and galactose, pentose phosphate</b>.</li>
+            </ul>
+          </div>
+          <div class="do prac">
+            <h4>Practise this week</h4>
+            <ul>
+              <li><b>Open the two posted Foundations 2 documents on the day the block starts.</b> <code>BG Foundation Exam 2 Review topics.docx</code> is about 40 bullets, and two of them are arithmetic assignments rather than themes: <i>"Calculate the amount of ATP that can be produced anaerobically and aerobically via glycolysis, PDH and TCA cycle from 1 molecule of glucose"</i> and <i>"What is the normal range for fasting blood glucose levels?"</i> Do them both, on paper, this week.</li>
+              <li><b><code>BG Team Foundation Exam 2 Diseases_Conditions.docx</code> is the option pool, written out by the faculty.</b> Eight glycogen storage diseases by name, fructosuria, hereditary fructose intolerance, classical and non-classical galactosemia, G6PD deficiency, congenital lactic acidosis, arsenic poisoning, thiamine deficiency, Wernicke, beriberi, chronic granulomatous disease &mdash; and exactly two drugs, primaquine and sildenafil. When a question's five options are disease names, they come from here.</li>
+              <li><b>The seven tables in the Harlem Foundation Exam #2 Help module are the fastest hour in the module.</b> <code>Glycogen storage diseases.xlsx</code>, <code>GLUT Transporters.xlsx</code>, <code>Comparative roles of NADPH.xlsx</code>, <code>Comparison of NAD-NADH and NADP-NADPH.xlsx</code>, <code>GPCR_Signaling.xlsx</code>, <code>Tissue-Specific Roles of the PPP.xlsx</code> and <code>Tables_gluconeogenesis regulation and glycogen.xlsx</code>. They pre-build exactly the comparisons this exam asks for.</li>
+              <li class="no"><span class="chip n">Expect</span><b>Long stems with a picture attached.</b> On faculty-written questions about lectures 6&ndash;12: median 49 words, <b>49.6% run 50 words or more</b>, 85.1% contain a number, <b>9.1% reference a figure and 24.4% carry an image</b> &mdash; one question in four. Five options. This is the longest and most figure-dependent material in the course. <span class="evi">Teaching-assistant questions on the same lectures show 0.7% figure references and 8.2% images, so drilling only those will leave you unprepared for the format.</span></li>
             </ul>
           </div>
         </div>
@@ -197,8 +275,19 @@ table.data tr.hi td.n { color: var(--alert); }
             <ul>
               <li><b>Foundations Exam 2 is Monday and carries roughly 44 Biochemistry points, more than any other exam this term.</b> Seven lectures, one week of runway. This is the week to protect from every other commitment.</li>
               <li>Three graded quizzes close <b>Mon Aug 31, 11:59 PM</b>: Glycolysis and TCA (9 pts), Gluconeogenesis and Glycogen (9 pts), Monosaccharides and HMP NADPH 1 (8 pts). All six attempts. Use them as review, not as a checkbox.</li>
-              <li>Read the clinical vignette <b>Hemolytic Anemia</b>, which is the G6PD deficiency case that pairs with the NADPH lectures.</li>
-              <li>Work the archived interactive questions for Foundations 2 &mdash; the archive splits them by faculty member, so you can see how each writes.</li>
+              <li>Read the clinical vignette <b>Hemolytic Anemia</b>, which is the G6PD deficiency case that pairs with the NADPH lectures. 89 usable questions on the subject across 5 years.</li>
+              <li>Work the archived interactive questions for Foundations 2. The 2025 folder is the largest interactive collection in the archive at 33 distinct decks, and it is subdivided by faculty member. <span class="evi">Read those subdivisions as "questions about this material", not as a personal style profile. Only one professor's own questions exist in usable numbers anywhere in the archive, and it is not either of the two who taught this block.</span></li>
+            </ul>
+          </div>
+          <div class="do prac">
+            <h4>Practise this week</h4>
+            <ul>
+              <li><b>This is the exam the archive cannot carry, so the topic list has to.</b> Foundations 2 is 26.3% of the grade and 9.7% of the available practice material &mdash; 5.6 clean questions per point, the lowest of the eight modules. Expect to run out of questions before you run out of scope, and close the gap by working the faculty's 40 bullets rather than by finding another review deck.</li>
+              <li><b>The two densest files, then stop.</b> <code>Biochemistry Exam 2 TA Review 2024.pdf</code> carries 46 clean questions belonging to this exam and 120 across seven modules, making it the broadest single file in the Fall archive. <code>2023 Middletown TA Review- Biochem Exam 1.pdf</code> carries another 24.</li>
+              <li><b><code>INTESAR Fall Exam 2 Foundations Biochemistry.apkg</code> is the one deck worth installing.</b> 1,250 on-syllabus notes, <b>0.0% off-syllabus</b>, seven modules, and Foundations 2 is its top module. Use it for enzyme names, regulators, cofactors and disease associations &mdash; content the exam does ask about, since 10.9% of questions have enzyme names as options and 10.7% have disease names. It will not train a 50-word vignette, and no deck will.</li>
+              <li class="no"><span class="chip n">Expect</span>A 50-to-75-word stem, often with a graph or a pathway fragment, giving enzyme activities or metabolite concentrations, asking <b>which regulatory step is affected</b> or <b>which enzyme is deficient</b>, with five options taken from the posted disease list.</li>
+              <li class="no"><span class="chip skip">Skip</span><b>Building a new Anki deck for this module in the hope the archive will seed it.</b> The card collection is mis-distributed exactly like the questions: Foundations 2 is seventh of eight on notes per point at 30.4, against GI at 88.4. <span class="evi">Whether deck-building is worth the time in general is untested by this analysis &mdash; previous years called the volume too large and no measurement here supports or refutes that.</span></li>
+              <li class="no"><span class="chip skip">Skip</span>Any file named <code>Problem Set 2, Lectures 12 through 16, Medical Genetics</code>. Eight of its questions route to this exam and all of them are Spring genetics two-option items.</li>
             </ul>
           </div>
         </div>
@@ -218,8 +307,19 @@ table.data tr.hi td.n { color: var(--alert); }
             <ul>
               <li><b>The course changes character here.</b> Lectures 13 onward are medical genetics, taught against Thompson &amp; Thompson rather than Lippincott, and assessed through case-based vignettes. Pathway memorisation gives way to inheritance patterns and mechanisms of mutation.</li>
               <li>The Tuesday session is the morning after the exam. Watch lectures 13 and 14 during the weekend before the exam, or accept walking in cold.</li>
-              <li>Read both MSK 1 vignettes early &mdash; <b>MERRF</b> (Thompson &amp; Thompson Case 33) and <b>Lynch syndrome</b> (Case 29).</li>
-              <li>Primers 3, 4, 5 and 6 are all examined on MSK 1. Each primer reliably generates a question, and they are short.</li>
+              <li>Read both MSK 1 vignettes early &mdash; <b>MERRF</b> (Thompson &amp; Thompson Case 33) and <b>Lynch syndrome</b> (Case 29). MERRF is the one vignette in the course whose own file supplies a real share of the questions on its subject: 7 of 18.</li>
+              <li><b>The four primers on this exam are not equal, and the old advice that each reliably produces a question does not survive counting.</b> Primer 3 DNA structure has 58 usable questions on its subject and primer 5 cell cycle has 29 &mdash; both worth a proper pass. Primer 4 nucleotide structure has 12. <b>Primer 6 RNA structure has zero</b>, in zero years, the only primer in the course with no footprint at all. Read it once and move on. <span class="evi">Absence of evidence in a collection that is 87% teaching-assistant material is weaker than presence, so read it &mdash; just do not drill it.</span></li>
+            </ul>
+          </div>
+          <div class="do prac">
+            <h4>Practise this week</h4>
+            <ul>
+              <li class="alert"><b>Filter before you drill. This is the module the archive contaminates worst.</b> 1,037 questions labelled "genetics" in the archive route to MSK 1, and the highest-ranking file for this exam on a naive count is <code>Genetics_Question_Bank_PDF.pdf</code> with 78 clean questions &mdash; a <b>Spring Medical Genetics</b> bank that has nothing to do with this course. Also skip <code>Genetics Exam 1 TA Review - Harlem 2021.pdf</code> (32), <code>FoundationalHighYield Exercises_Exam 3.docx</code> (30) and <code>Genetics TA Review Exam 1 2025.pptx</code> (14).</li>
+              <li><b>Use the 2025 topic list <code>MSK 1 Review topics.docx</code>, split in half.</b> Its RNA and transcription half is this exam; its translation, genetic-code and antibiotic half is MSK 2 in 2026. The long "define and explain the following terms" list at the end is the most efficient coverage check in the block. <span class="chip">2025 list</span> No 2026 scope document has been posted for this module.</li>
+              <li><b>The PRE and POST interactive decks are the cleanest question material in the archive.</b> <code>PRE: RNA types and processing (questions only)</code> paired with <code>POST: RNA types and processing (questions + explanations)</code> &mdash; the stems in one deck, the answers and reasoning in the other. Same pairing exists for the genetic code and for co- and post-translational modification.</li>
+              <li><b>Two teaching-assistant files:</b> <code>Biochem_Genetics TA Review Exam 1 (Montana).pptx</code> (44 clean here) and <code>MSK Exam 1 Biochem_Genetics TA Review Montana 2025.pptx</code> (21). Montana's decks are measurably the best of the three campuses &mdash; 71.7 questions per file at 46.6% usable, against Middletown's 57.6 at 27.1% and Harlem's 45.0 at 23.1%.</li>
+              <li class="no"><span class="chip skip">Skip</span><b>Population genetics of every kind.</b> Hardy-Weinberg, carrier probability and pedigree interpretation are the archive's most-repeated questions across years &mdash; and the 2026 Fall course no longer owns them. Four of the five duplicate groups that recur in three or more years are exactly this. <code>PS1 Pedigrees and Probabilities_Problem Set.pptx</code> is the trap version.</li>
+              <li class="no"><span class="chip map">Map</span><b>Do not open it. MSK 1 and MSK 2 need none of the 23 regions between them</b> &mdash; 31 points and 18.6% of the grade with no map content. The next region you need is for CP 1 on Oct 19.</li>
             </ul>
           </div>
         </div>
@@ -238,7 +338,17 @@ table.data tr.hi td.n { color: var(--alert); }
             <ul>
               <li>Two graded quizzes close <b>Mon Sep 14</b> (DNA Repair, 8 pts; DNA Composition and Replication, 8 pts) and one closes <b>Tue Sep 15</b> (RNA Types and Synthesis, 8 pts). <b>All three allow only three attempts</b>, down from six on the Foundations quizzes. Read the questions before you burn a try.</li>
               <li>MSK Exam 1 is Tue Sep 15, and Rosh Hashanah takes out the weekend before it. The usable review time is Thursday Sep 10 and Monday Sep 14.</li>
-              <li>MSK 1 is about 15 Biochemistry points, roughly a third of Foundations 2. Calibrate the effort accordingly.</li>
+              <li>MSK 1 is about 15 Biochemistry points, roughly a third of Foundations 2. Calibrate the effort accordingly. <span class="evi">Once Spring genetics is filtered out the archive holds 10.4% of its Fall questions here against 9.0% of the grade &mdash; close to proportionate. The risk on this exam is not under-studying, it is drilling the wrong questions.</span></li>
+            </ul>
+          </div>
+          <div class="do prac">
+            <h4>Practise this week</h4>
+            <ul>
+              <li><b>Two files and two deck pairs, in the two review sittings you have.</b> Thursday: <code>Biochem_Genetics TA Review Exam 1 (Montana).pptx</code> then <code>MSK Exam 1 Biochem_Genetics TA Review Montana 2025.pptx</code>. Monday: the PRE deck for RNA types and processing, marking your answers, then the POST deck for the explanations.</li>
+              <li><b>Open the 2025 MSK 2 folder as well as the MSK 1 folder.</b> The 2025 MSK 1 exam folder splits almost evenly between this year's MSK 1 and MSK 2 &mdash; 64 clean questions each way &mdash; and 13 clean questions in <code>MSK 2 Biochem (Middletown) TA Review 2025.pptx</code> belong to this exam.</li>
+              <li><b>Sequence work by hand, not by reading.</b> The topic list asks twice for a complementary strand, a transcript and a translation to be written out. Do that with a pencil before Tuesday.</li>
+              <li class="no"><span class="chip n">Expect</span><b>Possibly four options rather than five, and more figures than usual.</b> The DNA-block lectures route to the Harlem course director's material, which is the only set in the course that runs mostly four-option &mdash; 63.0% against 14.8% five &mdash; and flags figure or graph reading at 20.6%. <span class="evi">n = 27 clean rows. Treat as indicative, not as a rule; it is the second-thinnest profile in the analysis.</span></li>
+              <li><b><code>Tenner_Biochem.MSK1.apkg</code></b> is the one deck aimed at this exam: 304 on-syllabus notes, 3.8% off.</li>
             </ul>
           </div>
         </div>
@@ -257,8 +367,17 @@ table.data tr.hi td.n { color: var(--alert); }
             <h4>Do this week</h4>
             <ul>
               <li><b>Thursday Sep 17 carries two consecutive Biochemistry interactive sessions</b>, the only day in the term that does. Two lectures of prep are due the same morning, two days after an exam.</li>
-              <li>Read vignettes <b>Huntington</b> (Case 24) and <b>Cystic Fibrosis</b> (Case 12).</li>
+              <li>Read vignettes <b>Huntington</b> (Case 24) and <b>Cystic Fibrosis</b> (Case 12). Huntington has 68 usable questions on its subject across 4 years; cystic fibrosis 42 across 4, <b>none of them from the vignette file</b>. Read them for the subject, not for the questions in them.</li>
               <li>Yom Kippur closes the school on Mon Sep 21, so the following week is short as well.</li>
+            </ul>
+          </div>
+          <div class="do prac">
+            <h4>Practise this week</h4>
+            <ul>
+              <li><b>Open the 2025 MSK 1 topic list again and use its second half.</b> Translation, the genetic code, the antibiotic mechanisms and the drug and toxin targets sat on MSK 1 in 2025 and sit on <b>MSK 2</b> in 2026. That half of the list is the scope for Thursday's two sessions. <span class="chip">2025 list</span></li>
+              <li><b>Then read <code>Disease Drugs and toxins MSK 2.docx</code> once, now.</b> Fourteen lines: scurvy, osteogenesis imperfecta, Ehlers-Danlos, Menkes, Marfan, alpha-1-antitrypsin deficiency, congenital disorders of glycosylation types 1 and 2, Hunter, Hurler, I-cell disease, penicillin, vancomycin. <b>This is the most diagnosis-driven exam of the eight</b> &mdash; disease identification is flagged in 12.4% of its questions, the highest of the eight modules &mdash; so this list is worth more here than on any other exam. <span class="chip">2025 list</span></li>
+              <li><b>Translation is the second most persistent topic in the whole archive:</b> 301 questions across <b>seven distinct years</b>. Genetic code adds 239 across five. Whatever else slips this fortnight, these two do not.</li>
+              <li class="no"><span class="chip skip">Skip</span><code>Genetics Exam 1 TA Review - Harlem 2021.pdf</code> (27 clean questions route here) and <code>Genetics Exam 1 TA Review - Spring 2025.pptx</code> (13). Both are Spring Medical Genetics. Also <code>DannyGPT-20250809213457 (1).apkg</code>, whose top module is MSK 2 and which is 36.6% off-syllabus.</li>
             </ul>
           </div>
         </div>
@@ -276,8 +395,17 @@ table.data tr.hi td.n { color: var(--alert); }
             <h4>Do this week</h4>
             <ul>
               <li>Two graded quizzes close <b>Tue Sep 22</b>: Genetic Code (8 pts) and Protein Translation (8 pts), three attempts each.</li>
-              <li>Read the vignette <b>Mucopolysaccharidoses</b>, which pairs with the glycoproteins lecture and is examined on MSK 2.</li>
+              <li>Read the vignette <b>Mucopolysaccharidoses</b>, which pairs with the glycoproteins lecture and is examined on MSK 2. 63 usable questions on the subject across 4 years, 54 of them from teaching-assistant reviews and 2 from the vignette file itself.</li>
               <li>Friday is the only Biochemistry teaching this week and it lands on a half day. Do the prep on Thursday.</li>
+            </ul>
+          </div>
+          <div class="do prac">
+            <h4>Practise this week</h4>
+            <ul>
+              <li><b>Friday's fibrous-protein and glycoprotein lectures are the most picture-dependent material in the course.</b> Questions on that content run <b>39.1% clinical vignettes</b> (the highest of any lecture set), <b>93.5% five options</b>, <b>15.0% referencing a figure and 36.5% carrying an image</b>, median 49 words, 87.1% with a number in them. It is also the only set that asks you to identify a structure at all, in 6.5%. <span class="evi">n = 77 clean rows.</span></li>
+              <li><b>So although this exam needs no metabolic map, it does expect you to read pictures</b> &mdash; collagen assembly diagrams, glycosaminoglycan structures, blood-group tables. Learn those from the slides, because no figure anywhere in the archive was ever transcribed and no question file will train it.</li>
+              <li><b>Two files:</b> <code>MSK Exam 2 Biochem_Genetics Montana TA Review 2025.pptx</code> (25 clean here, the densest for this module) and <code>Biochemistry Exam 2 TA Review 2024.pdf</code> again (14 more). Then the PRE and POST interactive pair on fibrous proteins, glycoproteins and proteoglycans &mdash; stems in one, explanations in the other.</li>
+              <li class="no"><span class="chip skip">Skip</span>The Duchenne muscular dystrophy vignette set in the 2025 MSK 2 archive folder. The 2026 Canvas module names Cystic Fibrosis and Mucopolysaccharidoses only; Duchenne is not on this year's list.</li>
             </ul>
           </div>
         </div>
@@ -297,6 +425,15 @@ table.data tr.hi td.n { color: var(--alert); }
               <li>The next three weeks run exam, exam, exam with almost no gap: MSK 2 on Oct 6 and Cardiopulmonary 1 on Oct 19. Front-load here.</li>
             </ul>
           </div>
+          <div class="do prac">
+            <h4>Practise this week</h4>
+            <ul>
+              <li><b>MSK 2 is the one module where working through the available material in order is roughly correct.</b> 9.6% of the grade against 9.9% of the Fall archive. No cap, no shortage, and the flattest set of question types in the block. Finish the two Montana files and the interactive pairs from last week rather than looking for more.</li>
+              <li><b>Then start Cardiopulmonary 1 with the one thing that is certain about it: primer 9, acid-base.</b> <b>The best-evidenced primer in the course</b> &mdash; 110 usable and 77 clean questions on its subject across <b>six distinct years</b>, against zero for primer 6 and one for primer 10. Do it now, before the Oct 5 session, and the session will be revision.</li>
+              <li><b>Learn the genetic code and haemoglobin together.</b> They co-occur in 25 questions across the MSK 2 and CP 1 boundary; the sickle-cell point mutation is the bridge and it is examinable from either side.</li>
+              <li class="no"><span class="chip map">Map</span>Still nothing. The first map region since August arrives with CP 1: <b>fatty acid synthesis, fatty acid oxidation, ketone bodies</b>. Three of 23.</li>
+            </ul>
+          </div>
         </div>
       </details>
 
@@ -313,8 +450,17 @@ table.data tr.hi td.n { color: var(--alert); }
             <h4>Do this week</h4>
             <ul>
               <li><b>A lecture-heavy interactive session lands the morning before an exam.</b> Monday's prep has to be done over the preceding weekend alongside MSK 2 revision.</li>
-              <li>Read the vignette <b>Acid-Base Disorder</b>. Acid-base is one of the few topics that recurs across Biochemistry, Physiology and the boards; time spent here compounds.</li>
-              <li>The oxygen dissociation curve and haemoglobin shift logic sit here. Learn it once, properly, in both directions.</li>
+              <li>Read the vignette <b>Acid-Base Disorder</b>. 122 usable questions on the subject across 5 years, and acid-base pairs with Foundations 1 signal transduction in 27 questions &mdash; the highest cross-module pairing involving this exam. August's work returns here.</li>
+              <li>The oxygen dissociation curve and haemoglobin shift logic sit here. Learn it once, properly, in both directions. <b>Haemoglobin is the single most persistent topic in the entire archive</b> &mdash; 229 questions across <b>eight distinct years, 2018 through 2025</b>.</li>
+            </ul>
+          </div>
+          <div class="do prac">
+            <h4>Practise this week</h4>
+            <ul>
+              <li><b>The 2025 CP 1 list names the task, so practise the task.</b> <i>"Given a set of clinical values, be able to interpret the acid-base disorder (if any) present."</i> Plus anion gap, Henderson-Hasselbalch, compensation, and four conditions: respiratory and metabolic acidosis and alkalosis, alpha and beta thalassaemia, sickle cell trait and disease. <span class="chip">2025 list</span></li>
+              <li><b>Keep <code>NBOME Reference Adult Laboratory Values.pdf</code> open while you work.</b> It is supplied in the exam, so practising without it trains the wrong task. <span class="evi">Laboratory-value interpretation is flagged in 1.6% of this module's questions, joint highest of the eight &mdash; a low rate, but the topic list asks for it outright, which is the stronger signal.</span></li>
+              <li class="no"><span class="chip n">Expect</span><b>Long clinical scenarios with lab values, asking about management.</b> Questions on the haemoglobin lecture run to a <b>median 60-word stem</b>, the longest of any set, with 14.8% quoting a laboratory value and <b>treatment or management flagged in 26.1%</b> &mdash; four times any other set in the course. <span class="evi">This rests on n = 19 clean rows: the weakest evidence in the whole analysis attached to the most reliably examined topic in it. Prepare for lab-value interpretation because the faculty list demands it. Treat the 26% and the 60 words as a hint, not a plan.</span></li>
+              <li><b>Two files, and that is the ration for this module:</b> <code>Biochemistry Exam 2 TA Review 2024.pdf</code> (36 clean here, the densest) and <code>Biochemistry Exam 1 Review 2024.pptx.pdf</code> (33). Add <code>Cardio_Pulm Exam 1 Biochem_Genetics Montana TA Review 2025.pptx</code> (30) if there is room.</li>
             </ul>
           </div>
         </div>
@@ -331,8 +477,18 @@ table.data tr.hi td.n { color: var(--alert); }
             <ul>
               <li><b>No interactive session, but two lectures are examined on Monday.</b> Lecture 25 Fatty Acid and Triacylglycerol Synthesis and Lecture 26 Degradation of Triacylglycerols and Fatty Acids are self-directed this week, together with Primer 10 Lipid Structures.</li>
               <li>Two graded quizzes close <b>Mon Oct 19</b>: Lipid Digestion, Fatty Acid and TAG (8 pts) and Overview and Acid-Base (7 pts).</li>
-              <li>Read the vignette <b>Fatty Acid Metabolic Defect</b>.</li>
-              <li>Cardiopulmonary 1 is about 14 Biochemistry points, the smallest of the middle exams.</li>
+              <li>Read the vignette <b>Fatty Acid Metabolic Defect</b>. 61 usable questions on the subject across 3 years, 56 of them from teaching-assistant reviews.</li>
+              <li>Cardiopulmonary 1 is about 14 Biochemistry points, the smallest of the middle exams &mdash; and the archive holds <b>15.0% of its Fall questions here against 8.4% of the grade</b>, making it the most over-supplied module after GI. <b>When the topic list is covered, stop.</b> A third teaching-assistant file is time taken from Cardiopulmonary 2, which is worth four more points.</li>
+            </ul>
+          </div>
+          <div class="do prac">
+            <h4>Practise this week</h4>
+            <ul>
+              <li><b>Open the 2025 CP 2 folder as well as the CP 1 folder.</b> 84 of the CP 2 folder's clean questions route to this exam &mdash; more than the CP 1 folder's own 82. This is the worst folder-boundary leak in the archive, and it runs in the direction you would not guess.</li>
+              <li><b>Three map regions, and this is the week for them:</b> fatty acid synthesis, fatty acid oxidation, ketone bodies. Trace all three on the blank <code>FullSubwayMap222.pdf</code>.</li>
+              <li class="no"><span class="chip skip">Skip</span><b>The annotated <code>Kevin MAP.pdf</code> for this exam.</b> Its ketone-body region has <b>zero</b> annotations and its fatty-acid-oxidation region has two. The annotations are Renal and GI disease labels; the file becomes genuinely valuable in December and not before.</li>
+              <li class="no"><span class="chip skip">Skip</span><b>Primer 7 amino acid and primer 10 lipid structures as study targets.</b> 6 and 1 usable questions on their subjects respectively, across the whole archive. Read each once. Primer 8 protein structure is worth a proper pass (19 usable, 3 years), and primer 9 acid-base is not optional.</li>
+              <li class="no"><span class="chip skip">Skip</span>Four Spring Endocrine/Reproductive files contribute 17 clean questions that route here. They are not this course.</li>
             </ul>
           </div>
         </div>
@@ -349,8 +505,17 @@ table.data tr.hi td.n { color: var(--alert); }
           <div class="do">
             <h4>Do this week</h4>
             <ul>
-              <li>Cardiopulmonary 2 is two weeks out and worth about 18 points, more than either MSK exam. It is four lectures, so the ratio of points to content is the best of the middle block.</li>
+              <li>Cardiopulmonary 2 is two weeks out and worth about 18 points, more than either MSK exam. It is four lectures, so the ratio of points to content is the best of the middle block. The archive is proportionate here at 11.5% against 10.8% of the grade &mdash; no cap and no shortage.</li>
               <li>This is also the week Anatomy has no sessions at all, which frees real time. Spend some of it here.</li>
+            </ul>
+          </div>
+          <div class="do prac">
+            <h4>Practise this week</h4>
+            <ul>
+              <li><b>Three of the four load-bearing primers land on this one exam, so do them first.</b> <b>Primer 12 lipoproteins has the largest footprint of any primer in the course</b> &mdash; 173 usable and 92 clean questions on its subject across <b>seven distinct years</b>. Primer 13 eicosanoids: 115 usable, 5 years. Primer 11 cholesterol: 89 usable, 5 years.</li>
+              <li><b>The closing definition block of <code>CP 2 Topic list.docx</code> is the option pool written out.</b> HMG-CoA reductase, mevalonate, squalene and lanosterol, SREBP-2, SCAP, cholesterol 7-alpha-hydroxylase, the four bile acids, chylomicrons and VLDL and LDL and HDL2 and HDL3, apolipoproteins CII, B-48, B-100, E and E4 and A1, lipoprotein lipase, ACAT, LCAT, CETP, LDLR, SR-A and SR-B1. It is the longest topic list of the eight and ends in a 20-item "know the function or definition of the following" block. <span class="chip">2025 list</span></li>
+              <li><b>Then <code>CP 2 Drug and toxin List.docx</code>:</b> statins, aspirin and the NSAIDs, celecoxib, zileuton, the montelukast-class antagonists, the prostaglandins in clinical use, the sphingolipidoses and the fatty-acid-oxidation disorders. <span class="chip">2025 list</span></li>
+              <li class="no"><span class="chip map">Map</span>One region: <b>cholesterol synthesis</b>. Use the blank map &mdash; the annotated copy has zero annotations in that region.</li>
             </ul>
           </div>
         </div>
@@ -368,8 +533,19 @@ table.data tr.hi td.n { color: var(--alert); }
             <h4>Do this week</h4>
             <ul>
               <li>Three graded quizzes close across the weekend: Globular and Fibrous Proteins (8 pts) on <b>Sun Nov 1</b>, then Cholesterol and Lipoprotein (8 pts) and Phospholipid and Eicosanoid (8 pts) on <b>Mon Nov 2</b>.</li>
-              <li class="alert" style="list-style:none;margin-left:-18px;background:#fff4f2;border-left:3px solid #8b1e1e;border-radius:0 6px 6px 0;padding:8px 11px"><b>The Globular and Fibrous Proteins quiz closes Nov 1, but its content was examined on Oct 6 and Oct 19.</b> It is worth points and nothing else by then. This is the clearest case of the general rule: quiz due dates are not a study schedule.</li>
-              <li>Lipoprotein classes, their apolipoproteins and the associated dyslipidaemias are heavily examined and heavily confused. Build one table and learn it.</li>
+              <li class="alert"><b>The Globular and Fibrous Proteins quiz closes Nov 1, but its content was examined on Oct 6 and Oct 19.</b> It is worth points and nothing else by then. This is the clearest case of the general rule: quiz due dates are not a study schedule.</li>
+              <li>Lipoprotein classes, their apolipoproteins and the associated dyslipidaemias are heavily examined and heavily confused. Build one table and learn it. Lipoproteins carry 220 questions across 6 years; phospholipids 172, eicosanoids 136, cholesterol 130.</li>
+              <li>Eicosanoids pair with Foundations 1 signal transduction in 22 questions &mdash; the second return on August's work, after acid-base.</li>
+            </ul>
+          </div>
+          <div class="do prac">
+            <h4>Practise this week</h4>
+            <ul>
+              <li><b>Two dense old files carry this module, and one of them is faculty-written.</b> <code>Biochem Review Exam 3.pdf</code> holds 49 clean questions routing here, the densest single file for this exam. <code>Biochem Review Exam3 2022.pptx</code> holds 33 &mdash; and it is a <b>faculty</b> product containing 70 questions, the highest question count of any faculty review in the Fall archive. <span class="evi">Faculty reviews are the highest-yielding source type in the collection: 57.8% of their questions survive extraction usable, against 27.1% for Middletown teaching-assistant decks.</span></li>
+              <li><b>Then the BEFORE and AFTER interactive pairs from the 2025 CP 2 folder</b> &mdash; <code>CP2 Week1 BEFORE IS.pptx</code> with <code>CP2 Week1 AFTER IS - with explanation slides.pptx</code>, the same pair for week 2, and <code>PRACTICE QUESTIONS ON CHOLESTEROL &amp; LIPOPROTEINS.docx</code>. Add <code>Cardio_Pulm Exam 2 Biochem_Genetics Montana TA Review 2025.pptx</code> (22 clean) if there is time.</li>
+              <li class="no"><span class="chip n">Expect</span><b>No dominant question shape.</b> This is the flattest profile of the eight modules: mechanism 9.0%, enzyme identity 5.2%, diagnosis 5.2%, treatment 3.5%, regulation 2.8%, nothing above 10%. <b>Coverage is the strategy here, not pattern recognition.</b> The definition block predicts the small items; the drug list predicts the clinical ones.</li>
+              <li class="no"><span class="chip skip">Skip</span><b>The steroid hormone synthesis region of the map.</b> It is the one region with no 2026 Fall lecture, and all 95 of its usable questions come from Spring Endocrine and Reproductive material.</li>
+              <li><b><code>Biochem Exam 3 (5).apkg</code></b> is the deck for this module: 306 on-syllabus notes, <b>0.0% off-syllabus</b>.</li>
             </ul>
           </div>
         </div>
@@ -389,6 +565,15 @@ table.data tr.hi td.n { color: var(--alert); }
               <li>Use it to get ahead on the GI block and, more importantly, to start the renal and nitrogen material early. Renal is about 24 points, the third largest exam, and it arrives in the compressed final fortnight.</li>
             </ul>
           </div>
+          <div class="do prac">
+            <h4>Practise this week</h4>
+            <ul>
+              <li class="alert"><b>Renal starts here, four weeks before it is taught.</b> Six lectures, about 24 points, <b>eleven of the 23 metabolic map regions</b> &mdash; the largest single map commitment of the year &mdash; and Thanksgiving in the middle of the block. The problem with Renal is not that material is scarce; the archive is proportionate at 13.6%. The problem is that the calendar gives the block less time than it takes. <b>Week 14 and week 16 are the only slack, and both come before the lectures.</b></li>
+              <li><b>Read lectures 37 and 38 now and open the urea cycle region of the map.</b> The two lecture files sit in the orphan sweep under Canvas's own numbering rather than the syllabus's: <code>Lecture 25_Binstock_Nitrogen Balance  Dietary Protein Digestion 9_20_22.pptx</code> and <code>Lecture 26_Binstock_Urea cycle (9).pptx</code>. Urea cycle vocabulary lands in Renal questions 112 times out of 119 &mdash; the routing here is as clean as it gets.</li>
+              <li><b>Now the annotated <code>Kevin MAP.pdf</code> earns its keep.</b> Its 260 annotations, 127 of them carrying text, are concentrated exactly on this block: nucleotide breakdown, heme synthesis, pyrimidine synthesis, base salvage, purine synthesis. They are the disease names written onto the enzyme steps &mdash; Lesch-Nyhan, Kelley-Seegmiller, ADA-SCID, purine nucleoside phosphorylase deficiency, orotic aciduria, citrullinemia, argininosuccinic aciduria, classical and non-classical PKU, tyrosinemia I, II and III, alkaptonuria, maple syrup urine disease, Hartnup &mdash; plus regulator notes in the form <code>(+) citrate, insulin / (&minus;) glucagon, LCFA, AMP</code>.</li>
+              <li class="no"><span class="chip skip">Skip</span><b>Building an Anki deck for Renal.</b> 348 notes at <b>14.5 per point, the lowest density of the eight modules</b> and six times thinner than GI. The collection does not cover this exam and will not be made to.</li>
+            </ul>
+          </div>
         </div>
       </details>
 
@@ -403,9 +588,22 @@ table.data tr.hi td.n { color: var(--alert); }
           <div class="do">
             <h4>Do this week</h4>
             <ul>
-              <li class="alert" style="list-style:none;margin-left:-18px;background:#fff4f2;border-left:3px solid #8b1e1e;border-radius:0 6px 6px 0;padding:8px 11px"><b>Lectures 33, 34 and 35 are not posted on Canvas.</b> Lecture files run 1&ndash;42 with those three absent, and the syllabus places fat-soluble vitamins, water-soluble vitamins and insulin/glucagon in exactly that gap. Worth asking about before the GI exam rather than after.</li>
+              <li class="alert"><b>Lectures 33, 34 and 35 are not posted on Canvas.</b> Lecture files run 1&ndash;42 with those three absent, and the syllabus places fat-soluble vitamins, water-soluble vitamins and insulin/glucagon in exactly that gap. Worth asking about before the GI exam rather than after.</li>
               <li><b>The Vitamins session is team-based learning</b>, which is graded differently from a normal interactive session and includes a peer contribution form. The Canvas module carries the TBL outline and the assessment form; read them before the session.</li>
               <li>Both sessions start at 8:30 AM and run 90 minutes. Prep has to be done the night before.</li>
+            </ul>
+          </div>
+          <div class="do prac">
+            <h4>Practise this week</h4>
+            <ul>
+              <li class="alert"><b>This is the module the archive most wants you to over-study.</b> GI is <b>4.8% of the grade and 18.2% of the usable archive</b> &mdash; 69.0 clean questions per exam point, against Foundations 2's 5.6. It also has <b>88.4 Anki notes per point, the highest of the eight modules</b>. Heme, bilirubin, iron, vitamins and insulin are the most reviewed subjects in the whole collection because <b>they were worth far more points in the years those reviews were written</b>. Cap this block at about 5% of your Biochemistry time and hold the line.</li>
+              <li><b>Two files. Then stop.</b> <code>GI Exam Biochem_Genetics Montana TA Review 2025.pdf</code> carries 76 clean questions routing here &mdash; one file is genuinely enough &mdash; and <code>PRACTICE QUESTIONS ON LECTURES 29 &amp; 40_HEME &amp; IRON METABOLISM.docx</code> adds 24 faculty-written questions on exactly the two lectures that carry this exam. The heme and iron BEFORE and AFTER interactive pair is a third option if the first two go quickly.</li>
+              <li><b>The 2025 topic and drug lists are the option pool.</b> Heme synthesis regulation in marrow against liver, the porphyrias, acute intermittent porphyria against congenital erythropoietic porphyria against porphyria cutanea tarda, B6 deficiency against lead poisoning, bilirubin catabolism, the three jaundices, neonatal jaundice management, and the whole of iron. The named agents: heme and hemin, beta carotene, phenobarbital, phototherapy, isoniazid. The named conditions add Gilbert, Crigler-Najjar, Dubin-Johnson and Rotor. <span class="chip">2025 list</span></li>
+              <li><b>Learn the single-carbon and sulfur amino acid map region here, and use it twice.</b> It was predicted to belong to Renal, but its vocabulary lands top in GI &mdash; 94 usable questions against Renal's 64 &mdash; because folate and B12 sit in the water-soluble vitamin lecture. Learn it before Nov 23 and reuse it on Dec 9. Heme synthesis and heme degradation are the other two regions.</li>
+              <li><b>One specific scenario is worth knowing cold.</b> The archive's only live multi-year repeat &mdash; eleven copies across ten files, dated 2023, 2025 and <b>2026</b> &mdash; is insulin resistance and haemoglobin A1c in a patient with a family history of type II diabetes. Insulin and glucagon is examined in seven distinct years.</li>
+              <li class="no"><span class="chip n">Expect</span><b>Five options, a short clinical scenario, and distractors that are plainly wrong.</b> The macronutrients lecture is Papanikolaou's, and his is <b>the only directly measurable question profile in the course</b> &mdash; every one of his 51 clean questions has five options, median stem 37 words, <b>43.5% clinical vignettes</b> (roughly double the faculty average), 79.0% with a number, and <b>the least similar distractors of any set measured</b>. He does not build near-misses.</li>
+              <li class="no"><span class="chip skip">Skip</span><code>Endo_Repro Exam TA Review (Middletown, 2024).pptx</code>. 36 of its clean questions route to GI, which would make it the <b>second-ranked file for this module</b> on a naive count. It is a Spring Endocrine and Reproductive review. Also <code>Endo_Repro Exam Biochem_Genetics TA Review Montana 2026.pptx</code> (22 clean route here).</li>
+              <li class="no"><span class="chip skip">Skip</span><b>The remaining twenty-odd teaching-assistant files in the 2025 GI folder.</b> The Harlem review (34 clean), the Middletown review (30) and <code>Biochemistry Exam 4 TA Review 2024.pptx</code> (26) are all on-syllabus, all real, and all still not worth the hour at eight points.</li>
             </ul>
           </div>
         </div>
@@ -421,8 +619,16 @@ table.data tr.hi td.n { color: var(--alert); }
             <h4>Do this week</h4>
             <ul>
               <li>Two graded quizzes close <b>Mon Nov 23</b>: Macronutrients (4 pts, three attempts) and Vitamins and Iron (8 pts, unlimited attempts).</li>
-              <li class="alert" style="list-style:none;margin-left:-18px;background:#fff4f2;border-left:3px solid #8b1e1e;border-radius:0 6px 6px 0;padding:8px 11px"><b>The GI exam carries about 8 Biochemistry points, the lowest of the eight.</b> That is roughly a fifth of Foundations 2 for six lectures of content. The week also holds OMM Written Exam 2 and the GI anatomy practical &mdash; if something has to give, the marginal Biochemistry point here is the cheapest thing on the board.</li>
+              <li class="alert"><b>The GI exam carries about 8 Biochemistry points, the lowest of the eight.</b> That is roughly a fifth of Foundations 2 for six lectures of content. The week also holds OMM Written Exam 2 and the GI anatomy practical &mdash; if something has to give, the marginal Biochemistry point here is the cheapest thing on the board.</li>
               <li>Renal is the better use of this week. It is worth three times the GI exam and arrives 16 days later.</li>
+            </ul>
+          </div>
+          <div class="do prac">
+            <h4>Practise this week</h4>
+            <ul>
+              <li><b>Work <code>PRACTICE QUESTIONS ON AA, NITROGEN, UREA CYCLE &amp; PU-PY METABOLISM.docx</code> for the first time.</b> 47 questions, 39 of them clean, five options every time, covering exactly the Renal lecture range. <b>It is the single best practice document in the archive</b> and it is faculty-written. It is posted on Canvas for 2026 under that name; the archive copy sits in the 2025 Renal faculty-review folder. Work it now and again in week 18.</li>
+              <li><b>Read the 2025 Renal topic list this week rather than in December.</b> Thirty bullets and unusually operational: differentiate classical from non-classical PKU and treat both, compare CPS I with CPS II, distinguish orotic aciduria from ornithine transcarbamoylase deficiency, differentiate gout from pseudogout. The drug list is nine agents &mdash; pyridoxine, cobalamin in both forms, tetrahydrofolate, S-adenosylmethionine, 5-fluorouracil, febuxostat, methotrexate, allopurinol, colchicine. <span class="chip">2025 list</span></li>
+              <li><b>Keep working the map.</b> Eleven regions is three sustained weeks of work, not an evening: urea cycle, ammonium capture and release, aromatic amino acids, branched-chain amino acids, single-carbon and sulfur amino acids, purine synthesis, pyrimidine synthesis, deoxyribonucleotides, base salvage, nucleoside salvage, nucleotide breakdown. <span class="evi">The region assignment is well corroborated: base salvage vocabulary lands in Renal 69 times out of 71, nucleoside salvage 62 of 62, nucleotide breakdown 181 of 221.</span></li>
             </ul>
           </div>
         </div>
@@ -445,6 +651,14 @@ table.data tr.hi td.n { color: var(--alert); }
               <li>Thanksgiving is a four-day break with a 24-point exam two weeks out. Whether to work through it is a personal call, but the arithmetic is unusually clear this year.</li>
             </ul>
           </div>
+          <div class="do prac">
+            <h4>Practise this week</h4>
+            <ul>
+              <li><b>Two dense files, both from outside the Renal folder.</b> <code>Biochem Review Exam 3.pdf</code> carries 35 clean questions routing here and <code>Renal Exam Biochem_Genetics TA Review Montana 2025.pptx</code> carries 28. The Harlem Renal review adds 14 and <code>MT 2024 Biochemistry Exam 3 TA Review.pdf</code> 13.</li>
+              <li><b>Then the three 2025 interactive decks, opened as slides:</b> <code>Week 17_IS_Nitrogen Balance-Urea Cycle.pptx</code>, <code>Week 18_IS_Amino acids-Metabolism and Defects-Inborn Errors.pptx</code>, <code>Week 18-2_IS_Pu_Pyr Synthesis &amp; Catabolism-Nuc Structure.pptx</code>. Opened as PowerPoint, not read as text &mdash; 77% of interactive questions in the archive lost their answer options when they were extracted, because the options live on the slide.</li>
+              <li>The urea cycle is the classic high-yield item here and the archive agrees: 130 questions across 4 years, plus 138 on nitrogen balance. Enzymes, which compartment each step is in, and the deficiency presentations.</li>
+            </ul>
+          </div>
         </div>
       </details>
 
@@ -461,7 +675,16 @@ table.data tr.hi td.n { color: var(--alert); }
             <ul>
               <li>Read the vignettes <b>Inborn Error of Amino Acid Metabolism</b> and <b>Gout</b>. Gout is the named renal-exam vignette.</li>
               <li>The inborn errors are pure pattern recognition: enzyme missing, metabolite accumulating, clinical presentation. Build the table.</li>
-              <li>Purine and pyrimidine salvage and the drugs that block it are heavily examined and reappear in pharmacology later.</li>
+              <li>Purine and pyrimidine salvage and the drugs that block it are heavily examined and reappear in pharmacology later. Purine catabolism carries 189 questions, purine synthesis 92.</li>
+            </ul>
+          </div>
+          <div class="do prac">
+            <h4>Practise this week</h4>
+            <ul>
+              <li><b>Second pass through <code>PRACTICE QUESTIONS ON AA, NITROGEN, UREA CYCLE &amp; PU-PY METABOLISM.docx</code>.</b> Thursday's lectures complete its coverage, so the questions that were unanswerable in week 16 are answerable now.</li>
+              <li class="no"><span class="chip n">Expect</span><b>The most mechanism- and identity-driven exam of the eight.</b> Mechanism-seeking language is flagged in <b>17.9%</b> of this module's questions and enzyme or protein identity in <b>11.0%</b>, both the highest of the eight modules, with diagnosis also at 11.0%. <b>Practise the motion the inborn errors are built on:</b> enzyme missing, metabolite accumulating, clinical presentation, then pick the option that names the enzyme. That single drill is the mechanism, identity and diagnosis percentages at once.</li>
+              <li><b>Read the two vignettes.</b> Gout has the most usable questions of any vignette subject in the course &mdash; 180 across 5 years, of which 5 come from the vignette file itself, 113 from teaching-assistant reviews and 16 from faculty reviews. Inborn error of amino acid metabolism: 67 usable across 6 years, <b>zero</b> from the vignette file.</li>
+              <li>Lecture 41 routes to the purine and pyrimidine set that runs 39.1% vignettes, 93.5% five options and 36.5% carrying an image; lectures 37 and 38 to the long-stem, figure-heavy, regulation-focused set. The best practice document is Papanikolaou's, whose measured style is five options and a 35-to-50-word scenario with a number in it.</li>
             </ul>
           </div>
         </div>
@@ -479,8 +702,16 @@ table.data tr.hi td.n { color: var(--alert); }
           <div class="do">
             <h4>Do this week</h4>
             <ul>
-              <li class="alert" style="list-style:none;margin-left:-18px;background:#fff4f2;border-left:3px solid #8b1e1e;border-radius:0 6px 6px 0;padding:8px 11px"><b>The last three quizzes close four days after the exam they cover and two days after the term ends.</b> They are 23 points of the quiz component, so they still count &mdash; but do them <i>before</i> Dec 9, when they are worth something as revision. Left to the deadline they are administration.</li>
+              <li class="alert"><b>The last three quizzes close four days after the exam they cover and two days after the term ends.</b> They are 23 points of the quiz component, so they still count &mdash; but do them <i>before</i> Dec 9, when they are worth something as revision. Left to the deadline they are administration.</li>
               <li>Renal is the second-largest Biochemistry exam of the term and lands after the longest stretch of the semester. It rewards the person who started it in week 14.</li>
+            </ul>
+          </div>
+          <div class="do prac">
+            <h4>Practise this week</h4>
+            <ul>
+              <li><b>Tuesday's review session and the map, in that order.</b> Eleven regions traced without the map in front of you is the single best use of Dec 8, because it tests recall of pathway structure rather than recognition of slides.</li>
+              <li><b>Third pass through the faculty practice document, timed.</b> 47 questions, five options each, and by now you should be reading them at exam pace.</li>
+              <li><b>Then the two faculty Renal reviews:</b> <code>Renal Exam Review.pptx</code> and <code>REVIEW_RENAL_12-10-2025.pptx</code>. Faculty reviews are the highest-yielding source type in the archive and they demonstrably contain material that appears in no lecture deck.</li>
             </ul>
           </div>
         </div>
@@ -567,6 +798,236 @@ table.data tr.hi td.n { color: var(--alert); }
     </div>
   </div>
 
+  <!-- ================= WHAT THE EXAMS ASK ================= -->
+  <div id="ask" class="panel" role="tabpanel" aria-labelledby="tab-ask" tabindex="0">
+
+    <div class="card">
+      <h2>What a question on this course looks like</h2>
+      <p class="lead">Built by reading 16,283 archived question rows from 2018 through 2026, keeping the 3,937 that parse as complete lettered multiple-choice items with their options intact, and routing each one by topic onto the 2026 lecture list. Everything below is measured. Where the sample is small it says so, and where the sample cannot answer the question it says that instead.</p>
+
+      <div class="hedge">
+        <b>Read this before the rest of the tab.</b> The archive splits its files by faculty member, which makes it look as though each professor's personal question style is observable. It is not. Only <b>one</b> author's own questions exist in usable numbers &mdash; Papanikolaou's, 51 of them. The direct counts for everyone else are 28, 24, 7, 1 and 0, and for three of those the attributed files turn out to be Spring Medical Genetics problem sets rather than Fall biochemistry at all.<br><br>
+        So every other profile on this page was built the other way round: take each question, route it by topic to the 2026 lecture it belongs to, and group by that lecture's author. That measures <b>what questions about a lecture set look like</b>, which is the operationally useful quantity. <b>It does not measure how a person writes.</b> The distinction matters when you are tempted to prepare for a professor rather than for a body of material.
+      </div>
+
+      <div class="scroller" style="margin-top:14px">
+      <table class="data">
+        <thead><tr><th>Construction</th><th>All questions</th><th>Faculty-written</th><th>TA-written</th></tr></thead>
+        <tbody>
+          <tr><td>Options are enzyme names</td><td class="n">10.9%</td><td class="n">10.4%</td><td class="n">12.2%</td></tr>
+          <tr><td>Options are disease names</td><td class="n">10.7%</td><td class="n">11.7%</td><td class="n">10.7%</td></tr>
+          <tr><td>Paired increase / decrease options</td><td class="n">8.3%</td><td class="n">7.0%</td><td class="n">9.9%</td></tr>
+          <tr><td>Options are purely numeric</td><td class="n">5.1%</td><td class="n">7.0%</td><td class="n">4.1%</td></tr>
+          <tr><td>Options are vitamins or cofactors</td><td class="n">3.0%</td><td class="n">3.9%</td><td class="n">3.0%</td></tr>
+          <tr><td>Negative stem (EXCEPT, NOT, LEAST)</td><td class="n">2.1%</td><td class="n">2.9%</td><td class="n">1.8%</td></tr>
+          <tr><td>"All of the above" appears</td><td class="n">1.3%</td><td class="n">1.2%</td><td class="n">1.2%</td></tr>
+          <tr><td>"None of the above" appears</td><td class="n">0.3%</td><td class="n">0.0%</td><td class="n">0.3%</td></tr>
+          <tr><td>Combined "A and B" options</td><td class="n">0.2%</td><td class="n">0.0%</td><td class="n">0.2%</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <ul class="notes" style="margin-top:14px">
+        <li><b>The test-taking heuristics built around "all of the above" and "none of the above" do not apply to this course.</b> They appear in 1.3% and 0.3% of questions, and the faculty use "none of the above" <b>zero times in 685 questions</b>. Negative stems are rare too. Whatever you learned about those constructions elsewhere is dead weight here.</li>
+        <li><b>Faculty prefer five options; teaching assistants default to four.</b> Faculty-written questions average 3.96 options with 340 five-option items against 122 four-option; TA decks average 4.38 with 1,369 four-option against 1,057 five-option. If you have been practising on four-option questions all term, the real paper will feel different.</li>
+        <li><b>One question in five opens as a clinical vignette</b> across faculty-written material (20.0%), and 37.7% use a "which of the following" frame. Median stem 43 words, with 43.5% running 50 words or longer.</li>
+        <li class="alert"><b>"Memorise everything, every number and every diagram is testable" does not survive counting.</b> On 2,634 usable Fall questions: <b>3.3% turn on a specific number, 1.4% ask a calculation, 0.6% require reading a figure, 6.2% carry an image.</b> On faculty-written questions the rates roughly double &mdash; 5.8%, 2.2%, 3.8%, 10.7% &mdash; so past TA reviews do understate the demand. But language about central concepts (mechanism, regulation, why, best explains) outnumbers minor-detail language by more than twenty to one. <b>The right instruction is to memorise the numbers the posted topic lists name and expect one or two per exam</b>, not to memorise indiscriminately.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Per exam, what to expect</h2>
+      <p class="lead">Question-target percentages are keyword-flag rates on usable questions routed to that module. <b>They are not a partition &mdash; they do not sum to 100 and the unflagged remainder is large.</b> A module flagged at 9.4% for regulation is the most regulation-heavy of the eight; it does not mean 9.4% of the paper.</p>
+      <div class="grid2">
+
+        <div class="mod">
+          <h4>Foundations 1</h4>
+          <p class="meta">Aug 17 &middot; 28 pts &middot; lectures 1&ndash;5 &middot; n = 345</p>
+          <p><b>40-word direct recall and one-step mechanism.</b> Five options, and the fewest clinical vignettes of any measurable set at 15.5%. 71.4% contain a number, 7.9% reference a figure.</p>
+          <dl>
+            <dt>Asks about</dt><dd>Mechanism 11.0%, regulation 4.1%, enzyme identity 2.9%, treatment 2.0%, compartment or location 1.4%, diagnosis 1.2%.</dd>
+            <dt>Scope is fully enumerated</dt><dd>29 topic bullets and a <b>six-line</b> disease list, both posted for 2026. The smallest examinable scope of the eight and the only disease pool short enough to simply memorise.</dd>
+            <dt>The gap</dt><dd><b>Zero</b> calculation-flagged and zero figure-reading-flagged questions in the archive &mdash; yet the topic list asks outright for an ETC energy-yield calculation. Do it from the list; past questions will not make you.</dd>
+          </dl>
+        </div>
+
+        <div class="mod">
+          <h4>Foundations 2</h4>
+          <p class="meta">Aug 31 &middot; 44 pts &middot; lectures 6&ndash;12 &middot; n = 245</p>
+          <p><b>The longest and most figure-dependent material in the course.</b> Median 49 words, 75th percentile 75, <b>49.6% at 50 words or more</b> &mdash; half the paper is a paragraph. 85.1% numeric. <b>9.1% reference a figure and 24.4% carry an image:</b> one question in four is attached to a graphic. 70.7% five options.</p>
+          <dl>
+            <dt>Asks about</dt><dd>Mechanism 10.6%, <b>regulation or rate-limiting step 9.4% (highest of eight)</b>, <b>enzyme identity 8.6%</b>, diagnosis 5.7%, <b>cofactor or vitamin 4.5% (highest)</b>, figure reading 3.7%, calculation 0.8%.</dd>
+            <dt>The shape</dt><dd>A 50-to-75-word stem, often with a graph or pathway fragment, giving enzyme activities or metabolite concentrations, asking which regulatory step is affected or which enzyme is deficient, with five options taken from the posted disease list.</dd>
+            <dt>Where the archive misleads</dt><dd>Calculation flags at 0.8% here, but the faculty topic list names <b>two</b> ATP-yield calculations as objectives. The archive is TA-written and TA questions carry half the numeric load of faculty questions. The demand is real and under-represented.</dd>
+            <dt>What nothing can prepare</dt><dd>No figure anywhere in the corpus was ever transcribed. The one-in-four image load can be anticipated but not practised from this material &mdash; which is the argument for opening the interactive decks as slides.</dd>
+          </dl>
+        </div>
+
+        <div class="mod">
+          <h4>MSK 1</h4>
+          <p class="meta">Sep 15 &middot; 15 pts &middot; lectures 13&ndash;17 &middot; n = 526</p>
+          <p><b>Possibly four options rather than five.</b> The DNA-block lectures route to the only set in the course that runs mostly four-option &mdash; 63.0% against 14.8% five &mdash; with 20.6% figure or graph reading. <span class="evi">n = 27 usable. The second-thinnest profile in the analysis; indicative only.</span> The RNA lectures sit at median 40 words, 21.3% vignettes, 76.2% numeric, 71.4% five-option.</p>
+          <dl>
+            <dt>Asks about</dt><dd>Mechanism 14.1%, figure reading 3.6%, structure identification 1.3%.</dd>
+            <dt>Also expect</dt><dd>Sequence manipulation by hand. The 2025 topic list asks twice for a complementary strand, a transcript and a translation to be written out.</dd>
+            <dt>The real risk</dt><dd>Not the format &mdash; the filtering. 1,037 questions labelled genetics route to this module and much of the highest-ranking material is Spring Medical Genetics. The single largest duplicate group in the entire corpus, 16 copies across 16 files, is off-syllabus genetics vocabulary that routes here.</dd>
+          </dl>
+        </div>
+
+        <div class="mod">
+          <h4>MSK 2</h4>
+          <p class="meta">Oct 6 &middot; 16 pts &middot; lectures 18&ndash;21 &middot; n = 370</p>
+          <p><b>The most diagnosis-driven exam of the eight.</b> Disease identification is flagged in <b>12.4%</b> of its questions, the highest of any module, with mechanism at 10.5%. The 2025 disease, drug and toxin list is fourteen lines long and is effectively the whole option pool.</p>
+          <dl>
+            <dt>The fibrous-protein half</dt><dd>Routes to the most picture-dependent set in the course: <b>39.1% clinical vignettes</b> (highest of any set), <b>93.5% five options</b>, <b>15.0% figure reference and 36.5% carrying an image</b>, median 49 words, 87.1% numeric. The only set that asks for structure identification at all, at 6.5%. <span class="evi">n = 77 usable.</span></dd>
+            <dt>So</dt><dd>This exam needs no metabolic map and still expects you to read pictures &mdash; collagen assembly diagrams, glycosaminoglycan structures, blood-group tables.</dd>
+          </dl>
+        </div>
+
+        <div class="mod">
+          <h4>Cardiopulmonary 1</h4>
+          <p class="meta">Oct 19 &middot; 14 pts &middot; lectures 22&ndash;26 &middot; n = 381</p>
+          <p><b>Likely the longest stems in the course, on the weakest evidence in the analysis.</b> The haemoglobin lecture's questions run a <b>median 60 words</b>, 56.8% at 50-plus, <b>14.8% quoting a laboratory value</b> (the highest measured), and <b>treatment or management flagged in 26.1%</b> &mdash; four times any other set.</p>
+          <div class="hedge" style="margin:8px 0"><b>That rests on n = 19 usable questions.</b> It is the weakest evidence in this analysis attached to the most reliably examined topic in it &mdash; haemoglobin recurs in eight distinct years. Prepare for laboratory-value interpretation, because the faculty topic list asks for it outright. Treat the 26% and the 60 words as a hint, not a plan.</div>
+          <dl>
+            <dt>Asks about</dt><dd>Mechanism 15.2%, treatment 6.3%, regulation 6.3%, <b>lab-value interpretation 1.6% (joint highest)</b>, calculation 1.0%.</dd>
+            <dt>Bring</dt><dd>The NBOME reference values, which are supplied in the exam. Practising without them trains the wrong task.</dd>
+          </dl>
+        </div>
+
+        <div class="mod">
+          <h4>Cardiopulmonary 2</h4>
+          <p class="meta">Nov 2 &middot; 18 pts &middot; lectures 27&ndash;30 &middot; n = 289</p>
+          <p><b>The flattest profile of the eight &mdash; nothing dominates.</b> Mechanism 9.0%, enzyme identity 5.2%, diagnosis 5.2%, treatment 3.5%, regulation 2.8%, and no flag above 10%.</p>
+          <dl>
+            <dt>So the strategy changes</dt><dd>There is no single question shape to drill for here. <b>Coverage is the strategy, not pattern recognition.</b> The definition block at the end of the topic list predicts the small items; the drug and toxin list predicts the clinical ones.</dd>
+            <dt>Two shapes in one paper</dt><dd>Cholesterol and lipoproteins route to the long-stem, figure-carrying set; phospholipids and eicosanoids to the mid-length mechanism-focused set at median 40 words and 71.4% five-option.</dd>
+          </dl>
+        </div>
+
+        <div class="mod">
+          <h4>GI</h4>
+          <p class="meta">Nov 23 &middot; 8 pts &middot; lectures 31&ndash;36 &middot; n = 552</p>
+          <p><b>Five options, a short clinical scenario, and distractors that are plainly wrong.</b> The macronutrients lecture is the one place in the course with a directly measured profile: <b>every one of 51 usable questions has five options</b>, median 37 words, <b>43.5% clinical vignettes</b> (roughly double the faculty average), 79.0% numeric, 7.3% quoting a lab value.</p>
+          <dl>
+            <dt>The distractor finding</dt><dd><b>The least similar options of any set measured</b> &mdash; median overlap 0.015 against a faculty mean of 0.127, with only 9.6% of items above 0.25. He does not build near-miss distractors. Five plainly different answers, one right. Elimination works unusually well here.</dd>
+            <dt>Asks about</dt><dd>Mechanism 13.0%, diagnosis 7.2%, enzyme identity 6.9%, regulation 6.9%, cofactor or vitamin 4.2%.</dd>
+            <dt>And still</dt><dd>Eight points. 4.8% of the grade for 18.2% of the archive. The best-characterised exam on the page is the one to spend least time on.</dd>
+          </dl>
+        </div>
+
+        <div class="mod">
+          <h4>Renal</h4>
+          <p class="meta">Dec 9 &middot; 24 pts &middot; lectures 37&ndash;42 &middot; n = 335</p>
+          <p><b>The most mechanism- and identity-driven exam of the eight.</b> Mechanism <b>17.9%</b> and enzyme or protein identity <b>11.0%</b>, both the highest of any module, with diagnosis also at 11.0%, regulation 6.9% and treatment 6.9%.</p>
+          <dl>
+            <dt>The drill</dt><dd>Enzyme missing, metabolite accumulating, clinical presentation, then pick the option that names the enzyme. That one motion is the mechanism, identity and diagnosis percentages simultaneously, and it is the pattern the inborn errors are built on.</dd>
+            <dt>Three shapes</dt><dd>The purine and pyrimidine lecture routes to the 39.1%-vignette, 93.5%-five-option, 36.5%-image set; nitrogen balance and urea to the long-stem regulation-heavy set; and the best available practice document is the one with the directly measured five-option, 35-to-50-word, plainly-distinct-options profile.</dd>
+            <dt>Also</dt><dd>Eleven of the 23 map regions, which is nearly half the map for one exam.</dd>
+          </dl>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>The format warning to carry onto every practice file</h2>
+      <p class="lead">This is the single most transferable finding in the analysis, because it applies to almost everything you will actually practise on. 7,020 of the archive's questions are teaching-assistant reviews. 384 are faculty-written. The two do not look alike.</p>
+      <div class="scroller">
+      <table class="data">
+        <thead><tr><th>On the same lectures</th><th>Faculty-written</th><th>TA-written</th></tr></thead>
+        <tbody>
+          <tr><td>Median stem length</td><td class="n">40&ndash;49 words</td><td class="n">31 words</td></tr>
+          <tr><td>Contains a number</td><td class="n">71&ndash;87%</td><td class="n">32&ndash;39%</td></tr>
+          <tr><td>References a figure</td><td class="n">7.5&ndash;15.0%</td><td class="n">0.2&ndash;1.2%</td></tr>
+          <tr><td>Five options</td><td class="n">70&ndash;94%</td><td class="n">32&ndash;58%</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <ul class="notes" style="margin-top:14px">
+        <li><b>Teaching-assistant questions are about 60% as long, carry half the numeric load, contain almost no figures, and default to four options where the faculty use five.</b> The pattern holds in the same direction for all six lecture sets, with samples from 155 to 1,744 questions each. <span class="evi">Confirmed.</span></li>
+        <li><b>They are still the only source with real coverage</b> &mdash; 49 of the 50 topics, 47 of them with five or more questions, and only 1.9% off-syllabus. <b>Use them for breadth. Never use them to judge what an exam question looks like.</b></li>
+        <li><b>The consequence for Foundations 2 is concrete.</b> Faculty questions on lectures 6&ndash;12 reference a figure 9.1% of the time and carry an image 24.4% of the time. TA questions on the same lectures: 0.7% and 8.2%. Drilling only the TA material leaves you unprepared for one question in four.</li>
+        <li><b>The interactive-session decks are the fix, and they have their own catch.</b> They are the faculty's own questions and the only source matching the exam's format &mdash; but <b>1,505 of 1,948, or 77%, are stems whose options live on the slide</b> and did not survive text extraction. They have to be opened as PowerPoint. Worked from a question list they are unanswerable.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Which topics are actually worth the weight</h2>
+      <p class="lead">The obvious metric &mdash; questions per lecture hour, or per exam point &mdash; is an artefact and was discarded. It ranks heme, insulin, vitamins and iron at the top, all four in GI, because GI carries the fewest points per lecture. It measures GI's low point value, not faculty emphasis. <b>Recurrence across distinct years is the metric that works</b>, because a topic asked in seven separate years is being asked deliberately.</p>
+      <div class="scroller">
+      <table class="data">
+        <thead><tr><th>Topic</th><th>Module</th><th>Questions</th><th>Distinct years</th></tr></thead>
+        <tbody>
+          <tr class="hi"><td><b>Haemoglobin</b></td><td>CP 1</td><td class="n">229</td><td class="n">8 &middot; 2018&ndash;2025</td></tr>
+          <tr><td>Translation</td><td>MSK 2</td><td class="n">301</td><td class="n">7</td></tr>
+          <tr><td>Electron transport and ROS</td><td>Foundations 1</td><td class="n">210</td><td class="n">7 &middot; incl. 2026</td></tr>
+          <tr><td>Insulin and glucagon</td><td>GI</td><td class="n">179</td><td class="n">7</td></tr>
+          <tr><td>Glycolysis</td><td>Foundations 2</td><td class="n">169</td><td class="n">7 &middot; incl. 2026</td></tr>
+          <tr><td>Fatty acid degradation</td><td>CP 1</td><td class="n">162</td><td class="n">7</td></tr>
+          <tr><td>RNA synthesis</td><td>MSK 1</td><td class="n">227</td><td class="n">6</td></tr>
+          <tr><td>Lipoproteins</td><td>CP 2</td><td class="n">220</td><td class="n">6</td></tr>
+          <tr><td>Signal transduction</td><td>Foundations 1</td><td class="n">216</td><td class="n">6 &middot; incl. 2026</td></tr>
+          <tr><td>Water-soluble vitamins</td><td>GI</td><td class="n">215</td><td class="n">6 &middot; incl. 2026</td></tr>
+          <tr><td>Glycogen</td><td>Foundations 2</td><td class="n">206</td><td class="n">6</td></tr>
+          <tr><td>Enzyme kinetics</td><td>Foundations 1</td><td class="n">169</td><td class="n">6 &middot; incl. 2026</td></tr>
+          <tr><td>PDH and TCA</td><td>Foundations 2</td><td class="n">104</td><td class="n">6</td></tr>
+          <tr><td>Gluconeogenesis</td><td>Foundations 2</td><td class="n">85</td><td class="n">6</td></tr>
+          <tr><td>Acid-base</td><td>CP 1</td><td class="n">282</td><td class="n">5</td></tr>
+          <tr><td>Genetic code</td><td>MSK 2</td><td class="n">239</td><td class="n">5</td></tr>
+          <tr><td>DNA repair</td><td>MSK 1</td><td class="n">202</td><td class="n">5</td></tr>
+          <tr><td>Inborn errors of amino acid metabolism</td><td>Renal</td><td class="n">157</td><td class="n">5</td></tr>
+          <tr><td>Carbohydrate digestion</td><td>Foundations 1</td><td class="n">133</td><td class="n">5 &middot; incl. 2026</td></tr>
+          <tr><td>Purine synthesis</td><td>Renal</td><td class="n">92</td><td class="n">5</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <ul class="notes" style="margin-top:14px">
+        <li><b>Nine topics survive every filter</b> &mdash; five or more years of recurrence, on the 2026 syllabus, and named in a posted faculty topic list. They are the safest study targets in the course: <b>enzyme kinetics, electron transport and ROS, signal transduction, carbohydrate digestion, glycolysis, PDH and TCA, gluconeogenesis, glycogen, pentose phosphate.</b> Eight of the nine are Foundations 1 and 2 &mdash; the 72 points at the front of the semester.</li>
+        <li><b>Signal transduction is the highest-leverage single topic in the course.</b> It is one Foundations 1 lecture, it recurs in six years including 2026, it carries 216 questions, and it pairs across module lines with acid-base on CP 1 (27 co-occurrences) and eicosanoids on CP 2 (22). Learn it properly in August and it pays again in October and November.</li>
+        <li><b>Ten topic pairs cross module boundaries and are cheaper learned together:</b> water-soluble vitamins with gluconeogenesis (28), carbohydrate digestion with insulin and glucagon (28), signal transduction with acid-base (27), genetic code with haemoglobin (25), translation with RNA synthesis (22), eicosanoids with signal transduction (22), enzyme kinetics with glycolysis (21), lipoproteins with lipid digestion (21), carbohydrate digestion with monosaccharides (19), heme and bilirubin with PDH and TCA (19).</li>
+        <li class="alert"><b>Do not chase the archive's most-repeated individual questions.</b> Four of the five duplicate groups that recur across three or more years are population-genetics calculations &mdash; Hardy-Weinberg, carrier probability, pedigree interpretation &mdash; which the 2026 Fall course no longer owns. The largest group of all, 16 copies across 16 files in three years, is off-syllabus genetics vocabulary. <b>Repetition in this archive measures what used to be taught.</b> The one live multi-year repeat &mdash; 11 copies across 10 files, dated 2023, 2025 and 2026 &mdash; is insulin resistance and haemoglobin A1c in a patient with a family history of type II diabetes. That one is worth knowing cold.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>The metabolic map, region by region and dated</h2>
+      <p class="lead">The map is supplied in every exam, which makes navigation the skill being tested rather than recall. It has 23 regions and the semester needs 22 of them &mdash; but not evenly, and not when you would expect. The right-hand column shows how many of each region's usable questions actually land in the module the syllabus assigns it to, which is how the assignment was checked rather than assumed.</p>
+      <div class="scroller">
+      <table class="data">
+        <thead><tr><th>Learn before</th><th>Exam</th><th>Pts</th><th>Regions</th><th>Which</th><th>Corroboration</th></tr></thead>
+        <tbody>
+          <tr><td>Mon Aug 17</td><td>Foundations 1</td><td class="n">28</td><td class="n">1</td><td>Oxidative phosphorylation</td><td>77 of 93 land here</td></tr>
+          <tr class="hi"><td>Mon Aug 31</td><td><b>Foundations 2</b></td><td class="n">44</td><td class="n">4</td><td>Glycolysis and gluconeogenesis; citric acid cycle; glycogen and galactose; pentose phosphate</td><td>90/123, 51/117, 115/180, 86/137</td></tr>
+          <tr><td>&mdash;</td><td>MSK 1</td><td class="n">15</td><td class="n">0</td><td><b>None. Do not open it.</b></td><td>&mdash;</td></tr>
+          <tr><td>&mdash;</td><td>MSK 2</td><td class="n">16</td><td class="n">0</td><td><b>None.</b></td><td>&mdash;</td></tr>
+          <tr><td>Mon Oct 19</td><td>CP 1</td><td class="n">14</td><td class="n">3</td><td>Fatty acid synthesis; fatty acid oxidation; ketone bodies</td><td>48/87, 71/91, 57/69</td></tr>
+          <tr><td>Mon Nov 2</td><td>CP 2</td><td class="n">18</td><td class="n">1</td><td>Cholesterol synthesis</td><td>28/48</td></tr>
+          <tr><td>Mon Nov 23</td><td>GI</td><td class="n">8</td><td class="n">2</td><td>Heme synthesis; heme degradation</td><td>123/125, 127/153</td></tr>
+          <tr class="hi"><td>Wed Dec 9</td><td><b>Renal</b></td><td class="n">24</td><td class="n">11</td><td>Urea cycle; ammonium capture and release; aromatic amino acids; branched-chain amino acids; single-carbon and sulfur amino acids; purine synthesis; pyrimidine synthesis; deoxyribonucleotides; base salvage; nucleoside salvage; nucleotide breakdown</td><td>urea 112/119, purine 66/72, base salvage 69/71, nucleoside salvage 62/62, breakdown 181/221</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <ul class="notes" style="margin-top:14px">
+        <li class="alert"><b>The map is a late-semester instrument, and treating it as a first-week priority is the clearest misallocation the old advice produces.</b> One region before Aug 17. Four before Aug 31. Then <b>nothing at all for six weeks</b> &mdash; MSK 1 and MSK 2 need none of the 23 regions between them, which is 31 points and 18.6% of the grade with no map content. Then eleven regions for one exam in December.</li>
+        <li><b>The annotated <code>Kevin MAP.pdf</code> is a November and December asset, not an August one.</b> Its 260 annotations, 127 carrying text, are Renal and GI disease labels and regulator notes. There are <b>zero annotations in the glycolysis, glycogen, pentose-phosphate, oxidative-phosphorylation, urea-cycle, cholesterol and ketone-body regions.</b> Use the blank map for the Foundations exams; switch to the annotated one for Renal, where its labels are exactly the disease names the exam asks for.</li>
+        <li><b>One region straddles two exams, and it is worth learning on the earlier date.</b> Single-carbon metabolism and the sulfur-containing amino acids was predicted for Renal, but its vocabulary lands top in <b>GI</b> &mdash; 94 usable questions against Renal's 64 &mdash; because folate and B12 sit in the water-soluble vitamin lecture. Learn it before Nov 23 and reuse it on Dec 9.</li>
+        <li><b>One region has no 2026 lecture at all: steroid hormone synthesis.</b> All 95 of its usable questions come from Spring Endocrine and Reproductive material. Skip the region and skip the files.</li>
+        <li>What repeatedly catches people out, and none of it is content: the legend in the bottom-left corner, the vitamin names and abbreviations and their precursors, which side of the mitochondrial membrane each reaction sits on, the direction of the arrows, and the cofactors.</li>
+      </ul>
+    </div>
+
+    <div class="card warn">
+      <h2>What this analysis cannot tell you</h2>
+      <ul class="notes">
+        <li><b>What any 2026 exam will contain.</b> Only 19 question rows in the entire corpus carry a 2026 date, none of them complete, covering three modules. Everything forward-looking on this page is 2018&ndash;2025 material inferred onto a syllabus that was reorganised for 2026. The routing is explicit and documented; the transfer is an assumption.</li>
+        <li><b>How any named professor writes questions</b>, with the single exception noted at the top of this tab. Every other profile here describes questions <i>about</i> a body of lecture content, grouped by whoever teaches it.</li>
+        <li><b>Whether the low-footprint primers are genuinely unexamined.</b> Their low weight rests on <b>absence</b> of evidence in a collection that is 87% teaching-assistant and interactive material. Teaching assistants may simply not review structural primer content. Read them once; do not build weeks around them.</li>
+        <li><b>Whether the Canvas quizzes are worth doing as preparation.</b> 403 of them were catalogued and never extracted. 14 reached the corpus and none were usable. Unanswerable from this material.</li>
+        <li><b>What any exam figure looks like.</b> The corpus records that an image was attached, never what it showed. On the exam with a one-in-four image rate, that gap cannot be closed from question files &mdash; only from the slides.</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- ================= RESOURCES ================= -->
   <div id="res" class="panel" role="tabpanel" aria-labelledby="tab-res" tabindex="0">
 
@@ -590,50 +1051,100 @@ table.data tr.hi td.n { color: var(--alert); }
     </div>
 
     <div class="card">
+      <h2>The one finding that reorders everything</h2>
+      <p class="lead">Before any ranking is useful, one thing has to be said about the archive as a whole: <b>it is distributed inversely to the marks.</b> Measured across the eight modules, the correlation between what an exam is worth and how much usable practice material exists for it is <b>&minus;0.881</b>. The more an exam counts, the less there is to practise on.</p>
+      <div class="scroller">
+      <table class="data">
+        <thead><tr><th>Module</th><th>Points</th><th>Share of grade</th><th>Usable questions</th><th>Per point</th><th>Volume index</th><th>Read as</th></tr></thead>
+        <tbody>
+          <tr class="hi"><td><b>Foundations 2</b></td><td class="n">44</td><td class="n">26.3%</td><td class="n">245</td><td class="n">5.6</td><td class="n">0.37</td><td>worst-covered of the eight</td></tr>
+          <tr><td>Foundations 1</td><td class="n">28</td><td class="n">16.8%</td><td class="n">345</td><td class="n">12.3</td><td class="n">0.68</td><td>under-covered</td></tr>
+          <tr><td>Renal</td><td class="n">24</td><td class="n">14.4%</td><td class="n">335</td><td class="n">14.0</td><td class="n">0.94</td><td>proportionate</td></tr>
+          <tr><td>CP 2</td><td class="n">18</td><td class="n">10.8%</td><td class="n">289</td><td class="n">16.1</td><td class="n">0.98</td><td>proportionate</td></tr>
+          <tr><td>MSK 2</td><td class="n">16</td><td class="n">9.6%</td><td class="n">370</td><td class="n">23.1</td><td class="n">1.15</td><td>proportionate</td></tr>
+          <tr><td>MSK 1</td><td class="n">15</td><td class="n">9.0%</td><td class="n">526</td><td class="n">35.1</td><td class="n">1.67</td><td>inflated by Spring genetics</td></tr>
+          <tr><td>CP 1</td><td class="n">14</td><td class="n">8.4%</td><td class="n">381</td><td class="n">27.2</td><td class="n">1.25</td><td>over-covered</td></tr>
+          <tr class="hi"><td><b>GI</b></td><td class="n">8</td><td class="n">4.8%</td><td class="n">552</td><td class="n">69.0</td><td class="n">3.79</td><td>cap it</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <ul class="notes" style="margin-top:14px">
+        <li><b>Volume index is the share of the archive divided by the share of the grade.</b> Anything above 1.0 will absorb more time than it repays. GI holds 18.2% of the usable material for 4.8% of the marks; Foundations 2 holds 9.7% for 26.3%.</li>
+        <li><b>Studying in proportion to what exists means spending roughly four times too long on GI and about a third of the right amount on Foundations 2.</b> That is the practical content of the whole tab.</li>
+        <li>Restricted to Fall-course material only &mdash; 2,308 questions, with Spring Medical Genetics and Spring Endocrine and Reproductive files removed &mdash; the ordering holds at both ends but two middle rows move. <b>MSK 1 falls to 1.16</b>, so its apparent over-coverage was mostly Spring contamination, and <b>CP 1 rises to 1.79</b>, making it the most over-covered module after GI. The correlation weakens to &minus;0.571 and stays negative. <span class="evi">Confirmed on both populations, n = 3,937 and n = 2,308 clean lettered multiple-choice questions. The Fall-only figure is the one to plan against.</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
       <h2>What to use, in order</h2>
-      <p class="lead">There is more material available than any one person can work through. This is a ranking, not a list &mdash; the tiers are meant to be dropped from the bottom when time runs short.</p>
+      <p class="lead">Rebuilt from measurement rather than from recollection. Each source type below was counted: how many of its questions survive extraction as answerable items, how many topics it reaches, how much of it is off this year's syllabus. The tiers are meant to be dropped from the bottom when time runs short.</p>
+      <div class="scroller">
+      <table class="data">
+        <thead><tr><th>Source type</th><th>Questions</th><th>Usable</th><th>Off 2026 syllabus</th><th>Topics reached</th><th>Files</th></tr></thead>
+        <tbody>
+          <tr class="hi"><td><b>Faculty review decks</b></td><td class="n">384</td><td class="n">57.8%</td><td class="n">7.5%</td><td class="n">36 / 50</td><td class="n">31</td></tr>
+          <tr><td>Teaching-assistant reviews</td><td class="n">7,020</td><td class="n">50.4%</td><td class="n">1.9%</td><td class="n">49 / 50</td><td class="n">119</td></tr>
+          <tr><td>Study sheets</td><td class="n">319</td><td class="n">35.4%</td><td class="n">23.0%</td><td class="n">31 / 50</td><td class="n">50</td></tr>
+          <tr><td>Interactive-session questions</td><td class="n">1,948</td><td class="n">22.5%</td><td class="n">14.1%</td><td class="n">44 / 50</td><td class="n">197</td></tr>
+          <tr><td>Clinical vignettes</td><td class="n">494</td><td class="n">21.9%</td><td class="n">8.4%</td><td class="n">30 / 50</td><td class="n">70</td></tr>
+          <tr><td>Student-made reviews</td><td class="n">42</td><td class="n">14.3%</td><td class="n">0.0%</td><td>&mdash;</td><td class="n">1</td></tr>
+          <tr><td>Canvas practice quizzes</td><td class="n">14</td><td class="n">0.0%</td><td>&mdash;</td><td>&mdash;</td><td class="n">3</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="evi" style="margin-top:10px">Fall-course material only. "Usable" means the question and its answer options both survived text extraction; the rest are stems with the options missing. Off-syllabus is measured against the 2026 lecture list.</p>
 
       <div class="tier t1">
         <h3>Tier 1 &mdash; the course is written from these</h3>
         <p class="why">Everything examined comes from here. Nothing below this tier substitutes for it.</p>
         <ol class="top">
-          <li><b>The Touro lecture slides and videos.</b> Every testable fact lives in them, including the numbers and the diagrams. The consistent advice across every year is to read every bullet rather than skim for themes, and to expect three or four passes before it coheres.</li>
-          <li><b>The Metabolic Map, learned early.</b> It is provided in every exam, which makes fluency with it worth more than memorising it. Learn the legend, the vitamin abbreviations, which compartment each reaction occupies, and the direction of the arrows. Study from an annotated copy rather than a blank one; the annotated version in the archive is the same official map with the labelling filled in.<span class="src">In the repo: <code>SGA - upperclassmen resources/Kevin MAP.pdf</code>, alongside the blank <code>FullSubwayMap222.pdf</code> from Canvas.</span></li>
-          <li><b>Interactive-session questions, current and archived.</b> Written by the faculty who write the exams, which makes them the closest available proxy. The Fall 2025 archive files them per exam and even splits them by faculty member, so the individual question styles are visible.</li>
-          <li><b>The fourteen primers.</b> Short, and the recurring report from previous years is that each reliably produces at least one exam question. The Canvas module names state which primers belong to which exam, so there is no guesswork.</li>
-          <li><b>The clinical vignettes.</b> They generate questions that appear nowhere else and are among the easiest points available. Read them close to the exam so the details are fresh. Each is named in the module title of the exam it belongs to.</li>
-          <li><b>The Canvas practice and self-assessment quizzes.</b> Roughly thirty ungraded practice quizzes carry unlimited attempts and cost nothing. The graded ones are worth 2% of the course as well.</li>
+          <li><b>The Touro lecture slides and videos.</b> Unchanged from every previous year's advice, and the evidence agrees: <b>84% of the terms taught ten or more times across the lecture decks reappear in the review material</b>. Expect three or four passes before a block coheres.<span class="src">One correction to the old framing. "Memorise everything, every number and diagram is testable" does not survive counting: on 2,634 usable Fall questions, <b>3.3% turn on a specific number, 1.4% ask a calculation, 0.6% require reading a figure</b>. On faculty-written questions the rates roughly double &mdash; 5.8%, 2.2%, 3.8% &mdash; but they are still small. Read the slides completely; do not memorise them indiscriminately.</span></li>
+          <li><b>The faculty's posted topic and disease lists.</b> <b>New at this rank, and absent from every previous version of this page.</b> They are the faculty's own statement of scope, written as testable objectives, and several are effectively question stems already. Sixteen exist across the eight modules; <b>2026 lists are posted for Foundations 1 and 2</b> and the other six are 2025 and carry a boundary caveat. This is the highest ratio of evidence to effort in the entire course.<span class="src">All sixteen transcribed verbatim in <code>_inventory/FACULTY_SCOPE_LISTS.md</code>. The 2026 Foundations 1 disease list is <b>six lines long</b> and can simply be memorised.</span></li>
+          <li><b>The faculty review deck for the module.</b> <b>Promoted from tier 2.</b> Highest usable rate of any source type at 57.8%, only 31 files in total &mdash; the smallest tier-1 commitment on the page &mdash; and they demonstrably carry content that is in no lecture deck.<span class="src">The old warning that the course director's review "differs in small ways from her lecture slides" is <b>confirmed, and the difference has a direction.</b> The 2026 Foundations 1 review contains <b>106 terms that appear in no available lecture deck</b>, clustered on electron-transport toxicology: arsenic and dimercaprol, atractyloside, pentachlorophenol, oligomycin, malonate, carbon monoxide, Wilson's disease. It also omits 15 terms taught 12 or more times &mdash; almost all glycogen material, which in 2026 belongs to Foundations 2. The omissions are the resequencing, not a gap.</span></li>
+          <li><b>Interactive-session questions, opened as PowerPoint.</b> The faculty's own pen and the only source that matches the exam's format. They reach 44 of the 50 topics and 28.4% of them recur across two or more years. <b>But they must be worked from the original decks:</b> 1,505 of 1,948 &mdash; <b>77%</b> &mdash; are stems whose answer options live on the slide and did not survive extraction. Working them from a question list means working them without options.<span class="src">The 2025 Foundations 2 folder holds 33 distinct decks, the largest interactive collection in the archive. The 2025 CP 1 folder holds three, the smallest.</span></li>
+          <li><b><code>PRACTICE QUESTIONS ON AA, NITROGEN, UREA CYCLE &amp; PU-PY METABOLISM.docx</code>.</b> Named individually because it is <b>the single best practice document in the archive</b>: 47 questions, 39 of them fully usable, five options every time, covering exactly the Renal lecture range, and faculty-written. It is on Canvas for 2026 under that name.</li>
         </ol>
       </div>
 
       <div class="tier t2">
-        <h3>Tier 2 &mdash; high value, use as much as the week allows</h3>
-        <p class="why">Second-order material that consolidates rather than introduces.</p>
-        <ol class="top" start="7">
-          <li><b>TA reviews.</b> Twenty teaching assistants are assigned to the course this year, and the archive holds their review decks per exam. Reported as the best question source after the faculty's own. Made by students, so occasional errors are expected rather than alarming.</li>
-          <li><b>Faculty review sessions and decks.</b> Worth attending and worth reading afterwards. One specific warning carried forward from previous years: the course director's review deck differs in small ways from her lecture slides, and the differences are where the attention should go.</li>
-          <li><b>Lippincott Illustrated Reviews: Biochemistry, 9th edition.</b> The required text, and the syllabus maps chapters to individual lectures. Useful for a topic that has not landed after two passes of the slides, rather than as a primary read.</li>
-          <li><b>The supplemental sessions.</b> Optional, roughly weekly, and the one before each exam functions as a review. Questions asked there tend to be the ones the class collectively got wrong.</li>
+        <h3>Tier 2 &mdash; high value, and the only real coverage</h3>
+        <p class="why">Nothing else in the archive covers the whole syllabus. These do, at the cost of training the wrong question format.</p>
+        <ol class="top" start="6">
+          <li><b>Teaching-assistant reviews, Montana campus first.</b> The old page's claim that these are the best question source after the faculty's own is <b>confirmed for coverage</b>: 49 of 50 topics, 47 of them with five or more questions, and only <b>1.9% off-syllabus</b>, the cleanest rate of any source type. Campus matters and had never been measured: <b>Montana averages 71.7 questions per file at 46.6% usable; Middletown 57.6 at 27.1%; Harlem 45.0 at 23.1%.</b> All three cover all eight modules.<span class="src">The five densest single files: <code>Biochem Review Exam 3.pdf</code> (129 usable, 5 modules), <code>Biochemistry Exam 2 TA Review 2024.pdf</code> (120, 7 modules), <code>Biochemistry Exam 1 Review 2024.pptx.pdf</code> (102), <code>2023 Middletown TA Review- Biochem Exam 1.pdf</code> (101), <code>GI Exam Biochem_Genetics Montana TA Review 2025.pdf</code> (92).</span></li>
+          <li class="warn-li"><b>Carry this onto every teaching-assistant file you open.</b> Against faculty-written questions on the same lectures, their questions are about <b>60% as long</b> (median 31 words against 40 to 49), carry roughly <b>half the numeric content</b> (32&ndash;39% against 71&ndash;87%), contain <b>almost no figures</b> (0.2&ndash;1.2% against 7.5&ndash;15.0%), and default to <b>four options where the faculty use five</b> (32&ndash;58% five-option against 70&ndash;94%). The pattern holds in the same direction for all six lecture sets, n = 155 to 1,744 each. <b>Use them for breadth. Never use them to judge what an exam question looks like.</b></li>
+          <li><b>The clinical vignettes.</b> Read all fourteen. <b>The recommendation survives; the reason for it does not.</b> The old claim was that they generate questions found nowhere else. In fact for 13 of the 14, the teaching-assistant reviews carry more questions on the subject than the vignette file does &mdash; Gout has 180 usable questions on its subject and 5 of them come from the vignette; cystic fibrosis has 42 and <b>none</b>. What is true is that the subjects are heavily examined, several across five to seven distinct years. Read them for the subject.<span class="src">The one exception is MERRF, where 7 of 18 questions on the subject come from the vignette file itself.</span></li>
+          <li><b>The four load-bearing primers: 9 acid-base, 12 lipoproteins, 13 eicosanoids, 11 cholesterol.</b> Together 487 usable questions on their subjects across five to seven years each. Three of the four land on Cardiopulmonary 2.</li>
+          <li><b>Lippincott Illustrated Reviews: Biochemistry, 9th edition.</b> Position unchanged, and stated rather than implied: <b>no corpus evidence either way.</b> The syllabus maps chapters to individual lectures. Use it for a topic that has not landed after two passes.</li>
+          <li><b>The supplemental sessions.</b> Optional, roughly weekly, and the one before each exam functions as review. No corpus evidence; retained on the same reasoning as before.</li>
         </ol>
       </div>
 
       <div class="tier t3">
         <h3>Tier 3 &mdash; targeted use only</h3>
-        <p class="why">Reach for these to unstick one topic, not to cover the course.</p>
-        <ol class="top" start="11">
-          <li><b>Ninja Nerd videos</b> for a mechanism that refuses to click after the slides and the textbook.</li>
-          <li><b>First Aid</b> for board-style framing of a topic already learned.</li>
-          <li><b>Student-made reviews and Anki decks from the archive</b>, which exist for each exam. Useful late, as a check on coverage.</li>
+        <p class="why">Reach for these to unstick one topic, or at one specific point in the year.</p>
+        <ol class="top" start="12">
+          <li><b>The annotated metabolic map, from October onward.</b> <b>Moved down from tier 1, and the timing is the whole point.</b> Its 260 annotations, 127 carrying text, are Renal and GI disease labels and regulator notes. There are <b>zero annotations in the glycolysis, glycogen, pentose-phosphate, oxidative-phosphorylation, urea-cycle, cholesterol and ketone-body regions</b> &mdash; which is to say, zero in everything examined before November. Use the blank <code>FullSubwayMap222.pdf</code> until then.</li>
+          <li><b>Seven of the fourteen archive Anki decks</b>, as a fact-recall layer only. <code>INTESAR Fall Exam 2 Foundations Biochemistry.apkg</code> (1,250 notes, 0.0% off-syllabus) and <code>Biochem Exam 3 (5).apkg</code> (306, 0.0%) are the two cleanest. The other seven are on the drop list below.<span class="src">Deck coverage is mis-distributed exactly like the questions: GI has <b>88.4 notes per exam point</b>, Renal <b>14.5</b>, Foundations 2 <b>30.4</b>. The collection is telling you to study GI hardest and it is wrong.</span></li>
+          <li><b>The remaining ten primers, one pass each.</b> Not zero &mdash; one pass. See the drop list for why they are not study targets.</li>
+          <li><b>Ninja Nerd and First Aid.</b> Unchanged positions, no corpus evidence either way.</li>
         </ol>
       </div>
 
       <div class="tier t4">
-        <h3>Tier 4 &mdash; deliberately skipped</h3>
-        <p class="why">Not because they are bad, but because they are not aimed at this exam.</p>
-        <ol class="top" start="14">
-          <li><b>External question banks and pre-made Anki decks.</b> The consistent report from previous years is that they underperform for this course specifically, because the questions are written against a general biochemistry syllabus rather than against these slides. The same students recommend them for other courses.</li>
-          <li><b>The optional textbooks</b> &mdash; Panini, Marks, Molecular Biology of the Cell, Robbins. Listed in the syllabus as optional and reasonably treated that way.</li>
-          <li><b>Building an original Anki deck for this course.</b> Previous years describe the volume as too large to card usefully. The time is better spent on questions.</li>
+        <h3>Tier 4 &mdash; drop, by name</h3>
+        <p class="why">The most useful section on the page. Everything here is either off-syllabus for 2026 or measurably not worth the hour.</p>
+        <ol class="top" start="16">
+          <li><b>Every Spring Endocrine and Reproductive review.</b> <b>This is a live trap, not a theoretical one.</b> <code>Endo_Repro Exam Biochem_Genetics TA Review Montana 2026.pptx</code> ranks <b>second in the entire archive</b> for breadth &mdash; 46 usable questions across 7 of the 8 modules, dated 2026, from the densest campus &mdash; and it is a Spring exam review with nothing to do with this course. Any ranking that does not filter by course of origin puts it near the top. Also <code>Endo_Repro Exam TA Review (Middletown, 2024).pptx</code> (36 of its questions route to GI, which would make it that module's second-ranked file), <code>Endo_Repro_ Biochem 2020.pdf</code>, <code>Lund Endo_Repro Exam Review 2026.pdf</code>.</li>
+          <li><b>All Spring Medical Genetics material.</b> The highest-volume contamination source in the archive: 4,303 questions, <b>37.4% of them off the 2026 syllabus</b>. <code>Genetics_Question_Bank_PDF.pdf</code> alone contributes 78 usable questions that route to MSK 1, which would make it that exam's top-ranked file. Also every <code>Genetics Exam N TA Review</code>, every <code>Problem Set N, Lectures 12 through 16, Medical Genetics</code>, and <code>FoundationalHighYield Exercises_Exam 3.docx</code>.</li>
+          <li><b>Seven Anki decks, 33% to 76% off-syllabus.</b> <code>Genetics Exam 3 - Cytogenetics, PCR, Microarrays, Population</code> (75.6% off), <code>Vinny C Genetics E2 FINAL.apkg</code> (68.4%), <code>Genetics E3.apkg</code> (44.1%), <code>Gene regulation, Autosomal Dom/Rec, X-linked, Mitochondrial</code> (41.7%), <code>Vinny_s Genetics EIII.apkg</code> (39.8%), <code>DannyGPT-20250809213457 (1).apkg</code> (36.6%), <code>Genetics E2.apkg</code> (32.9%).</li>
+          <li><b>The archive's most-repeated questions.</b> Counter-intuitive but measured: <b>four of the five duplicate groups that recur across three or more years are population genetics</b> &mdash; Hardy-Weinberg, carrier probability, pedigree interpretation &mdash; which the 2026 Fall course no longer owns. The largest group of all, 16 copies across 16 files, is off-syllabus genetics vocabulary. <b>Repetition in this archive measures what used to be taught, not what will be asked.</b><span class="src">The one live multi-year repeat worth knowing: eleven copies across ten files dated 2023, 2025 and 2026, on insulin resistance and haemoglobin A1c in a patient with a family history of type II diabetes. That one is GI material and worth knowing cold.</span></li>
+          <li><b>Study sheets as a question source.</b> 319 questions, 20 usable, <b>23.0% off-syllabus &mdash; the worst rate of any source type.</b> They are annotated lecture decks. Use them as slides, never as practice.</li>
+          <li><b>The four low-footprint primers as study targets: 6 RNA structure, 10 lipid structures, 2 carbohydrate structures, 7 amino acid.</b> <b>The old claim that each primer reliably produces at least one exam question is contradicted.</b> Measured by whether the primer's subject matter appears in exam-facing material: primer 12 has 173 usable questions, primer 9 has 110 &mdash; and primer 6 has <b>zero, across zero years</b>, with primers 10, 2 and 7 at 1, 4 and 6. Only four questions in the entire corpus come from a primer file at all. Read all fourteen once; drill four.<span class="src">Hedged deliberately: this is <b>absence</b> of evidence in a collection that is 87% teaching-assistant and interactive material, and teaching assistants may simply not review structural primer content. Read them. Do not build study weeks around them.</span></li>
+          <li><b>Canvas practice quizzes as preparation.</b> Attempt them &mdash; the graded ones carry 2% of the grade and the ungraded ones are free. But expect nothing measurable: 14 questions reached the corpus and <b>none</b> were usable. <span class="evi">403 Canvas quiz questions were catalogued and never extracted, so this is absence of evidence rather than evidence of absence.</span></li>
+          <li><b>Student-made reviews.</b> One file exists, 42 questions, 4 usable.</li>
+          <li><b>Building an original Anki deck for this course.</b> Retained from previous years, which called the volume too large to card usefully &mdash; but flagged honestly: <b>no measurement here supports or refutes it.</b> What is measured is that the existing decks are thinnest exactly where the marks are heaviest.</li>
+          <li><b>External question banks and pre-made decks.</b> <b>Confirmed on format, contradicted on content.</b> Anki fronts run a median of 11 words with 0.29% opening as a clinical vignette; faculty questions run a median of 43 words with 20.0% vignettes and 43.5% at 50 words or more. The format gap is enormous and that is the real objection. But only <b>5.5% of the archive's 11,430 notes are off-syllabus</b>, so the content objection does not hold &mdash; cards are fine for facts and useless for shape.</li>
+          <li><b>The optional textbooks</b> &mdash; Panini, Marks, Molecular Biology of the Cell, Robbins. Listed as optional in the syllabus and reasonably treated that way.</li>
         </ol>
       </div>
     </div>
@@ -645,14 +1156,21 @@ table.data tr.hi td.n { color: var(--alert); }
         <thead><tr><th>Resource</th><th>Location</th></tr></thead>
         <tbody>
           <tr><td>Lectures, primers, vignettes, quizzes, TBL material</td><td>Canvas, filed by module and by week</td></tr>
+          <tr><td><b>The posted topic and disease lists</b></td><td>Canvas, inside each exam's own module &mdash; and transcribed in full in <code>_inventory/FACULTY_SCOPE_LISTS.md</code></td></tr>
           <tr><td>Blank Metabolic Map, NBOME laboratory values</td><td>Canvas, Resources module</td></tr>
           <tr><td>Annotated Metabolic Map, 2022 study sheets, first-year guide</td><td>This repository, <code>SGA - upperclassmen resources</code></td></tr>
           <tr><td>Fall 2025 archive &mdash; lectures, interactive questions, vignettes, faculty reviews, TA reviews, student reviews and Anki decks, all filed per exam</td><td>SGA dashboard, OMS-I tab, Biochem/Genetics (Fall 2025)</td></tr>
+          <tr><td><b>Per-module rankings with named files and file paths</b></td><td><code>RESOURCE_CATALOG.md</code> in the course folder</td></tr>
           <tr><td>Teaching assistant list, twenty names with contact addresses</td><td>Canvas, Teaching Assistants module</td></tr>
           <tr><td>Course director office hours</td><td>Canvas, Office Hours module &mdash; by appointment, Room 254</td></tr>
         </tbody>
       </table>
       </div>
+      <ul class="notes" style="margin-top:14px">
+        <li class="alert"><b>The 2025 archive's folder names do not line up with 2026's modules, and the mismatch is large enough to send you to the wrong folder.</b> The 2026 course resequenced its modules. Routing every 2025 question by topic onto the 2026 syllabus: the folder named <b>Foundations 1</b> is mostly <b>MSK 1</b> material (113 of its 221 questions, against 15 that stay in Foundations 1, with 52 off-syllabus entirely); <b>MSK 1</b> splits evenly between MSK 1 and MSK 2, 64 each; <b>CP 2</b> holds more CP 1 material than the CP 1 folder does, 84 against 82. GI and Renal are the only two folders that mean what they say.</li>
+        <li><b>Practical consequence.</b> For both Foundations exams and both MSK exams, open two folders. For CP 1, open the CP 2 folder as well. Per-question routing is in <code>_inventory/routed.csv</code> if a specific item needs checking.</li>
+        <li><b>Six of the eight modules have nothing posted for 2026 yet.</b> MSK 1, MSK 2, CP 1, CP 2 and Renal have no 2026-dated question material at all &mdash; the interactive decks arrive during the semester. Checking Canvas for them is a weekly action, not a one-time download.</li>
+      </ul>
     </div>
   </div>
 
@@ -661,36 +1179,58 @@ table.data tr.hi td.n { color: var(--alert); }
 
     <div class="card">
       <h2>The method, and why this course needs its own</h2>
-      <p class="lead">The recurring theme in advice from previous years is that a single study system will not carry all of first year, and that Biochemistry sits at the opposite end from Anatomy and Physiology.</p>
+      <p class="lead">The recurring theme in advice from previous years is that a single study system will not carry all of first year, and that Biochemistry sits at the opposite end from Anatomy and Physiology. That still holds. What follows keeps the advice that the archive supports, corrects the three claims it contradicts, and marks the ones no measurement can settle either way.</p>
       <ul class="notes">
-        <li><b>This is a bottom-up course.</b> Anatomy and Physiology reward building the framework first and filling in detail afterwards. Biochemistry does the reverse: the details come first, and the structure only appears once enough of them are in place. The practical consequence is that the first pass through a lecture will not feel like understanding, and that is the expected experience rather than a warning sign. It typically takes three or four passes before a block coheres.</li>
-          <li><b>Volume is the difficulty, not conceptual depth.</b> Every number, diagram and figure on a slide is examinable. Colour-highlighted text matters but is not the boundary of what is tested.</li>
-        <li><b>Questions are the primary study activity, not the final check.</b> The ordering that keeps being recommended runs from easiest and most general to hardest and most specific: textbook or review-book questions, then TA weekly reviews, then TA exam reviews, then the Canvas practice quizzes, then the faculty's own interactive-session questions. The last of those is the most predictive, because the people who wrote them write the exam.</li>
-        <li><b>Learn the question form, not only the content.</b> Interactive-session questions tend to reappear in the same shape on the exam.</li>
-        <li><b>Speaking the material out loud is repeatedly named as the highest-return technique for this course</b> &mdash; explaining a pathway to another person, or to nobody in particular. It surfaces the steps that were being skimmed.</li>
-        <li><b>Stay one to two weeks ahead where the calendar allows.</b> The empty weeks &mdash; Aug 10, Sep 28, Nov 16 &mdash; are the ones that make this possible, and they sit immediately before exams for a reason.</li>
+        <li><b>This is a bottom-up course.</b> Anatomy and Physiology reward building the framework first and filling in detail afterwards. Biochemistry does the reverse: the details come first, and the structure only appears once enough of them are in place. The first pass through a lecture will not feel like understanding, and that is the expected experience rather than a warning sign. It typically takes three or four passes before a block coheres. <span class="evi">No corpus evidence either way; carried forward on the consistency of the reports.</span></li>
+        <li class="alert"><b>Corrected. "Every number, diagram and figure on a slide is examinable" is not true, and acting on it wastes the scarcest resource you have.</b> On 2,634 usable archived questions, <b>3.3% turn on a specific number, 1.4% ask a calculation, 0.6% require reading a figure.</b> On faculty-written questions the rates roughly double &mdash; 5.8%, 2.2%, 3.8% &mdash; so past teaching-assistant reviews do understate the demand, but the numbers stay small. Meanwhile language about central concepts outnumbers minor-detail language by more than twenty to one. <b>The right instruction is: read every slide completely, memorise the numbers the posted topic lists name, and expect one or two arithmetic items per exam.</b> Volume is still the difficulty &mdash; but it is volume of mechanism, not volume of trivia.</li>
+        <li><b>Start each block from the faculty's own topic and disease list, not from the slides.</b> <b>This is the single largest change to the advice on this page.</b> Sixteen of these documents exist across the eight modules, they are the shortest things in the archive, they are written as testable objectives, and several are effectively question stems already. They also define the option pool: when a question's five options are disease names &mdash; which happens in 10.7% of questions &mdash; the names come from that list. 2026 versions are posted for Foundations 1 and 2; the other six are 2025 and carry a boundary caveat.</li>
+        <li><b>Questions are the primary study activity, not the final check.</b> Confirmed, with the ordering revised. Work from broadest to most faithful: <b>the faculty topic list</b> (coverage), then <b>teaching-assistant reviews</b> (breadth &mdash; 49 of 50 topics, 1.9% off-syllabus), then <b>the faculty review deck</b> (the highest-yielding source in the archive at 57.8% usable), then <b>the interactive-session decks opened as PowerPoint</b> (the only source matching the exam's format). <span class="evi">The old ordering put the Canvas practice quizzes fourth. They are free and the graded ones carry 2% of the grade, so attempt them &mdash; but 403 of them were never extractable and the 14 that reached the corpus were all unusable, so there is no evidence they prepare you for anything.</span></li>
+        <li class="alert"><b>Corrected, and it reorders the whole semester. Do not study in proportion to how much material exists.</b> The archive is distributed <b>inversely</b> to the marks, at a correlation of &minus;0.881. GI is 4.8% of the grade and 18.2% of the practice material; Foundations 2 is 26.3% of the grade and 9.7% of the material. Following the archive means spending roughly four times too long on GI and about a third of the right amount on the largest exam of the term. <b>Track points, not availability.</b></li>
+        <li><b>Learn the question form, not only the content &mdash; but learn it from the right source.</b> Interactive-session questions do reappear in the same shape, and 28.4% of them recur across two or more years. Teaching-assistant questions do not: on the same lectures they run about 60% as long, carry half the numeric load, contain almost no figures, and default to four options where the faculty use five. Most of what is available to practise on is the second kind. <b>Use it for coverage and never for calibration.</b></li>
+        <li><b>Speaking the material out loud is repeatedly named as the highest-return technique for this course</b> &mdash; explaining a pathway to another person, or to nobody in particular. It surfaces the steps that were being skimmed. <span class="evi">No corpus evidence either way. Retained because it is reported consistently and costs nothing to test on yourself.</span></li>
+        <li><b>Stay one to two weeks ahead where the calendar allows.</b> The empty weeks &mdash; Aug 10, Sep 28, Nov 16 &mdash; are the ones that make this possible, and they sit immediately before exams for a reason. Week 14, after the Nov 2 exam, is the fourth and it is the one that decides how the Renal exam goes.</li>
+        <li><b>Filter by course of origin before you drill anything.</b> The archive contains Spring Medical Genetics and Spring Endocrine and Reproductive material that looks like the best content in the collection &mdash; one Spring review ranks second in the entire archive for breadth &mdash; and belongs to different courses. The Fall 2025 folder names also do not match 2026's modules, because the course was resequenced.</li>
       </ul>
     </div>
 
     <div class="card">
       <h2>Working the metabolic map</h2>
+      <p class="lead">The map is supplied in every exam, which is why the old advice put it in the first tier. The advice was right about the map and wrong about the timing.</p>
       <ul class="notes">
         <li><b>It is an exam aid, so the skill being tested is navigation under time pressure.</b> Knowing roughly where a pathway lives is worth more than having memorised its contents, because the contents are printed in front of you.</li>
-        <li>Before each exam, find the relevant region of the map and work through it deliberately, so that no time is spent searching during the exam itself.</li>
-        <li>The parts that repeatedly catch people out: the legend in the bottom-left corner, the vitamin names and abbreviations and their precursors, which side of the mitochondrial membrane each reaction sits on, the direction of the arrows, and the cofactors.</li>
-        <li>Study from the annotated copy. The blank version is what appears in the exam, so the goal is to be able to look at the blank one and see the annotations.</li>
+        <li class="alert"><b>Corrected. It is a late-semester instrument, not a first-week one.</b> One of its 23 regions is examined before Aug 17 and four more before Aug 31. Then <b>nothing for six weeks</b> &mdash; MSK 1 and MSK 2 need none of the 23 between them, which is 31 points with no map content. Three regions before Oct 19, one before Nov 2, two before Nov 23, and then <b>eleven for the Renal exam alone</b>. Learning the map "early" means learning five regions in August and leaving the largest commitment for December, which is exactly where the calendar is tightest. The dated region-by-region schedule is on the "What the exams ask" tab.</li>
+        <li class="alert"><b>Corrected. Do not study from the annotated copy until October.</b> The old advice was to work from the annotated version rather than the blank one. Its 127 text annotations are <b>Renal and GI disease labels</b>: there are <b>zero</b> annotations in the glycolysis, glycogen, pentose-phosphate, oxidative-phosphorylation, cholesterol, urea-cycle and ketone-body regions. For the two Foundations exams it adds nothing. Use the blank <code>FullSubwayMap222.pdf</code> until November, then switch &mdash; because on the Renal regions the annotations are precisely the disease names the exam asks for.</li>
+        <li>Before each exam, find the relevant region and work through it deliberately, so that no time is spent searching during the exam itself. The goal is still to look at the blank map and see the labels.</li>
+        <li>The parts that repeatedly catch people out, and none of them are content: the legend in the bottom-left corner, the vitamin names and abbreviations and their precursors, which side of the mitochondrial membrane each reaction sits on, the direction of the arrows, and the cofactors.</li>
+        <li>One region, steroid hormone synthesis, has no 2026 lecture at all. Skip it.</li>
       </ul>
     </div>
 
     <div class="card">
-      <h2>Exam technique carried over from previous years</h2>
+      <h2>Exam technique</h2>
+      <p class="lead">Carried over from previous years, with the pieces the archive can check now marked as checked.</p>
       <ul class="notes">
-        <li>Stems run long. Read the question, form an answer before looking at the options, then work the options against it.</li>
-        <li>When the answer is not known outright, eliminate. Most questions have two defensible options; the work is finding which is worse.</li>
+        <li><b>Stems run long, and how long depends on the exam.</b> Confirmed and quantified: faculty-written questions run a median of 43 words with 43.5% at 50 words or more. On Foundations 2 the median is 49 and half the paper runs 50-plus. Read the question, form an answer before looking at the options, then work the options against it.</li>
+        <li><b>Expect five options from the faculty even though your practice material gave you four.</b> 70&ndash;94% of faculty questions on a given lecture set are five-option; teaching-assistant decks run 32&ndash;58%. A fifth option changes how elimination feels under time pressure.</li>
+        <li class="alert"><b>Drop the "all of the above" and "none of the above" heuristics entirely.</b> They appear in <b>1.3% and 0.3%</b> of questions in this course, and the faculty use "none of the above" <b>zero times in 685 questions</b>. Combined "A and B" options appear in 0.2%. Negative stems &mdash; EXCEPT, NOT, LEAST &mdash; are 2.1%. Whatever rules of thumb you carry about those constructions are dead weight here.</li>
+        <li><b>When the answer is not known outright, eliminate &mdash; and how well that works varies by author.</b> The old claim that most questions come down to two defensible options is true on average: option similarity across faculty questions averages 0.127. But it is <b>not</b> true everywhere. The one directly measured faculty profile in the course builds the least similar options of any set &mdash; median 0.015, with only 9.6% of items above 0.25. Five plainly different answers, one right. On his material, elimination is fast; on other material, expect the near-miss pair.</li>
+        <li><b>Know which pool the options are drawn from before you read them.</b> Across all questions: 10.9% have enzyme names as options, 10.7% disease names, 8.3% paired increase-and-decrease, 5.1% purely numeric, 3.0% vitamins or cofactors. The disease-name pools are published &mdash; the Foundations 1 list is six lines long.</li>
         <li>Flag and move on rather than stalling. Rank the flagged questions by difficulty and return to the easiest of them first.</li>
         <li>Write down whatever is volatile as soon as the exam opens &mdash; a pathway, an enzyme list, a set of values.</li>
         <li>Questions are written by different faculty, so one stem sometimes contains the information needed for another.</li>
         <li>Keep a running file of missed questions and facts that will not stick, and read only that in the last hour before the exam.</li>
+        <li>Have the NBOME reference values to hand while practising anything acid-base or haematology. They are supplied in the exam, so practising without them trains the wrong task.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Where this page could be wrong</h2>
+      <p class="lead">Stated so the rest can be trusted where it is strong.</p>
+      <ul class="notes">
+        <li><b>Strong.</b> The inverse distribution of archive to marks: 3,937 questions, two independently filtered populations, same ordering at both ends. The format gap between faculty and teaching-assistant questions: six lecture sets, 155 to 1,744 questions each, same direction every time. The map region assignments, each checked against where its vocabulary actually lands. The source-type yield rates, on 384 to 7,020 questions per type. The off-syllabus rates across 11,430 Anki notes. And the 2026 topic and disease lists, which are not inference at all &mdash; they are the faculty's own documents.</li>
+        <li><b>Thin, and hedged wherever it appears.</b> The haemoglobin question profile rests on <b>19 usable questions</b>, which is the weakest evidence in the analysis attached to the most reliably examined topic in it. The DNA-block profile rests on 27. The fine-grained topic weights for Cardiopulmonary 1. And the low-footprint primers, whose low weight rests on <b>absence</b> of evidence in a collection that is 87% teaching-assistant and interactive material.</li>
+        <li><b>Not knowable from this material.</b> How any named professor writes questions, with one exception. What any 2026 exam will contain &mdash; only 19 rows in the whole corpus carry a 2026 date and none of them are complete. Whether building your own Anki deck is worth the time. Whether the Canvas quizzes prepare you for anything.</li>
+        <li><b>The central assumption, stated once.</b> Everything forward-looking here is 2018&ndash;2025 material routed onto a syllabus that was reorganised for 2026. The routing is explicit and per-question; the transfer to this year is an assumption. <span class="evi">Full method and per-question routing in <code>_inventory/FINDINGS.md</code> and <code>_inventory/routed.csv</code>; per-module rankings with file paths in <code>RESOURCE_CATALOG.md</code>; what would make any of it stale in <code>_inventory/MAINTENANCE.md</code>.</span></li>
       </ul>
     </div>
 
