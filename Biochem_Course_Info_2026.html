@@ -41,6 +41,7 @@ table.data th { text-align: left; font-size: 0.71rem; text-transform: uppercase;
 table.data td { padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
 table.data tr:last-child td { border-bottom: 0; }
 table.data td.n { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
+table.data th.n { text-align: right; }
 table.data td.dt { white-space: nowrap; font-weight: 700; }
 table.data td.k { font-weight: 700; white-space: nowrap; }
 table.data tr.hi td { background: #fff4f2; }
@@ -92,6 +93,18 @@ code { font-size: 0.85em; background: #f2ece1; border-radius: 4px; padding: 1px 
       </tbody>
     </table>
     </div>
+    <p style="margin-top:13px"><b>Points in one component are not comparable to points in another.</b> Each component's points are scaled to fit its own weight, so a point is worth whatever that component's share divided by its point total comes to:</p>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Component</th><th class="n">On offer</th><th class="n">Worth of one point</th></tr></thead>
+      <tbody>
+        <tr class="hi"><td class="k">Module exams</td><td class="n">167 points</td><td class="n">0.54% of the course grade</td></tr>
+        <tr><td class="k">In-class participation</td><td class="n">about 21 sessions</td><td class="n">about 0.4% per session</td></tr>
+        <tr><td class="k">Self-assessment quizzes</td><td class="n">163 points</td><td class="n">0.012% of the course grade</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note"><b>An exam point is worth roughly forty quiz points</b>, and a single interactive-session check-in is worth about as much as a whole quiz. This is why the study guide allocates time by exam point value rather than by how much practice material exists for a module.</p>
     <ul style="margin-top:12px">
       <li><b>The 8% is attendance in practice.</b> Answering a polling question incorrectly costs nothing; not being in the room costs the point. Roughly 21 sessions carry one or two points each.</li>
       <li><b>Quiz deadlines are set per quiz on Canvas, not on a weekly cycle.</b> Each quiz unlocks about two weeks ahead and closes at 11:59 PM on the day of the exam it belongs to. Attempt limits vary from three to unlimited. Read both on the individual quiz.</li>
@@ -118,7 +131,7 @@ code { font-size: 0.85em; background: #f2ece1; border-radius: 4px; padding: 1px 
     </table>
     </div>
     <ul style="margin-top:12px">
-      <li><b>Biochemistry does not sit its own exams.</b> It contributes a block of questions to each shared module exam. The point values above are the Canvas gradebook score rows for those blocks.</li>
+      <li><b>Biochemistry does not sit its own exams.</b> Each module exam is shared by the courses in that module, and every course contributes a block of questions to it. <b>The points above are the size of the Biochemistry block on each paper</b>, taken from the Canvas gradebook score rows &mdash; so 28 of the marks available on the Foundations 1 exam are Biochemistry, and the rest belong to the other courses. Some of these values may carry over from the previous year, so the ordering is the reliable part rather than the exact figure.</li>
       <li><b>Foundations 1 and 2 together are 72 of the 167 points, and both are over by Aug 31.</b></li>
       <li>Multiple choice in board format, delivered through ExamSoft. <b>The metabolic map and the NBOME adult laboratory values sheet are supplied in every exam.</b></li>
       <li><b>No admission more than 15 minutes after the scheduled start.</b> A makeup exam requires an absence formally excused by the Dean of Student Affairs; without one, a makeup is capped at 90% of the raw score.</li>
