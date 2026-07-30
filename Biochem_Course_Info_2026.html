@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Biochemistry course information &mdash; Fall 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&amp;family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4f0e8;
+  --paper: #fffcf7;
+  --ink: #1c1916;
+  --muted: #6a635a;
+  --line: #e2dacd;
+  --brand: #8b5a2b;
+  --alert: #8b1e1e;
+  --green: #43603f;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Source Sans 3", system-ui, sans-serif; color: var(--ink); background: var(--bg); }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 24px 16px 64px; }
+header { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; margin-bottom: 16px; }
+h1 { font-family: Fraunces, Georgia, serif; font-size: 1.75rem; margin: 0 0 6px; }
+.sub { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.nav { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.nav a { border: 1px solid var(--line); background: #fff; font-weight: 600; font-size: 0.9rem; padding: 8px 14px; border-radius: 999px; color: var(--ink); text-decoration: none; }
+.nav a.here { background: var(--ink); color: #fff; border-color: var(--ink); }
+.nav a:hover { border-color: var(--brand); }
+.jump { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+.jump a { font-size: 0.78rem; font-weight: 700; text-decoration: none; color: var(--brand); background: #f6f0e5; border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; }
+.jump a:hover { background: #efe5d3; }
+
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
+.card.warn { border-color: #c9a8a3; background: #fffaf8; }
+.card h2 { font-family: Fraunces, Georgia, serif; font-size: 1.2rem; margin: 0 0 10px; }
+.card h3 { font-family: Fraunces, Georgia, serif; font-size: 1.05rem; margin: 16px 0 8px; }
+.lead { font-size: 0.9rem; color: var(--muted); margin: 0 0 14px; line-height: 1.55; }
+
+.kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 0 0 6px; }
+.kpi div { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 13px; }
+.kpi b { display: block; font-family: Fraunces, Georgia, serif; font-size: 1.35rem; line-height: 1.15; }
+.kpi span { font-size: 0.8rem; color: var(--muted); }
+
+ul.notes { margin: 0; padding-left: 18px; }
+ul.notes li { font-size: 0.9rem; line-height: 1.55; margin-bottom: 8px; }
+ul.notes li.alert { background: #fff4f2; border-left: 3px solid var(--alert); border-radius: 0 6px 6px 0; padding: 8px 11px; margin-left: -18px; list-style: none; }
+ul.notes li.good { background: #f2f6f1; border-left: 3px solid var(--green); border-radius: 0 6px 6px 0; padding: 8px 11px; margin-left: -18px; list-style: none; }
+
+.scroller { overflow-x: auto; }
+table.data { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 520px; }
+table.data th { text-align: left; font-size: 0.72rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); border-bottom: 2px solid var(--line); padding: 6px 8px; }
+table.data td { padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.data td.n { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
+table.data td.dt { white-space: nowrap; font-weight: 700; }
+table.data tr.hi td { background: #fff4f2; }
+table.data tr.hi td.n { color: var(--alert); }
+table.data td.k { font-weight: 700; white-space: nowrap; width: 30%; }
+
+dl.kv { margin: 0; font-size: 0.89rem; line-height: 1.55; }
+dl.kv dt { font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: .05em; color: var(--brand); margin-top: 11px; }
+dl.kv dt:first-child { margin-top: 0; }
+dl.kv dd { margin: 2px 0 0; }
+
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 12px; }
+.box { background: #fff; border: 1px solid var(--line); border-radius: 11px; padding: 13px 15px; }
+.box h4 { font-family: Fraunces, Georgia, serif; font-size: 1rem; margin: 0 0 8px; }
+.box p { font-size: 0.87rem; line-height: 1.55; margin: 0 0 8px; }
+.box p:last-child { margin-bottom: 0; }
+
+.hedge { border-left: 3px solid #b8a98f; background: #faf7f1; padding: 9px 12px; border-radius: 0 6px 6px 0; margin: 10px 0; font-size: 0.85rem; line-height: 1.55; }
+.small { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+code { font-size: 0.84em; background: #f2ece1; border-radius: 4px; padding: 1px 4px; word-break: break-word; }
+a.lnk { color: var(--brand); text-decoration: none; border-bottom: 1px solid #d9c9b2; }
+a.lnk:hover { border-bottom-color: var(--brand); }
+.tag { display: inline-block; font-size: 0.64rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; border-radius: 999px; padding: 2px 7px; background: #efe7da; color: #6a563a; }
+.tag.q { background: #f2e9d2; color: #74540c; }
+.tag.a { background: #f6dedb; color: var(--alert); }
+.tag.ok { background: #e2efdd; color: #2f5129; }
+ol.ask { margin: 0; padding-left: 20px; }
+ol.ask li { font-size: 0.89rem; line-height: 1.55; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Biochemistry course information</h1>
+    <p class="sub">Medical Biochemistry and Genetics I &middot; BSCN 625 &middot; Fall 2026 &middot; TouroCOM Middletown &middot; how the course is graded, run and staffed</p>
+    <nav class="nav" aria-label="Biochemistry pages">
+      <a href="Biochem_Calendar_2026.html">Calendar</a>
+      <a href="Biochem_Study_Plan_2026.html">Study plan</a>
+      <a class="here" href="Biochem_Course_Info_2026.html">Course information</a>
+      <a href="Biochem_Fall_2026.html">Evidence and analysis</a>
+    </nav>
+    <div class="jump">
+      <a href="#grade">Grade composition</a>
+      <a href="#exams">Exam mechanics</a>
+      <a href="#part">The 8% participation</a>
+      <a href="#quiz">The 2% quizzes</a>
+      <a href="#people">People and office hours</a>
+      <a href="#books">Textbooks</a>
+      <a href="#where">Where the material lives</a>
+      <a href="#shape">How the course is taught</a>
+      <a href="#policy">Absence and makeup policy</a>
+      <a href="#ask">Confirm these early</a>
+    </div>
+  </header>
+
+  <div class="card">
+    <div class="kpi">
+      <div><b>BSCN 625</b><span>course code &middot; CRN 14776 &middot; section 0-MT-CL</span></div>
+      <div><b>5</b><span>credit hours, per the registrar record</span></div>
+      <div><b>Letter grade</b><span>grade mode</span></div>
+      <div><b>Canvas 168928</b><span><a class="lnk" href="https://touro.instructure.com/courses/168928">open the course</a></span></div>
+      <div><b>Dr. Shilpika Bagh</b><span>Middletown course director</span></div>
+      <div><b>Aug 4 &ndash; Dec 9</b><span>first session to final exam</span></div>
+    </div>
+    <ul class="notes" style="margin-top:14px">
+      <li><b>Biochemistry and Medical Genetics are one course this year.</b> Lectures 1&ndash;12 and 22&ndash;42 are biochemistry; 13&ndash;21 are medical genetics, taught against Thompson &amp; Thompson rather than Lippincott and assessed through case-based vignettes. Both halves are examined inside the same eight shared module exams.</li>
+      <li><b>42 lecture videos, 14 primers, 13 clinical vignettes and one team-based learning session.</b> Videos sit in the Canvas Media Gallery, PowerPoints in the weekly modules. Primers are short refresher videos; vignettes are full patient cases with history, physical, differential and labs.</li>
+      <li><b>Five credits matters beyond the transcript.</b> Credit hours drive the academic-dismissal threshold, so the registrar's number is the one to use rather than a syllabus figure. Verify it in <a class="lnk" href="https://mytouroone.touro.edu">TouroOne</a> under Registration Tools &rarr; Student Schedule.</li>
+    </ul>
+  </div>
+
+  <div class="card" id="grade">
+    <h2>Grade composition</h2>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Component</th><th>What it is</th><th>How it is marked</th><th>Weight</th></tr></thead>
+      <tbody>
+        <tr class="hi"><td><b>Eight module exams</b></td><td>Biochemistry and Medical Genetics questions inside the eight shared module exams</td><td>Correct answers. 167 Biochemistry points in total</td><td class="n">90%</td></tr>
+        <tr><td><b>In-class participation</b></td><td>Polling responses during the interactive sessions, plus the Vitamins team-based learning session</td><td><b>Participation, not correctness</b> &mdash; roughly 21 sessions at one to two points each</td><td class="n">8%</td></tr>
+        <tr><td><b>Self-assessment quizzes</b></td><td>22 graded Canvas quizzes, 163 quiz points across 11 deadlines</td><td>Correct answers</td><td class="n">2%</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <ul class="notes" style="margin-top:14px">
+      <li class="alert"><b>The Canvas running total will not match these percentages.</b> Assignment-group weighting is switched off on this course and all four assignment groups carry a weight of zero, so the Canvas gradebook computes on raw total points. The 90/8/2 split in the syllabus is what the final grade is calculated from; the number Canvas displays during the semester is a different arithmetic. Do not plan against it.</li>
+      <li><b>The exam point values come from the Canvas gradebook score rows</b> &mdash; one row per module. They may carry over from the previous year, since the participation rows in the same gradebook still hold last year's dates. The <i>ordering</i> tracks how much teaching time each module gets and is worth planning against; the exact numbers are not worth defending.</li>
+      <li>Final course grades are posted only to TouroOne. The grading scale itself lives in the Student Handbook, not in the syllabus. Grade concerns go to the course director, and the campus-wide window is three weeks from publication.</li>
+    </ul>
+    <h3>Where the 167 exam points sit</h3>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Exam</th><th>Date</th><th>Points</th><th>Share of the exam grade</th></tr></thead>
+      <tbody>
+        <tr class="hi"><td>Foundations 2</td><td class="dt">Mon Aug 31</td><td class="n">44</td><td class="n">26.3%</td></tr>
+        <tr class="hi"><td>Foundations 1</td><td class="dt">Mon Aug 17</td><td class="n">28</td><td class="n">16.8%</td></tr>
+        <tr><td>Renal</td><td class="dt">Wed Dec 9</td><td class="n">24</td><td class="n">14.4%</td></tr>
+        <tr><td>Cardiopulmonary 2</td><td class="dt">Mon Nov 2</td><td class="n">18</td><td class="n">10.8%</td></tr>
+        <tr><td>MSK 2</td><td class="dt">Tue Oct 6</td><td class="n">16</td><td class="n">9.6%</td></tr>
+        <tr><td>MSK 1</td><td class="dt">Tue Sep 15</td><td class="n">15</td><td class="n">9.0%</td></tr>
+        <tr><td>Cardiopulmonary 1</td><td class="dt">Mon Oct 19</td><td class="n">14</td><td class="n">8.4%</td></tr>
+        <tr><td>GI</td><td class="dt">Mon Nov 23</td><td class="n">8</td><td class="n">4.8%</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="small" style="margin-top:10px"><b>43% of the exam grade is settled by Aug 31.</b> Full lecture ranges, primers, vignettes and exam times are on the <a class="lnk" href="Biochem_Calendar_2026.html">calendar page</a>; what to study for each is on the <a class="lnk" href="Biochem_Study_Plan_2026.html">study plan</a>.</p>
+  </div>
+
+  <div class="card" id="exams">
+    <h2>Exam mechanics</h2>
+    <div class="grid2">
+      <div class="box">
+        <h4>Format</h4>
+        <p>Multiple choice in board format, delivered through <b>ExamSoft</b>. Each exam is shared across all the courses in that module, and Biochemistry contributes a block of questions to it rather than sitting its own paper.</p>
+        <p>Five options is the norm in faculty-written questions, with four appearing in some sets. "None of the above" is effectively absent from this course.</p>
+      </div>
+      <div class="box">
+        <h4>What is supplied</h4>
+        <p><b>The metabolic map is provided in every exam.</b> Both the syllabus and the orientation deck state this, which is why fluency in navigating it matters more than reproducing it. The blank copy is <a class="lnk" href="https://touro.instructure.com/files/14989920/download?download_frd=1"><code>FullSubwayMap222.pdf</code></a>, and there is an <a class="lnk" href="https://prezi.com/view/usv2oNyKdXTnuXdti6X1/">interactive version</a> for practice.</p>
+        <p>The <a class="lnk" href="https://touro.instructure.com/files/14989947/download?download_frd=1">NBOME Reference Adult Laboratory Values</a> sheet is also supplied. Know where each value sits on it.</p>
+      </div>
+      <div class="box">
+        <h4>Timing</h4>
+        <p><b>No admission more than 15 minutes after the scheduled start.</b> Exams run two hours except GI, which runs 9:30 AM to 12 PM.</p>
+        <p>Start times vary between 9:30 and 11 AM across the eight, so each one needs checking rather than assuming.</p>
+      </div>
+      <div class="box">
+        <h4>Missing one</h4>
+        <p>A makeup is only offered if the absence is <b>formally excused by the Dean of Student Affairs</b>, and the course director decides its format. Hospitalisation and a death in the family are the examples the syllabus gives.</p>
+        <p><b>Without a formal excuse, a makeup is capped at 90% of the raw score</b> if it is allowed at all.</p>
+      </div>
+    </div>
+    <div class="hedge"><b>On memorising numbers.</b> Across 449 faculty-written questions measured from archived material, 5.8% turn on a specific number, 2.2% ask for a calculation and 3.8% require reading a figure. Central-concept language outnumbers minor-detail language by more than twenty to one. The numbers worth committing are the ones the posted topic lists name explicitly &mdash; the ETC energy yields, the fasting glucose range, the ATP yield from one glucose &mdash; and one or two of those per exam is the realistic expectation.</div>
+  </div>
+
+  <div class="card warn" id="part">
+    <h2>The 8% &mdash; the cheapest marks in the course, and the easiest to lose</h2>
+    <ul class="notes">
+      <li><b>Polling responses during interactive sessions are graded for participation, not for correctness.</b> Answering wrong costs nothing. <b>Not being in the room costs the point.</b> Roughly 21 sessions carry one to two points each, and arriving late means missing the first questions of the set.</li>
+      <li class="alert"><b>The polling app is named two different ways by the course's own documents.</b> The Fall 2026 syllabus says <b>Poll Everywhere</b> for the 8%; the Fall 2026 orientation deck says <b>iClicker</b>. Install both, log in to each before Aug 4, and settle it at the first session. Poll Everywhere is the campus-wide attendance tool and has a mandatory authentication step, so do that setup in advance either way.</li>
+      <li><b>Attendance at the interactive sessions is required by college policy.</b> All sessions are in person and there is no remote option. Absence from a session does not remove responsibility for the material covered in it.</li>
+      <li><b>The Vitamins team-based learning session on Thu Nov 12 counts toward this component</b> and carries a peer contribution form. Read the TBL outline before the session rather than in it.</li>
+      <li>Supplemental sessions are optional and carry no marks &mdash; but the five sitting in the week before an exam are exam reviews, and those are worth attending on content grounds.</li>
+    </ul>
+  </div>
+
+  <div class="card warn" id="quiz">
+    <h2>The 2% &mdash; how the quizzes actually behave</h2>
+    <ul class="notes">
+      <li><b>22 graded quizzes, 163 quiz points, 11 deadlines, all closing at 11:59 PM.</b> They are graded for correct answers. Full deadline table on the <a class="lnk" href="Biochem_Calendar_2026.html">calendar page</a>; open them from <a class="lnk" href="https://touro.instructure.com/courses/168928/quizzes">the Canvas quiz list</a>.</li>
+      <li class="alert"><b>Two documents describe two different systems, and Canvas is the one the deadlines run on.</b> The orientation deck describes a Monday 8 AM to Sunday 11:59 PM window with three attempts. Canvas unlocks each quiz roughly two weeks ahead at 8:00 AM and closes it at 11:59 PM on the day of the module exam it belongs to, with attempt limits of three, six, twenty-five or unlimited depending on the quiz. The syllabus defers to Canvas &mdash; it says only "due dates on Canvas". <b>Read the due date and the attempt limit on each individual quiz.</b></li>
+      <li><b>Nine of the eleven deadlines fall on or after the exam the quiz belongs to</b>, and two fall well after: the Globular and Fibrous Proteins quiz closes Nov 1 on content examined Oct 6 and Oct 19, and the final three close Dec 13, four days after the Renal exam. Work each quiz in the week its lectures are taught and treat the deadline as a backstop.</li>
+      <li><b>Attempt limits are not uniform within a week.</b> The three quizzes closing Aug 17 have unlimited, six and six attempts respectively. The MSK 1 and MSK 2 quizzes have three each, which makes them a one-shot review rather than a drill.</li>
+      <li class="good"><b>Around thirty ungraded practice quizzes exist alongside the graded set, with unlimited attempts</b>, plus a not-for-credit duplicate of most self-assessments. Those cost nothing and can be repeated indefinitely.</li>
+      <li>Four quizzes in the gradebook carry 2025 dates and are not on this year's schedule: a Week 2 Pedigree Inheritance quiz, a Week 2 quiz marked F25, a Week 7 Regulation of Gene Expression quiz, and a duplicate Week 15 Vitamins and Iron quiz.</li>
+    </ul>
+  </div>
+
+  <div class="card" id="people">
+    <h2>People</h2>
+    <h3>Middletown</h3>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Name</th><th>Role</th><th>Email</th><th>Phone</th><th>Office</th></tr></thead>
+      <tbody>
+        <tr class="hi"><td><b>Dr. Shilpika Bagh</b>, MBBS, MD</td><td><b>Course director</b>, Professor</td><td><a class="lnk" href="mailto:Sbagh@touro.edu">Sbagh@touro.edu</a></td><td>(845) 648-1245</td><td>Room 254</td></tr>
+        <tr><td>Dr. Kishore Challagundla, MS, PhD</td><td>Associate Professor</td><td><a class="lnk" href="mailto:kchallagundla@touro.edu">kchallagundla@touro.edu</a></td><td>(845) 648-1250</td><td>Room 250, by appointment</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h3>Dr. Bagh's office hours</h3>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Session</th><th>Day</th><th>Time</th><th>Location</th></tr></thead>
+      <tbody>
+        <tr><td>In person</td><td>Monday to Thursday</td><td>12&ndash;1 PM</td><td>Room 254</td></tr>
+        <tr><td>Zoom</td><td>Friday</td><td>12&ndash;1 PM</td><td>Room 254</td></tr>
+        <tr><td>Whiteboard session (DO and MS)</td><td>To be determined</td><td>To be determined</td><td>Lecture hall</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h3>The other two campuses</h3>
+    <p class="lead">Worth knowing, because a large share of the best archived practice material was written for Montana and Harlem &mdash; but Middletown questions go to Dr. Bagh.</p>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Campus</th><th>Course director</th><th>Course faculty</th></tr></thead>
+      <tbody>
+        <tr><td>Harlem</td><td>Dr. Pramodh Seneviratne &middot; <a class="lnk" href="mailto:pseneviratne@touro.edu">pseneviratne@touro.edu</a> &middot; (646) 981-4648 &middot; Room 415</td><td>Dr. Nikolaos Papanikolaou &middot; <a class="lnk" href="mailto:npapanik@touro.edu">npapanik@touro.edu</a> &middot; Room 420. Dr. Judith Binstock, Professor Emeritus</td></tr>
+        <tr><td>Montana</td><td>Dr. S. Diane Lund &middot; <a class="lnk" href="mailto:slund@touro.edu">slund@touro.edu</a> &middot; (406) 401-8132 &middot; Room 260</td><td>Dr. Alex Charbonneau &middot; <a class="lnk" href="mailto:acharbonneau@touro.edu">acharbonneau@touro.edu</a> &middot; Room 251. Dr. Teresa Gunn</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h3>Teaching assistants</h3>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Name</th><th>Email</th></tr></thead>
+      <tbody>
+        <tr><td>Anish Trivedi</td><td><a class="lnk" href="mailto:atrivedi4@student.touro.edu">atrivedi4@student.touro.edu</a></td></tr>
+        <tr><td>Vidhi Patel</td><td><a class="lnk" href="mailto:vpatel27@student.touro.edu">vpatel27@student.touro.edu</a></td></tr>
+        <tr><td>Zainab Sandhu</td><td><a class="lnk" href="mailto:zsandhu@student.touro.edu">zsandhu@student.touro.edu</a></td></tr>
+        <tr><td>Shaunak Pandya</td><td><a class="lnk" href="mailto:spandya6@student.touro.edu">spandya6@student.touro.edu</a></td></tr>
+        <tr><td>Kyle T. Mele</td><td><a class="lnk" href="mailto:kmele@student.touro.edu">kmele@student.touro.edu</a></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="small" style="margin-top:10px">The full roster for 2026&ndash;27 lists twenty TAs across the three campuses, in <code>Medical Biochemistry and Genetics I/2026-2027 Biochemistry_Genetics TA.xlsx</code>. SGA also organises peer tutoring by second-year students, and those tutors are briefed weekly on which topics the exam reviews are emphasising.</p>
+    <h3>Communication</h3>
+    <ul class="notes">
+      <li><b>Email is the stated best channel</b>, from the official Touro address. Faculty commit to prompt replies and to making time for appointments in office, on Zoom or on Teams.</li>
+      <li><b>Turn on Canvas announcement forwarding.</b> Announcements are where updates land, and Canvas will push them to email once the notification setting is changed. Only one announcement had been posted as of late July.</li>
+      <li>If a professor requests a meeting, answer immediately.</li>
+      <li>Map navigation help is offered by <a class="lnk" href="mailto:jkroner@student.touro.edu">jkroner@student.touro.edu</a> across all three campuses.</li>
+    </ul>
+  </div>
+
+  <div class="card" id="books">
+    <h2>Textbooks</h2>
+    <h3>Required</h3>
+    <div class="scroller">
+    <table class="data">
+      <tbody>
+        <tr><td class="k">Lippincott Illustrated Reviews: Biochemistry</td><td>Abali, Cline, Franklin, Viselli &middot; 9th ed. &middot; Wolters Kluwer, 2025 &middot; ISBN 9781975220495. The chapter references in the syllabus outline are to this book</td></tr>
+        <tr><td class="k">Thompson &amp; Thompson Genetics and Genomics in Medicine</td><td>Cohn, Scherer, Hamosh &middot; 9th ed. &middot; Elsevier, 2024 &middot; ISBN 9780323547628. The clinical vignettes for lectures 13&ndash;21 are its numbered cases &mdash; Case 33 MERRF, Case 29 Lynch, Case 12 Cystic Fibrosis, Case 24 Huntington</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h3>Optional, as listed by the syllabus</h3>
+    <div class="scroller">
+    <table class="data">
+      <tbody>
+        <tr><td class="k">Panini, Medical Biochemistry: An Essential Textbook</td><td>2nd ed. &middot; Thieme, 2021. Cited alongside Lippincott for several lectures in the syllabus outline</td></tr>
+        <tr><td class="k">Marks' Basic Medical Biochemistry</td><td>Lieberman, Peet, Chansky &middot; 6th ed. &middot; 2018. The syllabus outline gives suggested chapters from the 5th edition for many lectures</td></tr>
+        <tr><td class="k">Costanzo Physiology</td><td>8th ed. &middot; Elsevier, 2026</td></tr>
+        <tr><td class="k">Robbins, Cotran &amp; Kumar Pathologic Basis of Disease</td><td>11th ed. &middot; Elsevier, 2025</td></tr>
+        <tr><td class="k">Molecular Biology of the Cell</td><td>Alberts et al. &middot; 7th ed. &middot; W.W. Norton, 2022</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="small" style="margin-top:10px">The library holds digital versions of some required texts &mdash; worth asking before buying. Additional materials such as articles, videos and slides are provided on Canvas rather than purchased.</p>
+  </div>
+
+  <div class="card" id="where">
+    <h2>Where the material lives</h2>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Place</th><th>What is there</th><th>Access</th></tr></thead>
+      <tbody>
+        <tr><td><b>Canvas &mdash; weekly modules</b><br><a class="lnk" href="https://touro.instructure.com/courses/168928/modules">course 168928 modules</a></td><td>45 modules holding this year's lecture slides, primers, clinical vignettes, pre-discussion decks and the per-exam review material. The module a file sits in is more reliable than the number in its filename &mdash; the Canvas numbering runs ahead of the syllabus in the Foundation block</td><td>Canvas login</td></tr>
+        <tr><td><b>Canvas &mdash; the file store</b><br><a class="lnk" href="https://touro.instructure.com/courses/168928/files">course files</a></td><td><b>565 files, of which 444 are linked from no module at all.</b> That unlinked majority holds the complete faculty review set for all eight modules, the topic and disease lists, prior-year interactive sessions in matched question and answer pairs, and a medical genetics archive going back to 2019. It is not reachable by clicking through the modules</td><td>Canvas login</td></tr>
+        <tr><td><b>Canvas &mdash; Media Gallery</b></td><td>The 42 lecture videos and the 14 primer videos</td><td>Canvas login</td></tr>
+        <tr><td><b>Canvas &mdash; quizzes</b><br><a class="lnk" href="https://touro.instructure.com/courses/168928/quizzes">quiz list</a></td><td>73 quiz objects: 22 graded for this year, around thirty ungraded practice quizzes with unlimited attempts, and a not-for-credit duplicate of most self-assessments</td><td>Canvas login</td></tr>
+        <tr><td><b>The SGA upperclassmen archive</b></td><td>Google Drive, roughly 1,750 Biochemistry-relevant files across 2021&ndash;2026: faculty reviews, TA reviews from all three campuses, interactive sessions, clinical vignettes, card decks. Filed by year and by module exam, with folder names that follow the previous year's module boundaries rather than this year's</td><td><b>Needs the <code>@student.touro.edu</code> Google account</b> &mdash; see below</td></tr>
+        <tr><td><b>This repository</b></td><td><code>Medical Biochemistry and Genetics I/</code> holds the syllabus, the orientation deck, the TA roster, the blank and annotated metabolic maps, the NBOME lab values sheet, and local copies of the Canvas and archive material under <code>canvas/</code> and <code>sga/</code></td><td>Local disk</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <ul class="notes" style="margin-top:14px">
+      <li class="alert"><b>A large part of the SGA archive is owned by the touro.edu organisation and returns an error to a personal Google account.</b> If a Drive link says the owning organisation does not allow access, switch the account picker to <code>yplutcho@student.touro.edu</code>, or insert <code>/u/1</code> after the domain &mdash; <code>drive.google.com/u/1/file/d/&hellip;</code>. This is the difference between reaching a few hundred files and reaching all of them.</li>
+      <li><b>Six of the eight modules have no 2026-dated question material yet.</b> The interactive-session decks appear on Canvas during the semester and are the only directly relevant practice that will exist for this year's exams. Checking the current week's module is a weekly job.</li>
+      <li class="alert"><b>Lectures 33, 34 and 35 are not on Canvas.</b> The lecture files run 1&ndash;42 with exactly those three missing, and the syllabus places fat-soluble vitamins, water-soluble vitamins and insulin/glucagon in the gap. All three are GI exam material and all three appear on the graded quizzes. Worth asking Dr. Bagh about before Nov 23 rather than after.</li>
+    </ul>
+  </div>
+
+  <div class="card" id="shape">
+    <h2>How the course is taught</h2>
+    <div class="grid2">
+      <div class="box">
+        <h4>Flipped, with two session types</h4>
+        <p><b>Interactive sessions</b> assume the week's videos have been watched. First ten to fifteen minutes of question and answer, then thirty-five to forty minutes of polling questions. Attendance counts.</p>
+        <p><b>Supplemental sessions</b> are a mini review of that week's interactive session plus student questions. In the week before an exam they become exam reviews. Optional, ungraded.</p>
+      </div>
+      <div class="box">
+        <h4>What is expected before class</h4>
+        <p>All pre-class work done: the assigned lecture videos watched, the relevant textbook chapters read, any required quiz submitted. Class time is for application &mdash; peer teaching, team-based learning, case-based learning and problem-solving.</p>
+        <p>Six to eight polling questions are embedded through each lecture video as well.</p>
+      </div>
+      <div class="box">
+        <h4>What the clinical vignettes ask of you</h4>
+        <p>Analyse the information given, independently identify the genetic or biochemical basis of the disorder, then suggest a differential diagnosis and appropriate management using what the lectures and sessions covered.</p>
+        <p>All fourteen vignette subjects are examined; several recur across five to seven distinct years of archived material.</p>
+      </div>
+      <div class="box">
+        <h4>The stated philosophy</h4>
+        <p>From the orientation deck, unedited: <i>"Your patients will not have a biochemistry problem &mdash; they will have a medical problem."</i> And: <i>"Most questions need thinking, not just memorizing."</i></p>
+        <p>The learning outcomes are written the same way &mdash; illustrate the reactions, explain the integration of the pathways, identify how disruption leads to disease.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="policy">
+    <h2>Absence, tardiness and makeup policy</h2>
+    <ul class="notes">
+      <li><b>Attendance is required for the interactive sessions and for every scheduled exam.</b> Absence for any reason does not relieve responsibility for the material covered, and submission of the weekly Canvas quizzes is required to receive credit for them.</li>
+      <li><b>Permission to be excused from a required component is not routinely granted.</b> Requests go through the Office of Student Affairs on the <a class="lnk" href="https://tourocom.touro.edu/student-affairs/excused-absences/">excused absence request form</a>.</li>
+      <li><b>Exams:</b> no admission more than 15 minutes after the scheduled start. A makeup requires a formal excuse from the Dean of Student Affairs; its format is the course director's decision. <b>Without a formal excuse, any makeup is capped at 90% of the raw score.</b></li>
+      <li><b>Repeated tardiness is treated as a professionalism issue</b> under the AOA core competencies and can carry disciplinary consequences.</li>
+      <li>Official closures affecting this course: Labor Day Sep 7, Yom Kippur Sep 21, and the Thanksgiving recess Nov 26&ndash;27. Half days ending at 12 PM fall on Sep 11, Sep 25 and Oct 2. Last day of class Dec 4; last day of finals Dec 11. Source is the registrar's <a class="lnk" href="https://tourocom.touro.edu/current-students/academic-calendar/">TouroCOM academic calendar</a>, which outranks the syllabi on closures.</li>
+      <li>If Zoom is used for a live session, cameras are expected on unless otherwise approved.</li>
+    </ul>
+  </div>
+
+  <div class="card" id="ask">
+    <h2>Confirm these early</h2>
+    <p class="lead">Four things where the course's own documents disagree or a gap exists. None is guesswork about policy &mdash; each is a specific question with a named person to ask.</p>
+    <ol class="ask">
+      <li><span class="tag a">Aug 4</span> <b>Which polling app is the 8% recorded through?</b> The syllabus says Poll Everywhere, the orientation deck says iClicker. Install both, authenticate both, and settle it in the first session. Ask Dr. Bagh if it is still unclear afterwards.</li>
+      <li><span class="tag q">Week 1</span> <b>Is the Canvas quiz configuration the intended one?</b> The orientation deck describes a Monday-to-Sunday window with three attempts; Canvas has each quiz unlocking two weeks ahead and closing on the exam date, with attempt limits from three to unlimited. The syllabus defers to Canvas. Worth confirming with Dr. Bagh, because working from the deck would mean submitting up to two weeks early &mdash; or assuming a quiz has closed when it has not.</li>
+      <li><span class="tag q">Before Nov 23</span> <b>Where are lectures 33, 34 and 35?</b> Fat-soluble vitamins, water-soluble vitamins and insulin/glucagon are on the syllabus and on the quizzes, and their slide decks are absent from Canvas. Ask Dr. Bagh.</li>
+      <li><span class="tag ok">Settled &mdash; do not ask</span> <b>Exam dates and two session times.</b> The shared calendar, the syllabus and the Canvas modules all agree on Sep 15, Oct 6 and Dec 9. The Oct 9 supplemental is 9&ndash;10 AM and Nov 25 is 12&ndash;1 PM across all three sources. The Oct 2 early dismissal is Hoshana Rabbah, not Rosh Hashanah.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <p class="small">Sources: the Fall 2026 syllabus dated 7/22 for grading, policy, textbooks and faculty contacts; the Fall 2026 orientation deck for session structure, course philosophy and the TA list; <code>Bagh Office hours 7_1_26.docx</code> for office hours; the Canvas course object, assignment groups and gradebook for point values, quiz configuration and the weighting behaviour; the TouroOne registration record for credit hours and grade mode; and the registrar's TouroCOM academic calendar for closures and term boundaries. Where two course documents disagree, both readings are given above and the question is listed rather than resolved by guess. Built 2026-07-29.</p>
+  </div>
+</div>
+</body>
+</html>

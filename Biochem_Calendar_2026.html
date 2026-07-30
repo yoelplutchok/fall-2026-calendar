@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Biochemistry calendar &mdash; Fall 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&amp;family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4f0e8;
+  --paper: #fffcf7;
+  --ink: #1c1916;
+  --muted: #6a635a;
+  --line: #e2dacd;
+  --brand: #8b5a2b;
+  --alert: #8b1e1e;
+  --quiz: #8a6410;
+  --supp: #43603f;
+  --tbl: #4a3d63;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Source Sans 3", system-ui, sans-serif; color: var(--ink); background: var(--bg); }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 24px 16px 64px; }
+header { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; margin-bottom: 16px; }
+h1 { font-family: Fraunces, Georgia, serif; font-size: 1.75rem; margin: 0 0 6px; }
+.sub { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.nav { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.nav a { border: 1px solid var(--line); background: #fff; font-weight: 600; font-size: 0.9rem; padding: 8px 14px; border-radius: 999px; color: var(--ink); text-decoration: none; }
+.nav a.here { background: var(--ink); color: #fff; border-color: var(--ink); }
+.nav a:hover { border-color: var(--brand); }
+
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
+.card.warn { border-color: #c9a8a3; background: #fffaf8; }
+.card h2 { font-family: Fraunces, Georgia, serif; font-size: 1.2rem; margin: 0 0 10px; }
+.card h3 { font-family: Fraunces, Georgia, serif; font-size: 1.05rem; margin: 14px 0 8px; }
+.lead { font-size: 0.9rem; color: var(--muted); margin: 0 0 14px; line-height: 1.55; }
+
+.kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 0 0 6px; }
+.kpi div { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 13px; }
+.kpi b { display: block; font-family: Fraunces, Georgia, serif; font-size: 1.5rem; line-height: 1.1; }
+.kpi span { font-size: 0.8rem; color: var(--muted); }
+
+ul.notes { margin: 0; padding-left: 18px; }
+ul.notes li { font-size: 0.9rem; line-height: 1.55; margin-bottom: 8px; }
+ul.notes li.alert { background: #fff4f2; border-left: 3px solid var(--alert); border-radius: 0 6px 6px 0; padding: 8px 11px; margin-left: -18px; list-style: none; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.82rem; color: var(--muted); margin: 0 0 14px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+.sw.exam { background: var(--alert); }
+.sw.is { background: var(--brand); }
+.sw.quiz { background: var(--quiz); }
+.sw.supp { background: var(--supp); }
+.sw.tbl { background: var(--tbl); }
+.sw.closed { background: #b3aca1; }
+
+.scroller { overflow-x: auto; }
+.months { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 14px; }
+.mo { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 12px 14px; }
+.mo h3 { font-family: Fraunces, Georgia, serif; font-size: 1rem; margin: 0 0 9px; }
+.dow { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; margin-bottom: 3px; }
+.dow div { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); text-align: center; }
+.days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.day { min-height: 62px; border: 1px solid var(--line); border-radius: 6px; padding: 3px 4px; background: #fffdf9; }
+.day.blank { border: 0; background: transparent; }
+.day.off { background: #f5f2ec; }
+.day .dn { font-size: 0.66rem; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+.day.hasexam { border-color: #d9b3ae; background: #fff6f4; }
+.day.hasexam .dn { color: var(--alert); }
+.ev { display: block; font-size: 0.6rem; line-height: 1.25; border-radius: 3px; padding: 1px 3px; margin-top: 2px; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-decoration: none; }
+.ev.exam { background: var(--alert); font-weight: 700; }
+.ev.is { background: var(--brand); }
+.ev.quiz { background: var(--quiz); font-weight: 700; }
+.ev.supp { background: #e6ece3; color: #33482f; }
+.ev.tbl { background: var(--tbl); }
+.ev.closed { background: #e6e2da; color: #5c564d; }
+
+table.data { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 620px; }
+table.data th { text-align: left; font-size: 0.72rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); border-bottom: 2px solid var(--line); padding: 6px 8px; white-space: nowrap; }
+table.data td { padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.data td.n { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
+table.data td.dt { white-space: nowrap; font-weight: 700; font-variant-numeric: tabular-nums; }
+table.data tr.exam td { background: #fff4f2; }
+table.data tr.exam td.dt, table.data tr.exam td.n { color: var(--alert); }
+table.data tr.mstart td { border-top: 2px solid var(--line); }
+table.data tr.off td { color: var(--muted); }
+.bar { display: inline-block; height: 9px; background: var(--brand); border-radius: 2px; vertical-align: middle; margin-right: 6px; }
+
+.tag { display: inline-block; font-size: 0.64rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; border-radius: 999px; padding: 2px 7px; white-space: nowrap; }
+.tag.exam { background: #f6dedb; color: var(--alert); }
+.tag.is { background: #efe4d6; color: #7a4d22; }
+.tag.quiz { background: #f2e9d2; color: #74540c; }
+.tag.supp { background: #e6ece3; color: #33482f; }
+.tag.tbl { background: #e4e0ec; color: #423659; }
+.tag.closed { background: #ebe7e0; color: #5c564d; }
+.small { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+.det { display: block; font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+code { font-size: 0.84em; background: #f2ece1; border-radius: 4px; padding: 1px 4px; word-break: break-word; }
+a.lnk { color: var(--brand); text-decoration: none; border-bottom: 1px solid #d9c9b2; }
+a.lnk:hover { border-bottom-color: var(--brand); }
+.foot { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+@media (max-width: 620px) {
+  .day { min-height: 54px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Biochemistry calendar</h1>
+    <p class="sub">Biochemistry and Genetics I &middot; BSCN 625 &middot; Fall 2026 &middot; Middletown &middot; every session, deadline and graded item on one page</p>
+    <nav class="nav" aria-label="Biochemistry pages">
+      <a class="here" href="Biochem_Calendar_2026.html">Calendar</a>
+      <a href="Biochem_Study_Plan_2026.html">Study plan</a>
+      <a href="Biochem_Course_Info_2026.html">Course information</a>
+      <a href="Biochem_Fall_2026.html">Evidence and analysis</a>
+    </nav>
+  </header>
+
+  <div class="card">
+    <div class="kpi">
+      <div><b>8</b><span>module exams &middot; 90% of the grade</span></div>
+      <div><b>21</b><span>graded check-in sessions &middot; 8%</span></div>
+      <div><b>22</b><span>graded quizzes, 11 deadlines &middot; 2%</span></div>
+      <div><b>167</b><span>Biochemistry exam points</span></div>
+      <div><b>Aug 4 &ndash; Dec 13</b><span>first session to last deadline</span></div>
+    </div>
+    <ul class="notes" style="margin-top:14px">
+      <li><b>Everything on this page that carries points is coloured.</b> Red is an exam, brown is an interactive session where the check-in is worth marks, gold is a quiz deadline, purple is the team-based learning session. Green supplemental sessions are optional and ungraded; grey days are official closures.</li>
+      <li class="alert"><b>Two deadlines fall after the material stops mattering.</b> The Globular and Fibrous Proteins quiz closes Sun Nov 1 on content examined Oct 6 and Oct 19, and the last three quizzes close Sun Dec 13 &mdash; four days after the Renal exam and two days after finals end. Do those three before Dec 9, when they are still revision.</li>
+      <li><b>Every quiz closes at 11:59 PM</b> and each one opens roughly two weeks ahead at 8:00 AM. Attempt limits are not uniform: three, six, twenty-five and unlimited all appear, sometimes within the same week. Read the limit on the individual quiz before spending an attempt.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Where the exam points are</h2>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Exam</th><th>Date and time</th><th>Lectures</th><th>Primers</th><th>Clinical vignettes</th><th>Points</th><th>Share</th></tr></thead>
+      <tbody>
+        <tr class="exam"><td><b>Foundations 1</b></td><td class="dt">Mon Aug 17<br>11 AM&ndash;1 PM</td><td>1&ndash;5</td><td>1&ndash;2</td><td>Toxic Exposure, Asthma</td><td class="n">28</td><td><span class="bar" style="width:56px"></span>17%</td></tr>
+        <tr class="exam"><td><b>Foundations 2</b></td><td class="dt">Mon Aug 31<br>10 AM&ndash;12 PM</td><td>6&ndash;12</td><td>&mdash;</td><td>Lactic Acidosis, Hemolytic Anemia</td><td class="n">44</td><td><span class="bar" style="width:88px"></span>26%</td></tr>
+        <tr><td><b>MSK 1</b></td><td class="dt">Tue Sep 15<br>10 AM&ndash;12 PM</td><td>13&ndash;17</td><td>3, 4, 5, 6</td><td>MERRF, Lynch syndrome</td><td class="n">15</td><td><span class="bar" style="width:30px"></span>9%</td></tr>
+        <tr><td><b>MSK 2</b></td><td class="dt">Tue Oct 6<br>10 AM&ndash;12 PM</td><td>18&ndash;21</td><td>&mdash;</td><td>Cystic Fibrosis, Mucopolysaccharidoses</td><td class="n">16</td><td><span class="bar" style="width:32px"></span>10%</td></tr>
+        <tr><td><b>Cardiopulmonary 1</b></td><td class="dt">Mon Oct 19<br>10 AM&ndash;12 PM</td><td>22&ndash;26</td><td>7&ndash;10</td><td>Globular Protein, Acid-Base Disorder, Fatty Acid Metabolic Defect</td><td class="n">14</td><td><span class="bar" style="width:28px"></span>8%</td></tr>
+        <tr><td><b>Cardiopulmonary 2</b></td><td class="dt">Mon Nov 2<br>11 AM&ndash;1 PM</td><td>27&ndash;30</td><td>11&ndash;13</td><td>&mdash;</td><td class="n">18</td><td><span class="bar" style="width:36px"></span>11%</td></tr>
+        <tr><td><b>GI</b></td><td class="dt">Mon Nov 23<br>9:30 AM&ndash;12 PM</td><td>31&ndash;36</td><td>14</td><td>Vitamins TBL</td><td class="n">8</td><td><span class="bar" style="width:16px"></span>5%</td></tr>
+        <tr><td><b>Renal</b></td><td class="dt">Wed Dec 9<br>10 AM&ndash;12 PM</td><td>37&ndash;42</td><td>&mdash;</td><td>Gout</td><td class="n">24</td><td><span class="bar" style="width:48px"></span>14%</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <ul class="notes" style="margin-top:14px">
+      <li><b>Biochemistry does not sit its own exams.</b> It contributes a block of questions to each of the eight shared module exams. The point values above are the Canvas gradebook score rows for those blocks.</li>
+      <li><b>43% of the Biochemistry exam grade is decided by Aug 31.</b> Foundations 1 and 2 are 72 of the 167 points, and both are over inside four weeks of the first session.</li>
+      <li>All eight exams are multiple choice in board format, delivered through ExamSoft. <b>The metabolic map is supplied in every exam</b>, and so is the NBOME adult laboratory values sheet.</li>
+      <li>No exam admission more than 15 minutes after the scheduled start.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>The semester at a glance</h2>
+    <div class="legend">
+      <span><i class="sw exam"></i>Module exam</span>
+      <span><i class="sw is"></i>Interactive session &mdash; check-in graded</span>
+      <span><i class="sw quiz"></i>Quiz deadline, 11:59 PM</span>
+      <span><i class="sw tbl"></i>Team-based learning</span>
+      <span><i class="sw supp"></i>Supplemental session, optional</span>
+      <span><i class="sw closed"></i>School closed</span>
+    </div>
+    <div class="months" id="months"></div>
+    <p class="small" style="margin-top:12px">Session dates and times follow the DO 2030 shared calendar. Two items appear on the Biochemistry Canvas modules but not on that calendar and are marked below: the Thu Oct 29 interactive session, whose time is unpublished, and the Fri Sep 25 and Fri Oct 30 supplemental sessions.</p>
+  </div>
+
+  <div class="card">
+    <h2>Every dated item, in order</h2>
+    <p class="lead">One row per event. The Counts for column says what the item is worth; a dash means it carries no marks.</p>
+    <div class="scroller">
+      <table class="data">
+        <thead><tr><th>Date</th><th>Time</th><th>What</th><th>Counts for</th><th>Pts</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card warn">
+    <h2>The eleven quiz deadlines in full</h2>
+    <p class="lead">Twenty-two graded quizzes, 163 points, all closing at 11:59 PM. Open them from <a class="lnk" href="https://touro.instructure.com/courses/168928/quizzes">the course quiz list</a>.</p>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Closes</th><th>Quizzes</th><th>Pts</th><th>Attempts</th><th>Exam it belongs to</th></tr></thead>
+      <tbody>
+        <tr><td class="dt">Mon Aug 17</td><td>Week 1 Overview &middot; Enzyme and ETC &middot; Signal Transduction and Carbohydrate Digestion</td><td class="n">15</td><td>unlimited / 6 / 6</td><td>Foundations 1, same day</td></tr>
+        <tr><td class="dt">Mon Aug 31</td><td>Glycolysis and TCA &middot; Gluconeogenesis and Glycogen &middot; Monosaccharides, HMP and NADPH 1</td><td class="n">26</td><td>6</td><td>Foundations 2, same day</td></tr>
+        <tr><td class="dt">Mon Sep 14</td><td>DNA Repair &middot; DNA Composition and Replication</td><td class="n">16</td><td>3</td><td>MSK 1, next day</td></tr>
+        <tr><td class="dt">Tue Sep 15</td><td>RNA Types and Synthesis</td><td class="n">8</td><td>3</td><td>MSK 1, same day</td></tr>
+        <tr><td class="dt">Tue Sep 22</td><td>Genetic Code &middot; Protein Translation</td><td class="n">16</td><td>3</td><td>MSK 2, two weeks early</td></tr>
+        <tr><td class="dt">Tue Oct 6</td><td>NADPH 2 and Glycoprotein</td><td class="n">8</td><td>unlimited</td><td>MSK 2, same day</td></tr>
+        <tr><td class="dt">Mon Oct 19</td><td>Lipid Digestion, Fatty Acid and TAG &middot; Overview and Acid-Base</td><td class="n">15</td><td>6</td><td>Cardiopulmonary 1, same day</td></tr>
+        <tr class="exam"><td class="dt">Sun Nov 1</td><td>Globular and Fibrous Proteins</td><td class="n">8</td><td>6</td><td>Content sat on Oct 6 and Oct 19 &mdash; this deadline is after both</td></tr>
+        <tr><td class="dt">Mon Nov 2</td><td>Cholesterol and Lipoprotein &middot; Phospholipid and Eicosanoid</td><td class="n">16</td><td>6</td><td>Cardiopulmonary 2, same day</td></tr>
+        <tr><td class="dt">Mon Nov 23</td><td>Macronutrients &middot; Vitamins and Iron</td><td class="n">12</td><td>3 / unlimited</td><td>GI, same day</td></tr>
+        <tr class="exam"><td class="dt">Sun Dec 13</td><td>Nitrogen Balance and Urea &middot; Amino Acid Inborn Errors and Heme &middot; Purine and Pyrimidine</td><td class="n">23</td><td>6</td><td>Renal was Dec 9 &mdash; four days earlier. Do these before it</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <ul class="notes" style="margin-top:14px">
+      <li><b>Nine of the eleven deadlines land on or after the exam the quiz belongs to.</b> Treating the deadline as the trigger to study means revising on exam day. Work each quiz in the week its lectures are taught and keep the deadline as a backstop.</li>
+      <li><b>Four further quizzes in the gradebook carry 2025 dates and are not on this year's schedule</b> &mdash; a Week 2 Pedigree Inheritance quiz, a Week 2 quiz marked F25, a Week 7 Regulation of Gene Expression quiz, and a duplicate Week 15 Vitamins and Iron quiz.</li>
+      <li>Alongside the graded set sit roughly thirty ungraded practice quizzes with unlimited attempts, plus a not-for-credit duplicate of most self-assessments. Those cost nothing and can be repeated.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Closures and short days that eat study time</h2>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Date</th><th>What</th><th>Effect on Biochemistry</th></tr></thead>
+      <tbody>
+        <tr><td class="dt">Mon Sep 7</td><td>Labor Day &mdash; school closed</td><td>Shortens the week before MSK 1</td></tr>
+        <tr><td class="dt">Fri Sep 11</td><td>Half day, classes end 12 PM &mdash; Erev Rosh Hashanah</td><td>Removes the weekend before MSK 1. Usable review time is Thu Sep 10 and Mon Sep 14</td></tr>
+        <tr><td class="dt">Mon Sep 21</td><td>Yom Kippur &mdash; school closed</td><td>MSK 2 block loses a day; the Sep 25 session is the only one that week</td></tr>
+        <tr><td class="dt">Fri Sep 25</td><td>Half day, classes end 12 PM &mdash; Erev Sukkot</td><td>Two lectures are covered in one 10&ndash;11 AM session</td></tr>
+        <tr><td class="dt">Fri Oct 2</td><td>Half day, classes end 12 PM &mdash; Hoshana Rabbah</td><td>The last teaching-free week before MSK 2</td></tr>
+        <tr><td class="dt">Thu Nov 26 &ndash; Fri Nov 27</td><td>Thanksgiving recess &mdash; school closed</td><td>Falls inside the Renal block, three days after it starts</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <ul class="notes" style="margin-top:14px">
+      <li><b>The Renal block is the scheduling problem of the term.</b> Six lectures, 24 points and eleven metabolic-map regions, taught between Nov 24 and Dec 3 with Thanksgiving in the middle. Weeks 14 and 16 are the only slack, and both fall before the material is taught.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>What each colour costs if you miss it</h2>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Item</th><th>Count</th><th>Worth</th><th>Recoverable</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag exam">Exam</span> Module exam</td><td class="n">8</td><td>90% of the course grade, 167 points</td><td>Only through a formally excused absence, and a makeup is capped at 90% of the raw score</td></tr>
+        <tr><td><span class="tag is">Check-in</span> Interactive session</td><td class="n">21</td><td>8% &mdash; one to two points each</td><td>No. Responses are graded for participation, not correctness, and only register from inside the classroom. Arriving late loses the first ones</td></tr>
+        <tr><td><span class="tag quiz">Quiz</span> Graded self-assessment</td><td class="n">22</td><td>2% &mdash; 163 quiz points</td><td>Only before the deadline. Graded for correct answers, with three to unlimited attempts</td></tr>
+        <tr><td><span class="tag tbl">TBL</span> Vitamins team-based learning</td><td class="n">1</td><td>Counted with the in-class participation component</td><td>No. Thu Nov 12, and it carries a peer contribution form</td></tr>
+        <tr><td><span class="tag supp">Optional</span> Supplemental session</td><td class="n">19</td><td>Nothing directly</td><td>Yes, but the five sitting the week before an exam are exam reviews</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <ul class="notes" style="margin-top:14px">
+      <li class="alert"><b>The polling app is named two different ways by the same course.</b> The syllabus says Poll Everywhere; the orientation deck says iClicker. Install both and settle it at the first session on Aug 4, because that 8% is pure attendance and the cheapest marks in the course.</li>
+      <li>Attendance at interactive sessions is required by college policy and all sessions are in person, with no remote option. An excused absence needs a form filed with the Office of Student Affairs.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <p class="foot">Sources: the DO 2030 shared calendar export for every session date and time, the Fall 2026 syllabus dated 7/22 for the graded components and exam policy, the Canvas course gradebook for exam point values and quiz deadlines, and the registrar's TouroCOM academic calendar for closures. Where Canvas and the syllabus disagree on quiz mechanics, Canvas is what the deadlines run on. Built 2026-07-29.</p>
+  </div>
+</div>
+
+<script>
+const EV = [
+  {d:"2026-08-04", t:"1&ndash;2 PM", k:"is", s:"IS 1", ti:"Interactive session", det:"Watch first: Lecture 1 Overview of Metabolic Pathways, Lecture 2 Enzymes and Enzyme Kinetics", c:"8% check-in"},
+  {d:"2026-08-06", t:"8:30&ndash;10 AM", k:"is", s:"IS 2", ti:"Interactive session", det:"Watch first: Lecture 3 Electron Transport Chain, Lecture 4 Signal Transduction, Lecture 5 Carbohydrate Digestion, plus Primer 1 Thermodynamics and Primer 2 Carbohydrate Structures", c:"8% check-in"},
+  {d:"2026-08-07", t:"10&ndash;11 AM", k:"supp", s:"Suppl", ti:"Supplemental session", det:"Mini review of the week plus student questions", c:"&mdash;"},
+  {d:"2026-08-14", t:"10&ndash;11 AM", k:"supp", s:"Review", ti:"Supplemental session &mdash; exam review", det:"The week before Foundations 1", c:"&mdash;"},
+  {d:"2026-08-17", t:"11 AM&ndash;1 PM", k:"exam", s:"FOUND 1", ti:"Foundations Exam 1", det:"Lectures 1&ndash;5, Primers 1&ndash;2, vignettes Toxic Exposure and Asthma", c:"About 28 Biochemistry points", p:28},
+  {d:"2026-08-17", t:"11:59 PM", k:"quiz", s:"3 quizzes", ti:"Three graded quizzes close", det:"Week 1 Overview (1 pt, unlimited) &middot; Enzyme and ETC (8 pts, 6 attempts) &middot; Signal Transduction and Carbohydrate Digestion (6 pts, 6 attempts)", c:"15 quiz points", p:15},
+  {d:"2026-08-19", t:"1&ndash;2 PM", k:"is", s:"IS 3", ti:"Interactive session", det:"Watch first: Lecture 6 Glycolysis Parts I and II, Lecture 7 PDH and TCA cycle", c:"8% check-in"},
+  {d:"2026-08-20", t:"10&ndash;11 AM", k:"is", s:"IS 4", ti:"Interactive session", det:"Watch first: Lecture 8 Gluconeogenesis and Ethanol Metabolism, Lecture 9 Glycogen Metabolism", c:"8% check-in"},
+  {d:"2026-08-21", t:"10&ndash;11 AM", k:"supp", s:"Suppl", ti:"Supplemental session", det:"", c:"&mdash;"},
+  {d:"2026-08-27", t:"8:30&ndash;10 AM", k:"is", s:"IS 5", ti:"Interactive session", det:"Watch first: Lecture 10 Mono- and Disaccharide Metabolism, Lecture 11 HMP shunt and NADPH Part 1, Lecture 12 NADPH Part 2", c:"8% check-in"},
+  {d:"2026-08-28", t:"11 AM&ndash;12 PM", k:"supp", s:"Review", ti:"Supplemental session &mdash; exam review", det:"The week before Foundations 2", c:"&mdash;"},
+  {d:"2026-08-31", t:"10 AM&ndash;12 PM", k:"exam", s:"FOUND 2", ti:"Foundations Exam 2", det:"Lectures 6&ndash;12, vignettes Lactic Acidosis and Hemolytic Anemia. The largest Biochemistry block of the term", c:"About 44 Biochemistry points", p:44},
+  {d:"2026-08-31", t:"11:59 PM", k:"quiz", s:"3 quizzes", ti:"Three graded quizzes close", det:"Glycolysis and TCA (9 pts) &middot; Gluconeogenesis and Glycogen (9 pts) &middot; Monosaccharides, HMP and NADPH 1 (8 pts). Six attempts each", c:"26 quiz points", p:26},
+  {d:"2026-09-01", t:"8&ndash;9 AM", k:"is", s:"IS 6", ti:"Interactive session", det:"Watch first: Lecture 13 DNA Composition and Packaging, Lecture 14 DNA Replication, plus Primer 3 DNA Structure and Primer 4 Nucleotide Structure. The morning after Foundations 2", c:"8% check-in"},
+  {d:"2026-09-03", t:"10&ndash;11 AM", k:"is", s:"IS 7", ti:"Interactive session", det:"Watch first: Lecture 15 DNA Repair, plus Primer 5 Cell Cycle and Division", c:"8% check-in"},
+  {d:"2026-09-04", t:"11 AM&ndash;12 PM", k:"supp", s:"Suppl", ti:"Supplemental session", det:"", c:"&mdash;"},
+  {d:"2026-09-07", t:"all day", k:"closed", s:"Closed", ti:"Labor Day &mdash; school closed", det:"", c:"&mdash;"},
+  {d:"2026-09-08", t:"8&ndash;9 AM", k:"is", s:"IS 8", ti:"Interactive session", det:"Watch first: Lecture 16 RNA Types and Synthesis, Lecture 17 RNA Processing, plus Primer 6 RNA Structure", c:"8% check-in"},
+  {d:"2026-09-11", t:"11 AM&ndash;12 PM", k:"supp", s:"Suppl", ti:"Supplemental session &mdash; half day", det:"Classes end 12 PM for Erev Rosh Hashanah", c:"&mdash;"},
+  {d:"2026-09-14", t:"11:59 PM", k:"quiz", s:"2 quizzes", ti:"Two graded quizzes close", det:"DNA Repair &middot; DNA Composition and Replication. Three attempts each", c:"16 quiz points", p:16},
+  {d:"2026-09-15", t:"10 AM&ndash;12 PM", k:"exam", s:"MSK 1", ti:"MSK Exam 1", det:"Lectures 13&ndash;17, Primers 3&ndash;6, vignettes MERRF and Lynch syndrome", c:"About 15 Biochemistry points", p:15},
+  {d:"2026-09-15", t:"11:59 PM", k:"quiz", s:"1 quiz", ti:"Graded quiz closes", det:"RNA Types and Synthesis. Three attempts", c:"8 quiz points", p:8},
+  {d:"2026-09-17", t:"10&ndash;11 AM", k:"is", s:"IS 9", ti:"Interactive session", det:"Watch first: Lecture 18 Genetic Code", c:"8% check-in"},
+  {d:"2026-09-17", t:"11 AM&ndash;12 PM", k:"is", s:"IS 10", ti:"Second interactive session, back to back", det:"Watch first: Lecture 19 Translation and Co- and Post-Translational Modifications. The only day in the term with two sessions", c:"8% check-in"},
+  {d:"2026-09-18", t:"11 AM&ndash;12 PM", k:"supp", s:"Suppl", ti:"Supplemental session", det:"", c:"&mdash;"},
+  {d:"2026-09-21", t:"all day", k:"closed", s:"Closed", ti:"Yom Kippur &mdash; school closed", det:"", c:"&mdash;"},
+  {d:"2026-09-22", t:"11:59 PM", k:"quiz", s:"2 quizzes", ti:"Two graded quizzes close", det:"Genetic Code &middot; Protein Translation. Three attempts each", c:"16 quiz points", p:16},
+  {d:"2026-09-25", t:"10&ndash;11 AM", k:"is", s:"IS 11", ti:"Interactive session", det:"Watch first: Lecture 20 Fibrous Proteins, Collagen and Elastin; Lecture 21 Glycoproteins and Proteoglycans", c:"8% check-in"},
+  {d:"2026-09-25", t:"11 AM&ndash;12 PM", k:"supp", s:"Suppl", ti:"Supplemental session &mdash; half day", det:"On the Canvas modules, not on the shared calendar. Classes end 12 PM for Erev Sukkot", c:"&mdash;"},
+  {d:"2026-10-02", t:"10&ndash;11 AM", k:"supp", s:"Suppl", ti:"Supplemental session &mdash; half day", det:"Classes end 12 PM for Hoshana Rabbah", c:"&mdash;"},
+  {d:"2026-10-05", t:"9&ndash;10 AM", k:"is", s:"IS 12", ti:"Interactive session", det:"Watch first: Lecture 22 Globular Proteins and Hemoglobin, Lecture 23 Acid-Base Balance, plus Primers 7 Amino Acid, 8 Protein Structure and 9 Acid-Base", c:"8% check-in"},
+  {d:"2026-10-06", t:"10 AM&ndash;12 PM", k:"exam", s:"MSK 2", ti:"MSK Exam 2", det:"Lectures 18&ndash;21, vignettes Cystic Fibrosis and Mucopolysaccharidoses", c:"About 16 Biochemistry points", p:16},
+  {d:"2026-10-06", t:"11:59 PM", k:"quiz", s:"1 quiz", ti:"Graded quiz closes", det:"NADPH 2 and Glycoprotein. Unlimited attempts", c:"8 quiz points", p:8},
+  {d:"2026-10-08", t:"8:30&ndash;10 AM", k:"is", s:"IS 13", ti:"Interactive session", det:"Watch first: Lecture 24 Lipid Digestion and Absorption; the acid-base and globular protein material continues", c:"8% check-in"},
+  {d:"2026-10-09", t:"9&ndash;10 AM", k:"supp", s:"Suppl", ti:"Supplemental session", det:"Confirmed 9&ndash;10 AM; an older syllabus version said 1&ndash;2 PM", c:"&mdash;"},
+  {d:"2026-10-16", t:"10&ndash;11 AM", k:"supp", s:"Review", ti:"Supplemental session &mdash; exam review", det:"The week before Cardiopulmonary 1. No interactive session falls this week, and lectures 25, 26 and Primer 10 are self-directed", c:"&mdash;"},
+  {d:"2026-10-19", t:"10 AM&ndash;12 PM", k:"exam", s:"CP 1", ti:"Cardiopulmonary Exam 1", det:"Lectures 22&ndash;26, Primers 7&ndash;10, vignettes Globular Protein, Acid-Base Disorder and Fatty Acid Metabolic Defect", c:"About 14 Biochemistry points", p:14},
+  {d:"2026-10-19", t:"11:59 PM", k:"quiz", s:"2 quizzes", ti:"Two graded quizzes close", det:"Lipid Digestion, Fatty Acid and TAG &middot; Overview and Acid-Base. Six attempts each", c:"15 quiz points", p:15},
+  {d:"2026-10-22", t:"10&ndash;11 AM", k:"is", s:"IS 14", ti:"Interactive session", det:"Watch first: Lecture 27 Cholesterol Properties and Synthesis, Lecture 28 Phospholipids and Sphingolipids, plus Primer 11 Cholesterol and Bile Acid Structures", c:"8% check-in"},
+  {d:"2026-10-23", t:"11 AM&ndash;12 PM", k:"supp", s:"Suppl", ti:"Supplemental session", det:"", c:"&mdash;"},
+  {d:"2026-10-27", t:"9&ndash;10 AM", k:"is", s:"IS 15", ti:"Interactive session", det:"Watch first: Lecture 29 Lipoproteins Parts 1 and 2, Lecture 30 Eicosanoids, plus Primer 12 Lipoproteins and Primer 13 Eicosanoid Structure", c:"8% check-in"},
+  {d:"2026-10-29", t:"time unpublished", k:"is", s:"IS 16", ti:"Interactive session", det:"On the Canvas modules, not on the shared calendar. Confirm the time in class", c:"8% check-in"},
+  {d:"2026-10-30", t:"11 AM&ndash;12 PM", k:"supp", s:"Suppl", ti:"Supplemental session", det:"On the Canvas modules, not on the shared calendar", c:"&mdash;"},
+  {d:"2026-11-01", t:"11:59 PM", k:"quiz", s:"1 quiz", ti:"Graded quiz closes", det:"Globular and Fibrous Proteins. Six attempts. Its content was examined on Oct 6 and Oct 19, so this deadline sits behind both", c:"8 quiz points", p:8},
+  {d:"2026-11-02", t:"11 AM&ndash;1 PM", k:"exam", s:"CP 2", ti:"Cardiopulmonary Exam 2", det:"Lectures 27&ndash;30, Primers 11&ndash;13", c:"About 18 Biochemistry points", p:18},
+  {d:"2026-11-02", t:"11:59 PM", k:"quiz", s:"2 quizzes", ti:"Two graded quizzes close", det:"Cholesterol and Lipoprotein &middot; Phospholipid and Eicosanoid. Six attempts each", c:"16 quiz points", p:16},
+  {d:"2026-11-06", t:"10&ndash;11 AM", k:"supp", s:"Suppl", ti:"Supplemental session", det:"Nothing else is scheduled this week &mdash; the last light week of the term", c:"&mdash;"},
+  {d:"2026-11-10", t:"8:30&ndash;10 AM", k:"is", s:"IS 17", ti:"Interactive session, 90 minutes", det:"Watch first: Lecture 31 Heme Metabolism, Lecture 32 Macronutrients, Insulin and Glucagon, plus Primer 14 Nutrition", c:"8% check-in"},
+  {d:"2026-11-12", t:"8:30&ndash;10 AM", k:"tbl", s:"TBL", ti:"Interactive session and team-based learning", det:"Fat-soluble vitamins, water-soluble vitamins, Lecture 36 Iron Metabolism, and the Vitamins TBL. Read the TBL outline and the peer contribution form beforehand", c:"In-class participation"},
+  {d:"2026-11-13", t:"10&ndash;11 AM", k:"supp", s:"Suppl", ti:"Supplemental session", det:"", c:"&mdash;"},
+  {d:"2026-11-20", t:"12&ndash;1 PM", k:"supp", s:"Review", ti:"Supplemental session &mdash; exam review", det:"The week before the GI exam", c:"&mdash;"},
+  {d:"2026-11-23", t:"9:30 AM&ndash;12 PM", k:"exam", s:"GI", ti:"GI Exam", det:"Lectures 31&ndash;36, Primer 14, the Vitamins TBL", c:"About 8 Biochemistry points", p:8},
+  {d:"2026-11-23", t:"11:59 PM", k:"quiz", s:"2 quizzes", ti:"Two graded quizzes close", det:"Macronutrients (3 attempts) &middot; Vitamins and Iron (unlimited)", c:"12 quiz points", p:12},
+  {d:"2026-11-24", t:"10&ndash;11 AM", k:"is", s:"IS 18", ti:"Interactive session", det:"Watch first: Lecture 37 Nitrogen Balance, Dietary Protein Digestion and Transaminases; Lecture 38 Urea Cycle", c:"8% check-in"},
+  {d:"2026-11-25", t:"12&ndash;1 PM", k:"supp", s:"Suppl", ti:"Supplemental session", det:"Confirmed 12&ndash;1 PM", c:"&mdash;"},
+  {d:"2026-11-26", t:"all day", k:"closed", s:"Closed", ti:"Thanksgiving recess &mdash; school closed", det:"Nov 26 and 27", c:"&mdash;"},
+  {d:"2026-11-27", t:"all day", k:"closed", s:"Closed", ti:"Thanksgiving recess &mdash; school closed", det:"", c:"&mdash;"},
+  {d:"2026-12-01", t:"10&ndash;11 AM", k:"is", s:"IS 19", ti:"Interactive session", det:"Watch first: Lecture 39 Amino Acid Metabolism, Lecture 40 Inborn Errors of Amino Acid Metabolism", c:"8% check-in"},
+  {d:"2026-12-03", t:"10&ndash;11 AM", k:"is", s:"IS 20", ti:"Interactive session", det:"Watch first: Lecture 41 Synthesis of Purines and Pyrimidines, Lecture 42 Catabolism of Purines and Pyrimidines", c:"8% check-in"},
+  {d:"2026-12-04", t:"10&ndash;11 AM", k:"supp", s:"Last class", ti:"Supplemental session &mdash; last day of class", det:"", c:"&mdash;"},
+  {d:"2026-12-08", t:"10&ndash;11 AM", k:"supp", s:"Review", ti:"Supplemental session &mdash; final review", det:"The day before the Renal exam", c:"&mdash;"},
+  {d:"2026-12-09", t:"10 AM&ndash;12 PM", k:"exam", s:"RENAL", ti:"Renal Exam", det:"Lectures 37&ndash;42, vignette Gout", c:"About 24 Biochemistry points", p:24},
+  {d:"2026-12-11", t:"all day", k:"closed", s:"Finals end", ti:"Last day of finals", det:"", c:"&mdash;"},
+  {d:"2026-12-13", t:"11:59 PM", k:"quiz", s:"3 quizzes", ti:"Final three graded quizzes close", det:"Nitrogen Balance and Urea (7 pts) &middot; Amino Acid Inborn Errors and Heme (8 pts) &middot; Purine and Pyrimidine (8 pts). Six attempts each. Four days after the Renal exam", c:"23 quiz points", p:23}
+];
+
+const KIND = {exam:"Exam", is:"Check-in", quiz:"Quiz", supp:"Optional", tbl:"TBL", closed:"Closed"};
+const MONTHS = [[2026,7,"August 2026"],[2026,8,"September 2026"],[2026,9,"October 2026"],[2026,10,"November 2026"],[2026,11,"December 2026"]];
+const DOW = ["Su","Mo","Tu","We","Th","Fr","Sa"];
+const MN = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const DN = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+
+function parse(d){ const p = d.split("-").map(Number); return new Date(p[0], p[1]-1, p[2]); }
+
+// month grids
+const byDay = {};
+EV.forEach(function(e){ (byDay[e.d] = byDay[e.d] || []).push(e); });
+const order = {exam:0, quiz:1, tbl:2, is:3, supp:4, closed:5};
+Object.keys(byDay).forEach(function(k){ byDay[k].sort(function(a,b){ return order[a.k]-order[b.k]; }); });
+
+let mh = "";
+MONTHS.forEach(function(m){
+  const y = m[0], mo = m[1];
+  const first = new Date(y, mo, 1).getDay();
+  const len = new Date(y, mo+1, 0).getDate();
+  mh += '<div class="mo"><h3>' + m[2] + '</h3><div class="dow">';
+  DOW.forEach(function(d){ mh += "<div>" + d + "</div>"; });
+  mh += '</div><div class="days">';
+  for (let i = 0; i < first; i++) { mh += '<div class="day blank"></div>'; }
+  for (let day = 1; day <= len; day++) {
+    const key = y + "-" + String(mo+1).padStart(2,"0") + "-" + String(day).padStart(2,"0");
+    const evs = byDay[key] || [];
+    const dow = new Date(y, mo, day).getDay();
+    let cls = "day";
+    if (dow === 0 || dow === 6) { cls += " off"; }
+    if (evs.some(function(e){ return e.k === "exam"; })) { cls += " hasexam"; }
+    if (evs.some(function(e){ return e.k === "closed"; })) { cls += " off"; }
+    mh += '<div class="' + cls + '"><span class="dn">' + day + "</span>";
+    evs.forEach(function(e){ mh += '<span class="ev ' + e.k + '" title="' + e.ti + '">' + e.s + "</span>"; });
+    mh += "</div>";
+  }
+  mh += "</div></div>";
+});
+document.getElementById("months").innerHTML = mh;
+
+// chronological list
+let rh = "";
+let lastMonth = null;
+EV.forEach(function(e){
+  const dt = parse(e.d);
+  const mstart = (lastMonth !== null && dt.getMonth() !== lastMonth) ? " mstart" : "";
+  lastMonth = dt.getMonth();
+  const cls = (e.k === "exam" ? "exam" : (e.k === "closed" ? "off" : ""));
+  rh += '<tr class="' + cls + mstart + '">'
+     + '<td class="dt">' + DN[dt.getDay()] + " " + MN[dt.getMonth()] + " " + dt.getDate() + "</td>"
+     + '<td class="small" style="white-space:nowrap">' + e.t + "</td>"
+     + "<td><span class=\"tag " + e.k + '">' + KIND[e.k] + "</span> <b>" + e.ti + "</b>"
+     + (e.det ? '<span class="det">' + e.det + "</span>" : "") + "</td>"
+     + '<td class="small">' + e.c + "</td>"
+     + '<td class="n">' + (e.p ? e.p : "&mdash;") + "</td></tr>";
+});
+document.getElementById("rows").innerHTML = rh;
+</script>
+</body>
+</html>

@@ -25,6 +25,10 @@ h1 { font-family: Fraunces, Georgia, serif; font-size: 1.75rem; margin: 0 0 6px;
 .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
 .tabs button { border: 1px solid var(--line); background: #fff; font: inherit; font-weight: 600; font-size: 0.9rem; padding: 8px 14px; border-radius: 999px; cursor: pointer; color: var(--ink); }
 .tabs button.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+.xnav { display: flex; gap: 8px; flex-wrap: wrap; align-items: baseline; margin-top: 11px; }
+.xnav span { font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.xnav a { font-size: 0.8rem; font-weight: 700; text-decoration: none; color: var(--brand); background: #f6f0e5; border: 1px solid var(--line); border-radius: 999px; padding: 4px 11px; }
+.xnav a:hover { background: #efe5d3; }
 .panel { display: none; }
 .panel.active { display: block; }
 
@@ -130,6 +134,12 @@ ol.top li.warn-li { list-style: none; margin-left: -20px; background: #fff4f2; b
       <button type="button" role="tab" id="tab-res" aria-controls="res" aria-selected="false" data-tab="res">Resources, ranked</button>
       <button type="button" role="tab" id="tab-method" aria-controls="method" aria-selected="false" data-tab="method">How to study it</button>
     </div>
+    <div class="xnav">
+      <span>Also for this course:</span>
+      <a href="Biochem_Calendar_2026.html">Calendar</a>
+      <a href="Biochem_Study_Plan_2026.html">Study plan</a>
+      <a href="Biochem_Course_Info_2026.html">Course information</a>
+    </div>
   </header>
 
   <!-- ================= WEEKLY PLAN ================= -->
@@ -226,6 +236,7 @@ ol.top li.warn-li { list-style: none; margin-left: -20px; background: #fff4f2; b
               <li><b>The highest-value half hour available before Aug 17: the ETC inhibitor and uncoupler table in the faculty review deck.</b> The 2026 Foundations 1 review contains <b>106 terms that appear in no available lecture deck</b>, and the substantive cluster is electron-transport toxicology with named agents and their antidotes &mdash; arsenic and dimercaprol, atractyloside, pentachlorophenol, oligomycin, malonate, carbon monoxide, Wilson's disease, copper, mercury, barbiturates. The 2026 disease list confirms the emphasis by naming "CO and CN poisoning" as one of only six conditions. This content is review-only; it is not in the slides.</li>
               <li class="alert"><b>Read the orphan copy of the review, not the one linked in the module.</b> Two copies of the 2026 Foundations 1 review exist on Canvas with the same date. The module-linked <code>BG Team Foundation Exam #1 Review.pptx</code> is 44 slides; the unlinked <code>Fall 2026 Foundation Exam #1 Review.pptx</code> is 49 and the shorter one is a strict subset of it. The extra five slides are nutrition material.</li>
               <li><b>Two teaching-assistant files, then stop.</b> <code>2023 Middletown TA Review- Biochem Exam 1.pdf</code> carries 54 clean questions belonging to this exam, more than any other single file; <code>Biochemistry Exam 1 Review 2024.pptx.pdf</code> carries 47. Both are in the archive under the 2024 and 2023 material rather than under anything labelled Foundations.</li>
+              <li><b>Drill the double-reciprocal plot until the five inhibition patterns are automatic, because every figure this course has ever handed out belongs to this exam.</b> Nine distinct figures sit on Canvas and all nine are Foundations 1 material: four double-reciprocal plots, two pedigrees, a globin structure, an oxygen dissociation curve and a feedback schematic. The files are in <code>canvas/orphans/quiz/</code> and <code>canvas/orphans/reference/</code>. The single distinction worth over-practising is <b>competitive against mixed</b> &mdash; both steepen the line, and they separate only on whether the y-intercept moved. See <b>What the exams ask</b> for what each figure contains. <span class="evi">Eight of the nine are dated 2019, so they are evidence of how a figure question is drawn here, not of where the topics now sit.</span></li>
               <li class="no"><span class="chip n">Expect</span>Short items. Roughly 40-word stems, five options, one-step mechanism reasoning, and <b>the lowest vignette rate of any exam in the course at 15.5%</b>. Not paragraphs.</li>
               <li class="no"><span class="chip skip">Skip</span><b>The ETC energy-yield calculation is the exception to that.</b> The topic list asks for it explicitly, and the archive's questions on lectures 1&ndash;5 flag calculation zero times. Do it from the topic list, because past questions will not make you.</li>
             </ul>
@@ -1016,6 +1027,32 @@ ol.top li.warn-li { list-style: none; margin-left: -20px; background: #fff4f2; b
       </ul>
     </div>
 
+    <div class="card">
+      <h2>The figures, and there are only four kinds</h2>
+      <p class="lead">The question files record that an image was attached but never what it showed, so the figure load was something to anticipate rather than prepare for. The 21 image files held on Canvas have since been read; they reduce to <b>9 distinct figures</b>, and none of them appears in any row of the 22,756-question corpus. Across all nine there are only <b>four kinds of drawing</b>, and three of the nine are the same double-reciprocal plot asked three different ways. <b>One caution that limits all of this:</b> only one of the nine is dated 2025. The other eight are 2019, which predates the eight-module merge, so they are evidence of how this course <i>draws</i> a figure question and not evidence that these topics still sit where they sat.</p>
+      <div class="scroller">
+      <table class="data">
+        <thead><tr><th>Kind</th><th>How many</th><th>What is actually being tested</th><th>Where it belongs</th></tr></thead>
+        <tbody>
+          <tr class="hi"><td><b>Double-reciprocal plot</b></td><td class="n">4</td><td>Inhibition type from line geometry, or Km and Vmax from intercepts</td><td>Foundations 1, enzyme lectures</td></tr>
+          <tr><td>Pedigree</td><td class="n">2</td><td>Mode of inheritance, then a recurrence risk</td><td>Foundations 1</td></tr>
+          <tr><td>Labelled structure</td><td class="n">2</td><td>Secondary structure, and an oxygen dissociation curve shift</td><td>Foundations 1, protein lectures</td></tr>
+          <tr><td>Pathway schematic</td><td class="n">1</td><td>End-product feedback inhibition of the committed step</td><td>Foundations 1, regulation</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <ul class="notes" style="margin-top:14px">
+        <li><b>Every figure of the nine belongs to Foundations 1 material.</b> Not one is a metabolic pathway map, a clinical image or a gel. If a figure appears on a later exam it will be a kind of drawing that has no precedent in what the course has handed out.</li>
+        <li class="alert"><b>The five-option inhibition plot is the one worth drilling, and two of its five options are separated by a few pixels.</b> One figure carries five double-reciprocal panels, one per inhibition type: competitive, uncompetitive, pure noncompetitive, and mixed in both directions. The trap is that <b>competitive and mixed both show a steeper line and a rightward x-intercept shift</b>, and differ only in whether the two lines meet exactly on the y-axis or just to the left of it. Practise the distinction as "did 1/Vmax move" rather than "did the line get steeper". The two mixed panels differ only in which side of the x-axis they cross on, which is the same question as whether apparent Km rose or fell.</li>
+        <li><b>On the methotrexate plot, three of the four distractors are beaten without any kinetics.</b> The set asks which plot correctly shows methotrexate inhibiting dihydrofolate reductase. Two options put the <i>inhibitor</i> on the x-axis where the substrate belongs, and a third inverts the concentration order so that more inhibitor gives a shallower line. Check the axis label and the label order before reading the geometry.</li>
+        <li><b>The numeric plot uses numbers that divide cleanly, which is the course signalling that it wants the arithmetic done.</b> A y-intercept of 0.8 and an x-intercept of &minus;8 give <b>Vmax = 1.25 &micro;M/min and Km = 0.125 mM, or 125 &micro;M</b>. The reaction scheme is printed beside it because Km = (k&#8331;&#8321; + k&#8322;)/k&#8321; is the follow-on ask. kcat cannot be obtained from it: total enzyme concentration is not given. <b>Two question numbers share this one figure</b>, so read it carefully once.</li>
+        <li class="alert"><b>Two pedigrees, two different answers, from the same course.</b> One is autosomal recessive and one is X-linked recessive, so neither yields to pattern-matching the shape of the drawing. On the X-linked one the <b>double line joining two first cousins is the mechanism, not decoration</b> &mdash; it is what produces an affected <i>female</i>, which needs a carrier mother and an affected father. Read that double line as ornament and the affected female looks like evidence against X-linkage, which is exactly the wrong turn. The course hands out the standard symbol sheet in Resources, and it distinguishes dot-in-circle, an obligate carrier who will <i>not</i> manifest, from half-filled, a nonpenetrant carrier who <i>may</i>.</li>
+        <li><b>On the oxygen dissociation curve, what has <i>not</i> changed rules out most of the options.</b> The patient curve is right-shifted, but it stays sigmoidal and reaches the same plateau. Cooperativity intact rules out anything about lost subunit interaction or a myoglobin-like curve; an unchanged plateau rules out anaemia. That leaves reduced affinity and a raised P50: raised 2,3-BPG, acidosis through the Bohr effect, raised CO&#8322;, or fever.</li>
+        <li><b>The structure figure contains no beta sheet anywhere</b> &mdash; it is one all-helical globin domain wrapped round a heme, with an arrow on a helix. Every sheet-based and coil-based distractor is excluded by the image itself.</li>
+        <li><b>The archive's own figures are mostly not worth chasing.</b> Twenty-eight more images sit in the archive uncollected, but <b>22 of them are Spring Medical Genetics exam material</b> and two more are 2021 exam-scope screenshots written under the old four-exam numbering. The only ones with real value are the <b>two Renal concept maps</b> from 2025, which cover the module the archive supplies most thinly.</li>
+      </ul>
+    </div>
+
     <div class="card warn">
       <h2>What this analysis cannot tell you</h2>
       <ul class="notes">
@@ -1023,7 +1060,7 @@ ol.top li.warn-li { list-style: none; margin-left: -20px; background: #fff4f2; b
         <li><b>How any named professor writes questions</b>, with the single exception noted at the top of this tab. Every other profile here describes questions <i>about</i> a body of lecture content, grouped by whoever teaches it.</li>
         <li><b>Whether the low-footprint primers are genuinely unexamined.</b> Their low weight rests on <b>absence</b> of evidence in a collection that is 87% teaching-assistant and interactive material. Teaching assistants may simply not review structural primer content. Read them once; do not build weeks around them.</li>
         <li><b>Whether the Canvas quizzes are worth doing as preparation.</b> 403 of them were catalogued and never extracted. 14 reached the corpus and none were usable. Unanswerable from this material.</li>
-        <li><b>What any exam figure looks like.</b> The corpus records that an image was attached, never what it showed. On the exam with a one-in-four image rate, that gap cannot be closed from question files &mdash; only from the slides.</li>
+        <li><b>How many figures an exam carries, and what the rest of them show.</b> The nine figures held on Canvas have now been read and are summarised above, but nine is a small sample against the several hundred questions the corpus flags as carrying an image, and eight of the nine are dated 2019. Knowing which <i>kinds</i> of drawing this course produces is not the same as knowing the figure load of any 2026 exam, and nothing in that transcription revised a topic weight or a time allocation on this page.</li>
       </ul>
     </div>
   </div>
