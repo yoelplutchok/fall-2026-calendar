@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Biochemistry and Genetics I &mdash; evidence and analysis, Fall 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&amp;family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4f0e8;
+  --paper: #fffcf7;
+  --ink: #1c1916;
+  --muted: #6a635a;
+  --line: #e2dacd;
+  --brand: #8b5a2b;
+  --alert: #8b1e1e;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Source Sans 3", system-ui, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.5; }
+.wrap { max-width: 880px; margin: 0 auto; padding: 24px 16px 72px; }
+header { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; margin-bottom: 16px; }
+h1 { font-family: Fraunces, Georgia, serif; font-size: 1.7rem; margin: 0 0 6px; }
+.sub { margin: 0; color: var(--muted); font-size: 0.94rem; }
+.nav { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.nav a { border: 1px solid var(--line); background: #fff; font-weight: 600; font-size: 0.9rem; padding: 8px 14px; border-radius: 999px; color: var(--ink); text-decoration: none; }
+.nav a.here { background: var(--ink); color: #fff; border-color: var(--ink); }
+.nav a:hover { border-color: var(--brand); }
+
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
+.card h2 { font-family: Fraunces, Georgia, serif; font-size: 1.15rem; margin: 0 0 5px; }
+.card .kicker { font-size: 0.88rem; color: var(--muted); margin: 0 0 12px; }
+.card p { font-size: 0.92rem; margin: 0 0 9px; }
+.card p:last-child { margin-bottom: 0; }
+.card ul { margin: 0; padding-left: 19px; }
+.card ul li { font-size: 0.92rem; margin-bottom: 7px; }
+.card ul li:last-child { margin-bottom: 0; }
+
+.kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 9px; }
+.kpi div { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 13px; }
+.kpi b { display: block; font-family: Fraunces, Georgia, serif; font-size: 1.4rem; line-height: 1.1; }
+.kpi span { font-size: 0.79rem; color: var(--muted); }
+
+.scroller { overflow-x: auto; }
+table.data { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 480px; }
+table.data th { text-align: left; font-size: 0.7rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); border-bottom: 2px solid var(--line); padding: 6px 8px; }
+table.data td { padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.data tr:last-child td { border-bottom: 0; }
+table.data td.n, table.data th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+table.data td.n { font-weight: 700; }
+table.data td.k { font-weight: 700; white-space: nowrap; }
+table.data tr.hi td { background: #fff4f2; }
+table.data tr.hi td.n { color: var(--alert); }
+table.data tr.dim td { color: var(--muted); }
+
+.takeaway { font-size: 0.91rem; background: #fdfbf5; border-left: 3px solid var(--brand); border-radius: 0 6px 6px 0; padding: 9px 12px; margin-top: 12px; }
+.takeaway b.t { display: block; font-family: Fraunces, Georgia, serif; font-size: 0.95rem; margin-bottom: 3px; }
+.note { font-size: 0.85rem; color: var(--muted); margin-top: 11px; }
+a.lnk { color: var(--brand); text-decoration: none; border-bottom: 1px solid #d9c9b2; }
+a.lnk:hover { border-bottom-color: var(--brand); }
+code { font-size: 0.85em; background: #f2ece1; border-radius: 4px; padding: 1px 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Evidence and analysis</h1>
+    <p class="sub">What a survey of the course archive shows about the questions, and how the study priorities follow from it</p>
+    <nav class="nav" aria-label="Pages">
+      <a href="Biochem_Fall_2026.html">Weekly guide</a>
+      <a href="Biochem_Course_Info_2026.html">Course information</a>
+      <a class="here" href="Biochem_Evidence_2026.html">Evidence and analysis</a>
+    </nav>
+  </header>
+
+  <div class="card">
+    <h2>What was surveyed</h2>
+    <p class="kicker">Every Biochemistry file reachable through Canvas and the SGA upperclassmen archive was catalogued, its text extracted, and its questions parsed and sorted onto the 2026 lecture list.</p>
+    <div class="kpi">
+      <div><b>2,319</b><span>files catalogued, 2018&ndash;2026</span></div>
+      <div><b>16,283</b><span>question items extracted</span></div>
+      <div><b>3,937</b><span>complete multiple-choice items with options intact</span></div>
+      <div><b>11,430</b><span>flashcard notes across 33 decks</span></div>
+      <div><b>50</b><span>syllabus topics used to sort them</span></div>
+    </div>
+    <p class="note">Complete items are those where the stem and all answer options survived extraction, so option counts and distractor patterns can be measured. Items where only the stem survived are still usable for topic coverage, and are counted separately where that matters. Percentages below are keyword-flag rates on complete stems, so they do not sum to 100.</p>
+  </div>
+
+  <div class="card">
+    <h2>1. Practice material is distributed almost opposite to the marks</h2>
+    <p class="kicker">Exam point values against the number of complete practice questions available for each module.</p>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Module</th><th class="n">Points</th><th class="n">% of grade</th><th class="n">Questions available</th><th class="n">Per point</th><th class="n">Supply index</th></tr></thead>
+      <tbody>
+        <tr class="hi"><td class="k">GI</td><td class="n">8</td><td class="n">4.8</td><td class="n">552</td><td class="n">69.0</td><td class="n">3.79</td></tr>
+        <tr><td class="k">MSK 1</td><td class="n">15</td><td class="n">9.0</td><td class="n">526</td><td class="n">35.1</td><td class="n">1.67</td></tr>
+        <tr><td class="k">CP 1</td><td class="n">14</td><td class="n">8.4</td><td class="n">381</td><td class="n">27.2</td><td class="n">1.25</td></tr>
+        <tr><td class="k">MSK 2</td><td class="n">16</td><td class="n">9.6</td><td class="n">370</td><td class="n">23.1</td><td class="n">1.15</td></tr>
+        <tr><td class="k">CP 2</td><td class="n">18</td><td class="n">10.8</td><td class="n">289</td><td class="n">16.1</td><td class="n">0.98</td></tr>
+        <tr><td class="k">Renal</td><td class="n">24</td><td class="n">14.4</td><td class="n">335</td><td class="n">14.0</td><td class="n">0.94</td></tr>
+        <tr><td class="k">Foundations 1</td><td class="n">28</td><td class="n">16.8</td><td class="n">345</td><td class="n">12.3</td><td class="n">0.68</td></tr>
+        <tr class="hi"><td class="k">Foundations 2</td><td class="n">44</td><td class="n">26.3</td><td class="n">245</td><td class="n">5.6</td><td class="n">0.37</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">Supply index is the module's share of the available questions divided by its share of the grade. Above 1.0 means more material exists than the marks justify. Rank correlation between points and question count is <b>&minus;0.881</b>.</p>
+    <div class="takeaway"><b class="t">Why this sets the study order</b>GI carries 4.8% of the exam grade and 18.2% of the practice material; Foundations 2 carries 26.3% of the grade and 9.7% of the material. Working through what is available in the order it appears therefore spends roughly four times too long on GI and about a third of the right amount on the largest exam of the semester. The weekly guide allocates time by point value instead, caps GI and Cardiopulmonary 1, and leans on the faculty topic lists to fill the gap on the two Foundations exams.</div>
+  </div>
+
+  <div class="card">
+    <h2>2. What a question looks like</h2>
+    <p class="kicker">Measured across 3,937 complete items, split by who wrote them.</p>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Feature</th><th class="n">Faculty-written</th><th class="n">Student-written reviews</th></tr></thead>
+      <tbody>
+        <tr><td>Median stem length</td><td class="n">40&ndash;49 words</td><td class="n">31 words</td></tr>
+        <tr><td>Five answer options</td><td class="n">70&ndash;94%</td><td class="n">32&ndash;58%</td></tr>
+        <tr><td>Stem contains a number</td><td class="n">71&ndash;87%</td><td class="n">32&ndash;39%</td></tr>
+        <tr><td>Refers to a figure</td><td class="n">7.5&ndash;15.0%</td><td class="n">0.2&ndash;1.2%</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="margin-top:11px">Constants that hold across the whole set:</p>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Construction</th><th class="n">Share of complete items</th></tr></thead>
+      <tbody>
+        <tr><td>Options are enzyme names</td><td class="n">10.9%</td></tr>
+        <tr><td>Options are disease names</td><td class="n">10.7%</td></tr>
+        <tr><td>Paired increase/decrease options</td><td class="n">8.3%</td></tr>
+        <tr><td>Options are purely numeric</td><td class="n">5.1%</td></tr>
+        <tr><td>Options are vitamins or cofactors</td><td class="n">3.0%</td></tr>
+        <tr class="dim"><td>Negative stem &mdash; EXCEPT, NOT, LEAST</td><td class="n">2.1%</td></tr>
+        <tr class="dim"><td>"All of the above" appears</td><td class="n">1.3%</td></tr>
+        <tr class="dim"><td>"None of the above" appears</td><td class="n">0.3%</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="takeaway"><b class="t">Why this shapes what to practise</b>Two conclusions follow. First, since one option in five is a disease or enzyme name, the faculty's posted disease lists are effectively published answer sets, and memorising a fourteen-line list is a direct return. Second, student-written reviews are shorter, less numeric and almost never carry figures, so they are the right tool for covering breadth and the wrong tool for rehearsing the real format &mdash; that comes from the faculty reviews and the interactive decks. Answer-of-last-resort heuristics have nothing to work with here.</div>
+  </div>
+
+  <div class="card">
+    <h2>3. What each exam asks for</h2>
+    <p class="kicker">Flag rates on the complete items sorted to each module, showing what each exam leans on most.</p>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Module</th><th>Leans hardest on</th><th>Distinctive shape</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Foundations 1</td><td>Mechanism 11.0%</td><td>Shortest stems of the eight and the lowest clinical-vignette rate, 15.5%. Every figure posted in the course belongs here</td></tr>
+        <tr class="hi"><td class="k">Foundations 2</td><td>Regulation 9.4% &middot; enzyme identity 8.6% &middot; cofactors 4.5% &mdash; all highest of the eight</td><td>Median 49 words, half the items over 50 words, and about one in four attached to a graphic. The longest and most figure-heavy exam</td></tr>
+        <tr><td class="k">MSK 1</td><td>Mechanism 14.1%</td><td>Four options more often than five. Sequence manipulation on paper</td></tr>
+        <tr><td class="k">MSK 2</td><td>Diagnosis 12.4% &mdash; highest of the eight</td><td>The most vignette-driven and picture-dependent set: 39.1% vignettes and 36.5% carrying an image on the fibrous-protein material</td></tr>
+        <tr><td class="k">CP 1</td><td>Mechanism 15.2% &middot; laboratory values 1.6%, joint highest</td><td>Long clinical scenarios quoting lab values. Haemoglobin material shows the longest median stem measured, 60 words</td></tr>
+        <tr><td class="k">CP 2</td><td>Mechanism 9.0%, nothing above 5.2% after that</td><td>The flattest profile of the eight &mdash; no dominant question type</td></tr>
+        <tr><td class="k">GI</td><td>Mechanism 13.0% &middot; diagnosis 7.2%</td><td>Five plainly distinct options rather than near misses. Distractor similarity here is the lowest measured</td></tr>
+        <tr class="hi"><td class="k">Renal</td><td>Mechanism 17.9% &middot; enzyme identity 11.0% &middot; diagnosis 11.0% &mdash; all highest of the eight</td><td>The inborn-error chain: enzyme missing, metabolite accumulating, presentation, name the enzyme</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="takeaway"><b class="t">Why this drives the emphasis per exam</b>Each module rewards a different kind of preparation. Foundations 2 rewards an enzyme-regulator table and comfort with long figure-attached stems. MSK 2 and Renal reward working from presentation to a named condition or enzyme, which is why both get a table built for exactly that. CP 1 rewards drilling acid-base interpretation against a lab-value sheet. CP 2 has no dominant shape, so coverage of its two lists beats pattern practice.</div>
+  </div>
+
+  <div class="card">
+    <h2>4. Which topics keep coming back</h2>
+    <p class="kicker">Topics appearing in the most distinct years of archived material, 2018 through 2026.</p>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Topic</th><th>Module</th><th class="n">Years present</th><th class="n">Items</th></tr></thead>
+      <tbody>
+        <tr class="hi"><td class="k">Haemoglobin</td><td>CP 1</td><td class="n">8</td><td class="n">229</td></tr>
+        <tr><td class="k">Translation</td><td>MSK 2</td><td class="n">7</td><td class="n">301</td></tr>
+        <tr><td class="k">Electron transport and ROS</td><td>Foundations 1</td><td class="n">7</td><td class="n">210</td></tr>
+        <tr><td class="k">Insulin and glucagon</td><td>GI</td><td class="n">7</td><td class="n">179</td></tr>
+        <tr><td class="k">Glycolysis</td><td>Foundations 2</td><td class="n">7</td><td class="n">169</td></tr>
+        <tr><td class="k">Fatty acid degradation</td><td>CP 1</td><td class="n">7</td><td class="n">162</td></tr>
+        <tr><td class="k">RNA synthesis</td><td>MSK 1</td><td class="n">6</td><td class="n">227</td></tr>
+        <tr><td class="k">Lipoproteins</td><td>CP 2</td><td class="n">6</td><td class="n">220</td></tr>
+        <tr><td class="k">Signal transduction</td><td>Foundations 1</td><td class="n">6</td><td class="n">216</td></tr>
+        <tr><td class="k">Water-soluble vitamins</td><td>GI</td><td class="n">6</td><td class="n">215</td></tr>
+        <tr><td class="k">Glycogen</td><td>Foundations 2</td><td class="n">6</td><td class="n">206</td></tr>
+        <tr><td class="k">Enzyme kinetics</td><td>Foundations 1</td><td class="n">6</td><td class="n">169</td></tr>
+        <tr><td class="k">Acid-base</td><td>CP 1</td><td class="n">5</td><td class="n">282</td></tr>
+        <tr><td class="k">Genetic code</td><td>MSK 2</td><td class="n">5</td><td class="n">239</td></tr>
+        <tr><td class="k">DNA repair</td><td>MSK 1</td><td class="n">5</td><td class="n">202</td></tr>
+        <tr><td class="k">Inborn errors of amino acid metabolism</td><td>Renal</td><td class="n">5</td><td class="n">157</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="margin-top:11px"><b>Nine topics clear every filter</b> &mdash; five or more years of recurrence, on the 2026 syllabus, and named in a posted faculty topic list: enzyme kinetics, electron transport and ROS, signal transduction, carbohydrate digestion, glycolysis, PDH and TCA, gluconeogenesis, glycogen, pentose phosphate. <b>Eight of the nine belong to Foundations 1 and 2</b>, the 72 points at the front of the semester.</p>
+    <p><b>Some topics pair across exam boundaries.</b> Signal transduction from Foundations 1 co-occurs with acid-base on CP 1 27 times and with eicosanoids on CP 2 22 times. The genetic code on MSK 2 co-occurs with haemoglobin on CP 1 25 times, bridged by the sickle-cell point mutation. Translation and RNA synthesis co-occur 22 times across the two MSK exams.</p>
+    <div class="takeaway"><b class="t">Why signal transduction and haemoglobin get singled out</b>Signal transduction is the highest-leverage single topic because it recurs in six years, is named on this year's topic list, and reappears on two later exams &mdash; August work that pays three times. Haemoglobin is the most consistently examined topic in the entire record, appearing in every year surveyed. Cross-boundary pairs are worth learning together rather than twice.</div>
+  </div>
+
+  <div class="card">
+    <h2>5. Which sources are worth the time</h2>
+    <p class="kicker">Question yield and relevance by type of resource. "Usable" means the item can be worked as a question; "off-syllabus" means it belongs to material this course does not cover.</p>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Source</th><th class="n">Items</th><th class="n">% usable</th><th class="n">% off-syllabus</th><th class="n">Topics reached</th></tr></thead>
+      <tbody>
+        <tr class="hi"><td class="k">Faculty review decks</td><td class="n">384</td><td class="n">57.8</td><td class="n">7.5</td><td class="n">36 / 50</td></tr>
+        <tr><td class="k">Student TA reviews</td><td class="n">7,020</td><td class="n">50.4</td><td class="n">1.9</td><td class="n">49 / 50</td></tr>
+        <tr><td class="k">Interactive-session decks</td><td class="n">1,948</td><td class="n">22.5</td><td class="n">14.1</td><td class="n">44 / 50</td></tr>
+        <tr><td class="k">Clinical vignettes</td><td class="n">494</td><td class="n">21.9</td><td class="n">8.4</td><td class="n">30 / 50</td></tr>
+        <tr class="dim"><td class="k">Annotated study sheets</td><td class="n">319</td><td class="n">35.4</td><td class="n">23.0</td><td class="n">31 / 50</td></tr>
+        <tr class="dim"><td class="k">Student-made review documents</td><td class="n">42</td><td class="n">14.3</td><td class="n">0.0</td><td class="n">&mdash;</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="margin-top:11px"><b>Among the student reviews, the Montana campus decks measure best:</b> 71.7 questions per file at 46.6% complete, against Middletown at 57.6 and 27.1%, and Harlem at 45.0 and 23.1%. All three cover all eight modules.</p>
+    <p><b>Interactive-session decks need opening as slides.</b> Four in five of their items lose their answer options when the text is extracted, because the options are drawn on the slide rather than typed. Their format is the closest match to the real exam, so the decks are worth opening in PowerPoint rather than reading as a list.</p>
+    <div class="takeaway"><b class="t">Why the source order is what it is</b>Faculty reviews yield the highest proportion of workable questions of any source and demonstrably contain material that is not in the lecture slides, which puts them near the top despite being few in number. Student TA reviews are the only source that reaches nearly every topic and carry the least off-syllabus content, so they earn second place for breadth. Annotated study sheets have the highest off-syllabus rate of any type, which is why they are treated as marked-up slides rather than as a question bank.</div>
+  </div>
+
+  <div class="card">
+    <h2>6. The primers are not equal</h2>
+    <p class="kicker">How often each primer's subject matter appears in exam-facing material.</p>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th class="n">#</th><th>Subject</th><th>Module</th><th class="n">Questions on the subject</th><th class="n">Years</th></tr></thead>
+      <tbody>
+        <tr class="hi"><td class="n">12</td><td class="k">Lipoproteins</td><td>CP 2</td><td class="n">173</td><td class="n">7</td></tr>
+        <tr class="hi"><td class="n">13</td><td class="k">Eicosanoid structure</td><td>CP 2</td><td class="n">115</td><td class="n">5</td></tr>
+        <tr class="hi"><td class="n">9</td><td class="k">Acid-base balance</td><td>CP 1</td><td class="n">110</td><td class="n">6</td></tr>
+        <tr class="hi"><td class="n">11</td><td class="k">Cholesterol and bile acid</td><td>CP 2</td><td class="n">89</td><td class="n">5</td></tr>
+        <tr><td class="n">3</td><td class="k">DNA structure</td><td>MSK 1</td><td class="n">58</td><td class="n">1</td></tr>
+        <tr><td class="n">14</td><td class="k">Nutrition</td><td>GI</td><td class="n">44</td><td class="n">4</td></tr>
+        <tr><td class="n">5</td><td class="k">Cell cycle and division</td><td>MSK 1</td><td class="n">29</td><td class="n">3</td></tr>
+        <tr><td class="n">1</td><td class="k">Thermodynamics</td><td>Foundations 1</td><td class="n">20</td><td class="n">3</td></tr>
+        <tr><td class="n">8</td><td class="k">Protein structure</td><td>CP 1</td><td class="n">19</td><td class="n">3</td></tr>
+        <tr><td class="n">4</td><td class="k">Nucleotide structure</td><td>MSK 1</td><td class="n">12</td><td class="n">3</td></tr>
+        <tr class="dim"><td class="n">7</td><td class="k">Amino acid</td><td>CP 1</td><td class="n">6</td><td class="n">4</td></tr>
+        <tr class="dim"><td class="n">2</td><td class="k">Carbohydrate structures</td><td>Foundations 1</td><td class="n">4</td><td class="n">3</td></tr>
+        <tr class="dim"><td class="n">10</td><td class="k">Lipid structures</td><td>CP 1</td><td class="n">1</td><td class="n">1</td></tr>
+        <tr class="dim"><td class="n">6</td><td class="k">RNA structure</td><td>MSK 1</td><td class="n">0</td><td class="n">0</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="takeaway"><b class="t">Why four primers are mandatory and ten get one pass</b>The spread runs from 173 questions down to none. Primers 12, 13, 9 and 11 carry repeated weight across five to seven years, and three of the four belong to Cardiopulmonary 2 &mdash; which makes the primers unusually good value on that one exam. The four at the bottom have almost no footprint, so they get a single read. Because the archive is dominated by student-written reviews, a low count is weaker evidence than a high one: it may mean the topic goes unreviewed rather than unexamined, which is why none of the primers is dropped outright.</div>
+  </div>
+
+  <div class="card">
+    <h2>7. The metabolic map is concentrated in two exams</h2>
+    <p class="kicker">The map is supplied in every exam. Which of its 23 regions each exam actually draws on, with the date by which each is needed.</p>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Needed by</th><th>Date</th><th class="n">Points</th><th class="n">Regions</th><th>Which</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Foundations 1</td><td>Aug 17</td><td class="n">28</td><td class="n">1</td><td>Oxidative phosphorylation</td></tr>
+        <tr><td class="k">Foundations 2</td><td>Aug 31</td><td class="n">44</td><td class="n">4</td><td>Glycolysis and gluconeogenesis &middot; citric acid cycle &middot; glycogen and galactose &middot; pentose phosphate</td></tr>
+        <tr class="dim"><td class="k">MSK 1</td><td>Sep 15</td><td class="n">15</td><td class="n">0</td><td>None</td></tr>
+        <tr class="dim"><td class="k">MSK 2</td><td>Oct 6</td><td class="n">16</td><td class="n">0</td><td>None</td></tr>
+        <tr><td class="k">CP 1</td><td>Oct 19</td><td class="n">14</td><td class="n">3</td><td>Fatty acid synthesis &middot; fatty acid oxidation &middot; ketone bodies</td></tr>
+        <tr><td class="k">CP 2</td><td>Nov 2</td><td class="n">18</td><td class="n">1</td><td>Cholesterol synthesis</td></tr>
+        <tr><td class="k">GI</td><td>Nov 23</td><td class="n">8</td><td class="n">3</td><td>Heme synthesis &middot; heme degradation &middot; single-carbon and sulfur amino acids</td></tr>
+        <tr class="hi"><td class="k">Renal</td><td>Dec 9</td><td class="n">24</td><td class="n">11</td><td>Urea cycle &middot; ammonium capture and release &middot; aromatic and branched-chain amino acids &middot; single-carbon and sulfur amino acids &middot; purine and pyrimidine synthesis &middot; deoxyribonucleotides &middot; base, nucleoside and nucleotide salvage and breakdown</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">Each assignment is corroborated by where the region's vocabulary appears in the question record: heme synthesis in 123 of 125 cases within GI, urea cycle in 112 of 119 within Renal, oxidative phosphorylation in 77 of 93 within Foundations 1.</p>
+    <div class="takeaway"><b class="t">Why the map is scheduled rather than learned up front</b>Half the map belongs to one exam in December, and two exams worth 31 points between them use none of it. The single-carbon and sulfur amino acid region straddles GI and Renal because folate and B12 are taught in the water-soluble vitamin lecture, so learning it in November serves both. Steroid hormone synthesis has no lecture this semester and can be left alone. One annotated copy of the map circulating in the archive carries 260 annotations, and they sit almost entirely in the nucleotide and heme regions &mdash; making it a November and December resource rather than an August one.</div>
+  </div>
+
+  <div class="card">
+    <h2>8. Flashcard decks: good content, wrong format</h2>
+    <p class="kicker">33 decks, 11,430 notes, sorted against the 2026 syllabus.</p>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Deck</th><th class="n">On-syllabus notes</th><th class="n">% off-syllabus</th><th class="n">Modules</th></tr></thead>
+      <tbody>
+        <tr class="hi"><td class="k">INTESAR Fall Exam 2 Foundations</td><td class="n">1,250</td><td class="n">0.0</td><td class="n">7</td></tr>
+        <tr><td class="k">DannyGPT Fall 2025</td><td class="n">805</td><td class="n">8.1</td><td class="n">8</td></tr>
+        <tr><td class="k">Biochem Exam 2, 2020 deck</td><td class="n">442</td><td class="n">0.0</td><td class="n">7</td></tr>
+        <tr><td class="k">Halpern, purines and pyrimidines</td><td class="n">414</td><td class="n">1.2</td><td class="n">8</td></tr>
+        <tr><td class="k">BenKi, Fall 2025 OMS I</td><td class="n">342</td><td class="n">0.6</td><td class="n">7</td></tr>
+        <tr><td class="k">Biochem Exam 3</td><td class="n">306</td><td class="n">0.0</td><td class="n">8</td></tr>
+        <tr><td class="k">Tenner, MSK 1</td><td class="n">304</td><td class="n">3.8</td><td class="n">7</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="margin-top:11px">Across all 33 decks only <b>5.5%</b> of notes are off-syllabus, so the content is sound. The format is a different matter: card fronts run a median of <b>11 words</b> against exam stems at <b>43</b>, and 0.29% of cards present a clinical scenario against 20.0% of exam questions.</p>
+    <p><b>Deck coverage is distributed the same way the questions are.</b> Notes per exam point: GI 88.4, MSK 1 86.6, Foundations 1 56.2, MSK 2 35.1, CP 1 33.4, Foundations 2 30.4, CP 2 19.8, <b>Renal 14.5</b> &mdash; six times the density on the eight-point exam that the twenty-four-point exam has.</p>
+    <div class="takeaway"><b class="t">Why decks appear as a fact layer only</b>Cards work well for the things one option in five turns out to be: enzyme names, regulators, cofactors and disease associations. They cannot rehearse a fifty-word clinical stem with a figure attached, which is what Foundations 2 and MSK 2 actually ask. Seven decks are clean enough to keep; several others in circulation are 33% to 76% off-syllabus and belong to a different course.</div>
+  </div>
+
+  <div class="card">
+    <h2>9. What is not on the record yet</h2>
+    <ul>
+      <li><b>Six of the eight exams have no material dated this year.</b> Only 19 items across four files carry a 2026 date, covering Foundations 1, Foundations 2 and GI. The interactive-session decks for the other modules are posted during the semester, which is why checking the current week's Canvas module is a standing task.</li>
+      <li><b>Everything forward-looking here is inferred from 2018&ndash;2025 material mapped onto this year's lecture list.</b> The mapping is explicit and topic-by-topic; the transfer to a reorganised syllabus is an assumption.</li>
+      <li><b>Figures were recorded as present but never transcribed.</b> The one-in-four figure load on Foundations 2 can be anticipated, but not rehearsed from question text &mdash; another reason to open the interactive decks as slides.</li>
+      <li><b>Some findings rest on small samples and are treated as indicative.</b> The haemoglobin question shape comes from 19 complete items, and the DNA-block four-option pattern from 27. Both are reported as hints rather than plans.</li>
+      <li><b>The graded Canvas quizzes could not be surveyed.</b> Their question banks are not readable, so nothing here describes them.</li>
+    </ul>
+    <p class="note">Sources: the Canvas course file store and module structure, the SGA upperclassmen archive spanning 2018 to 2026, the Fall 2026 syllabus, the posted faculty topic and disease lists for all eight modules, and the shared class calendar. Question items were extracted from PowerPoint, Word and PDF text, sorted onto the 50 topics named in this year's syllabus, and filtered to exclude material belonging to the spring genetics and endocrine courses.</p>
+  </div>
+</div>
+</body>
+</html>
