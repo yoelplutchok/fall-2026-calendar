@@ -22,6 +22,10 @@ body { margin: 0; font-family: "Source Sans 3", system-ui, sans-serif; color: va
 header { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; margin-bottom: 16px; }
 h1 { font-family: Fraunces, Georgia, serif; font-size: 1.7rem; margin: 0 0 6px; }
 .sub { margin: 0; color: var(--muted); font-size: 0.94rem; }
+.nav { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.nav a { border: 1px solid var(--line); background: #fff; font-weight: 600; font-size: 0.9rem; padding: 8px 14px; border-radius: 999px; color: var(--ink); text-decoration: none; }
+.nav a.here { background: var(--ink); color: #fff; border-color: var(--ink); }
+.nav a:hover { border-color: var(--brand); }
 .card { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
 .card h2 { font-family: Fraunces, Georgia, serif; font-size: 1.15rem; margin: 0 0 5px; }
 .card .kicker { font-size: 0.88rem; color: var(--muted); margin: 0 0 12px; }
@@ -61,6 +65,11 @@ code { font-size: 0.85em; background: #f2ece1; border-radius: 4px; padding: 1px 
   <header>
     <h1>Evidence and analysis</h1>
     <p class="sub">Medical Biochemistry and Genetics I &middot; BSCN 625 &middot; Fall 2026 &middot; what a survey of the course archive shows about the questions, and how the study priorities follow from it</p>
+    <nav class="nav" aria-label="Pages">
+      <a href="Biochem_Fall_2026.html">Weekly guide</a>
+      <a href="Biochem_Course_Info_2026.html">Course information</a>
+      <a class="here" href="Biochem_Evidence_2026.html">Evidence and analysis</a>
+    </nav>
   </header>
 
   <div class="card">
@@ -77,7 +86,45 @@ code { font-size: 0.85em; background: #f2ece1; border-radius: 4px; padding: 1px 
   </div>
 
   <div class="card">
-    <h2>1. Practice material is distributed almost opposite to the marks</h2>
+    <h2>1. The course was rebuilt twice, and most of the archive predates it</h2>
+    <p class="kicker">All six fall syllabi from 2021 to 2026 were read end to end. Two structural changes separate this year's course from the years most of the practice material came from.</p>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>Year</th><th class="n">Exams</th><th class="n">Weight each</th><th>When they sat</th><th class="n">Genetics on the fall syllabus</th></tr></thead>
+      <tbody>
+        <tr><td class="k">2021</td><td class="n">4</td><td class="n">22.5%</td><td>Weeks 7, 11, 16, finals</td><td class="n">no</td></tr>
+        <tr><td class="k">2022</td><td class="n">4</td><td class="n">22.5%</td><td>Weeks 7, 11, 15, 18</td><td class="n">no</td></tr>
+        <tr><td class="k">2023</td><td class="n">4</td><td class="n">22.5%</td><td>Weeks 7, 11, 16, finals</td><td class="n">no</td></tr>
+        <tr><td class="k">2024</td><td class="n">4</td><td class="n">22.5%</td><td>Weeks 7, 12, 15, finals</td><td class="n">no</td></tr>
+        <tr class="hi"><td class="k">2025</td><td class="n">8</td><td class="n">90% together</td><td>Across the whole term</td><td class="n">yes</td></tr>
+        <tr class="hi"><td class="k">2026</td><td class="n">8</td><td class="n">90% together</td><td>Across the whole term</td><td class="n">yes</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="margin-top:11px"><b>Four exams became eight in Fall 2025.</b> Through 2024 the course ran four examinations at 22.5% each, with 10% for quizzes and clickers together. The eight module exams that carry 90% of the grade today are one year old.</p>
+    <p><b>Genetics arrived at the same time.</b> The 2021, 2022, 2023 and 2024 fall syllabi contain <b>no mention at all</b> of DNA replication, DNA repair, RNA types and synthesis, RNA processing, the genetic code or translation &mdash; zero occurrences in each of the four. The 2025 and 2026 syllabi carry thirteen and seventeen. That material was Medical Genetics, a separate spring course with its own syllabus and its own faculty. The 2025 syllabus says the course now &ldquo;combines the disciplines of Medical Biochemistry and Medical Genetics&rdquo;.</p>
+    <p><b>Fall 2025 is therefore structurally identical to Fall 2026</b> &mdash; the same eight modules, in the same order, with the same names and the same weights. Material dated 2025 is a direct match rather than an approximation, and is ranked accordingly throughout the weekly guide.</p>
+    <p><b>Everything older needs re-sorting by topic.</b> Of the 13,711 extracted question items that carry a year, <b>6,924</b> &mdash; slightly over half &mdash; come from the four-exam years. Their own exam labels name a different exam from the one their content sits on now:</p>
+    <div class="scroller">
+    <table class="data">
+      <thead><tr><th>2026 module</th><th>Where that content sat before 2025</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Foundations 1</td><td>Old Exam 1, first half</td></tr>
+        <tr><td class="k">Foundations 2</td><td>The tail of old Exam 1 and the front of old Exam 2</td></tr>
+        <tr class="hi"><td class="k">MSK 1 and MSK 2</td><td><b>The spring Medical Genetics course</b>, not fall Biochemistry</td></tr>
+        <tr><td class="k">CP 1</td><td>Old Exam 1 for acid-base and haemoglobin; old Exam 2 for lipid digestion and fatty acids</td></tr>
+        <tr><td class="k">CP 2</td><td>Old Exams 2 and 3 &mdash; cholesterol, lipoproteins, eicosanoids</td></tr>
+        <tr class="hi"><td class="k">GI</td><td><b>Old Exam 4</b> for vitamins, iron and nutrition; old Exam 3 for heme and insulin</td></tr>
+        <tr><td class="k">Renal</td><td>Old Exam 3 &mdash; urea cycle, amino acids, purines</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">The four-exam boundaries also moved from year to year: cholesterol sat on Exam 3 in 2021 and on Exam 2 in 2024. A file named for an exam number is naming a boundary that has since moved twice, which is why every question in this survey was sorted by its content against the 2026 lecture list rather than by the label it arrived with.</p>
+    <div class="takeaway"><b class="t">What follows for how prior-year material is weighted</b>Three things. <b>MSK 1 and MSK 2 are the weakest-supported modules on the schedule</b>, because almost all of their pre-2025 material was written for a different course with different faculty &mdash; so 2025 and 2026 material carries disproportionate weight there, and anything labelled &ldquo;Genetics Exam&rdquo; is a spring artefact rather than a head start. <b>GI looks over-supplied because it inherited a 22.5% exam</b> and now carries eight points; the volume of GI material is a fact about 2022, not about what is coming in November. And <b>an exam number on a filename is not a routing key</b>: the only reliable way to place an older file is by what it is about, which is how every list in the weekly guide is built.</div>
+  </div>
+
+  <div class="card">
+    <h2>2. Practice material is distributed almost opposite to the marks</h2>
     <p class="kicker">Exam point values against the number of complete practice questions available for each module.</p>
     <div class="scroller">
     <table class="data">
@@ -99,7 +146,7 @@ code { font-size: 0.85em; background: #f2ece1; border-radius: 4px; padding: 1px 
   </div>
 
   <div class="card">
-    <h2>2. What a question looks like</h2>
+    <h2>3. What a question looks like</h2>
     <p class="kicker">Measured across 3,937 complete items, split by who wrote them.</p>
     <div class="scroller">
     <table class="data">
@@ -132,7 +179,7 @@ code { font-size: 0.85em; background: #f2ece1; border-radius: 4px; padding: 1px 
   </div>
 
   <div class="card">
-    <h2>3. What each exam asks for</h2>
+    <h2>4. What each exam asks for</h2>
     <p class="kicker">Flag rates on the complete items sorted to each module, showing what each exam leans on most.</p>
     <div class="scroller">
     <table class="data">
@@ -153,7 +200,7 @@ code { font-size: 0.85em; background: #f2ece1; border-radius: 4px; padding: 1px 
   </div>
 
   <div class="card">
-    <h2>4. Which topics keep coming back</h2>
+    <h2>5. Which topics keep coming back</h2>
     <p class="kicker">Topics appearing in the most distinct years of archived material, 2018 through 2026.</p>
     <div class="scroller">
     <table class="data">
@@ -184,7 +231,7 @@ code { font-size: 0.85em; background: #f2ece1; border-radius: 4px; padding: 1px 
   </div>
 
   <div class="card">
-    <h2>5. Which sources are worth the time</h2>
+    <h2>6. Which sources are worth the time</h2>
     <p class="kicker">Question yield and relevance by type of resource. "Usable" means the item can be worked as a question; "off-syllabus" means it belongs to material this course does not cover.</p>
     <div class="scroller">
     <table class="data">
@@ -205,7 +252,7 @@ code { font-size: 0.85em; background: #f2ece1; border-radius: 4px; padding: 1px 
   </div>
 
   <div class="card">
-    <h2>6. The primers are not equal</h2>
+    <h2>7. The primers are not equal</h2>
     <p class="kicker">How often each primer's subject matter appears in exam-facing material.</p>
     <div class="scroller">
     <table class="data">
@@ -232,7 +279,7 @@ code { font-size: 0.85em; background: #f2ece1; border-radius: 4px; padding: 1px 
   </div>
 
   <div class="card">
-    <h2>7. The metabolic map is concentrated in two exams</h2>
+    <h2>8. The metabolic map is concentrated in two exams</h2>
     <p class="kicker">The map is supplied in every exam. Which of its 23 regions each exam actually draws on, with the date by which each is needed.</p>
     <div class="scroller">
     <table class="data">
@@ -254,7 +301,7 @@ code { font-size: 0.85em; background: #f2ece1; border-radius: 4px; padding: 1px 
   </div>
 
   <div class="card">
-    <h2>8. Flashcard decks: good content, wrong format</h2>
+    <h2>9. Flashcard decks: good content, wrong format</h2>
     <p class="kicker">33 decks, 11,430 notes, sorted against the 2026 syllabus.</p>
     <div class="scroller">
     <table class="data">
@@ -276,7 +323,7 @@ code { font-size: 0.85em; background: #f2ece1; border-radius: 4px; padding: 1px 
   </div>
 
   <div class="card">
-    <h2>9. What is not on the record yet</h2>
+    <h2>10. What is not on the record yet</h2>
     <ul>
       <li><b>Six of the eight exams have no material dated this year.</b> Only 19 items across four files carry a 2026 date, covering Foundations 1, Foundations 2 and GI. The interactive-session decks for the other modules are posted during the semester, which is why checking the current week's Canvas module is a standing task.</li>
       <li><b>Everything forward-looking here is inferred from 2018&ndash;2025 material mapped onto this year's lecture list.</b> The mapping is explicit and topic-by-topic; the transfer to a reorganised syllabus is an assumption.</li>
